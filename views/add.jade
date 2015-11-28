@@ -1,0 +1,27 @@
+extend layout
+
+block new
+
+block content
+  section
+    h1 add a new thread
+
+    if error
+      p.errors= error
+
+    p.tip.highlight Creating a new thread means that you are the owner. You are free to delete inappropriate/irrelevant comments.
+    p.tip.highlight How you want to organize this structure depends on what you want to be grouped under (existing) or what you want to start as a new topic.
+    form.post(method='post', action='/post')
+      h2 Topic*
+      p.tip in the hostname format similar to: programming.javascript.node
+      input(type='text', name='category', placeholder='alt.something.specific', required, list='categories')
+      datalist#categories
+        for topic in topics
+          option(value='#{topic.name}')
+      h2 Title*
+      input(type='text', name='title', required)
+      h2 Post*
+      p.tip supports markdown
+      textarea(name='body', required)
+      input(type='hidden', name='crumb', value='#{crumb}')
+      button(type='submit') add

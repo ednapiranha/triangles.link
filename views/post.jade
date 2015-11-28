@@ -1,0 +1,31 @@
+include mixins
+extend layout
+
+block content
+  section.detail
+    h2
+      | Posted by:&#xa0;
+      a(href='/user/#{post.author}')= post.postedBy
+
+    ol
+      +postView(post, {
+        showDetails: true,
+        linkCategory: true,
+        isOwner: isOwner
+      })
+
+    if session
+      .comments
+        p.tip supports markdown
+        form(method='post', action='/comment')
+          textarea(name='comment', placeholder='add comment', required)
+          input(type='hidden', name='key', value='#{post.key}')
+          input(type='hidden', name='crumb', value='#{crumb}')
+          button(type='submit') add comment
+
+    if isOwner
+      #actions
+        a(href='/thread/edit/#{post.key}') edit
+        form.delete(method='post', action='/thread/delete/#{post.key}')
+          input(type='hidden', name='crumb', value='#{crumb}')
+          button.delete(type='submit') delete
