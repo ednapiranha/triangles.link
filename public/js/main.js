@@ -1,18 +1,18 @@
 'use strict';
 
-// [96,325, 216,325, 156,235]
 (function() {
-  var snap = Snap('#draw');
+  // set menu
 
-  var p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
-    fill: 'none',
-    stroke: '#1a4f7b',
-    strokeWidth: 15
-  });
+  var menuButton = document.querySelector('header p');
+  var menu = document.querySelector('#menu');
 
-  p = p.pattern(0, 5, 25, 10);
-
-  snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
-            '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
-            '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
+  menuButton.onclick = function() {
+    if (this.classList.contains('active')) {
+      menu.classList.remove('active');
+      this.classList.remove('active');
+    } else {
+      menu.classList.add('active');
+      this.classList.add('active');
+    }
+  };
 })();

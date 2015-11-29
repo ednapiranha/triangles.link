@@ -12,10 +12,15 @@ html
   body
     header
       if session
-        block new
-          p △
+        p △
+        #menu
+          a(href='/dashboard') Back to △
+          a(href='/profile') Profile
+          a(href='/logout') Sign out
       else
         block login
+          a(href='/signup') Join
+
           form(method='post', action='/login', class='login')
             if error
               p.errors= error
@@ -30,14 +35,10 @@ html
         .content
           block content
 
-    block footer
-      footer
-        .inner
-          section
-            .user-actions
-              if !session
-                a(href='/signup') Join
-              else
-                a(href='/profile') Profile
-                a(href='/logout') Sign out
-    block script
+    block script_loader
+      script(src='/js/main.js')
+    block script_game
+      script(src='/js/tweenmax.min.js')
+      script(src='/js/delaunay.js')
+      script(src='/js/snap.min.js')
+      script(src='/js/background.js')

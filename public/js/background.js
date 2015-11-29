@@ -1,8 +1,11 @@
 'use strict';
 
 (function () {
-  var width = window.innerWidth;
-  var height = window.innerHeight;
+  /*
+   * sky generation
+   */
+  var width = 2400; //window.innerWidth;
+  var height = 530; //window.innerHeight;
   var snap = Snap('#back');
   var vertices = [];
   var triangles;
@@ -14,6 +17,7 @@
   var blueMax;
   var green;
 
+  // sky color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
     redMin = 150;
     redMax = 120;
@@ -46,8 +50,8 @@
   });
 
   function createTriangles() {
-    for (var x = 0; x <= width; x += width / 4) {
-      for (var y = 0; y <= height; y += height / 4) {
+    for (var x = 0; x <= width; x += width / 8) {
+      for (var y = 0; y <= height; y += height / 8) {
         var xp;
         var yp;
 
@@ -87,8 +91,8 @@
       y: (vertices[triangles[i]][1] + vertices[triangles[i + 1]][1] + vertices[triangles[i + 2]][1]) / 3
     };
 
-    var cir = snap.circle(poly.centroid.x, poly.centroid.y, 1).attr({
-      fill: '#21c7cd'
+    var cir = snap.polygon(0, 0, poly.centroid.x, poly.centroid.y, poly.centroid.x + 3, poly.centroid.y + 5).attr({
+      fill: 'rgba(255, 255, 255, 0.5)'
     });
 
     grouping.add(poly, cir);
@@ -101,20 +105,6 @@
   }
 
   createTriangles();
-
-  function onResize() {
-    grouping.clear();
-    vertices = [];
-    width = window.innerWidth;
-    height = window.innerHeight;
-    snap.attr({
-      width: width,
-      height: height
-    });
-    createTriangles();
-  }
-
-  window.addEventListener('resize', onResize);
 
   function randomPoly() {
     return Math.floor(Math.random() * (triangles.length / 3));
@@ -130,4 +120,33 @@
     });
   }
   nextPoly();
+
+  /*
+   * mountain generation
+   */
+  snap = Snap('#mountain');
+  var color;
+
+  // mountain color
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    color = 'rgba(241, 203, 255, 0.6)';
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    color = 'rgba(229, 253, 255, 0.6)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(255, 197, 168, 0.6)';
+  } else {
+    color = 'rgba(157, 150, 213, 0.4)';
+  }
+
+  var p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
+    fill: 'none',
+    stroke: color,
+    strokeWidth: 25
+  });
+
+  p = p.pattern(0, 5, 25, 10);
+
+  snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
+            '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
+            '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
 })();

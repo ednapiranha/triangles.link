@@ -52,17 +52,12 @@ table {
 body {
   font-family: Arial, sans-serif;
   background: rgba(183,222,237,1);
-  background: -moz-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
+  background: linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
   background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(183,222,237,1)), color-stop(39%, rgba(33,180,226,1)), color-stop(100%, rgba(48,207,196,1)));
   background: -webkit-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
 }
 
 header {
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 50px 50px 0 0;
-  border-color: rgba(1, 1, 1, 0.3) transparent transparent transparent;
   position: fixed;
   z-index: 3;
 }
@@ -76,8 +71,39 @@ header p {
   cursor: pointer;
 }
 
-header p:hover {
-  color: #00d2ff;
+header p:hover, header p.active {
+  color: #111;
+}
+
+#area {
+  height: 1200px;
+  width: 2400px;
+}
+
+#menu {
+  position: fixed;
+  opacity: 0;
+  top: 50px;
+  transition: opacity 1s;
+  -webkit-transition: opacity: 1;
+}
+
+#menu.active {
+  opacity: 1;
+  transition: opacity 1s;
+  -webkit-transition: opacity: 1;
+}
+
+#menu a {
+  background-color: rgba(1, 1, 1, 0.5);
+  padding: 2px 10px;
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 0.8rem;
+  margin-bottom: 1px;
+  text-transform: uppercase;
+  line-height: 1.4rem;
 }
 
 .login {
@@ -98,12 +124,12 @@ header p:hover {
   bottom: 0;
 }
 
-#draw {
-  width: 100vw;
+#mountain {
+  width: 1400px;
   height: 445px;
   position: absolute;
   left: 0;
-  bottom: 10px;
+  top: 80px;
   z-index: 2;
 }
 
