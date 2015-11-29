@@ -191,21 +191,8 @@ const routes = [
       },
       validate: {
         payload: {
-          email: Joi.string().email(),
-          password: Joi.string().min(6).strip().required()
-        }
-      }
-    }
-  },
-  {
-    method: 'GET',
-    path: '/post',
-    handler: services.newThread,
-    config: {
-      auth: auth,
-      plugins: {
-        'hapi-auth-cookie': {
-          redirectTo: '/'
+          email: Joi.string().email().required(),
+          password: Joi.string().min(6).required()
         }
       }
     }

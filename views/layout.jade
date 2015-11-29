@@ -1,7 +1,7 @@
 doctype html
 html
   head
-    title what we like
+    title triangles
     meta(charset='utf-8')
     meta(content='width=device-width, height=device-height, user-scalable=no, initial-scale=0.8, maximum-scale=0.8, minimum-scale=0.8', name='viewport')
     meta(content='yes', name='apple-mobile-web-app-capable')
@@ -12,11 +12,9 @@ html
 
   body
     header
-      a.header(href='/') what we like
       if session
         block new
-          a#add(href='/post') +
-            span add a new thread
+          p header
       else
         block login
           form(method='post', action='/login', class='login')
@@ -41,8 +39,6 @@ html
               if !session
                 a(href='/signup') Join
               else
-                a(href='/topics') All topics
                 a(href='/profile') Profile
                 a(href='/logout') Sign out
     block script
-      script(type='text/javascript', src='/js/main.js')

@@ -6,9 +6,3 @@ block login
 block content
   section
     h1= user.name
-
-    ol.threads
-      for post in posts
-        +postView(post, {
-          showDetails: false
-        })

@@ -2,10 +2,8 @@ include mixins
 extend layout
 
 block content
-  section
-    h1 Latest from you
-    ol.threads
-      for post in posts
-        +postView(post, {
-          showDetails: false
-        })
+  section#area
+
+block script
+  script(src='/js/snap.min.js')
+  script(src='/js/main.js')

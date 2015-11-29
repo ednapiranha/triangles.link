@@ -49,3 +49,24 @@ table {
 
 /* Main styles */
 
+body {
+  font-family: Arial, sans-serif;
+}
+
+.login {
+  padding: 20px;
+}
+
+.errors {
+  color: #f00;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.triangle-top {
+
+}
+
+.triangle-bottom {
+
+}

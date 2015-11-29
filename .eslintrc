@@ -5,7 +5,9 @@
     "es6": true
   },
   "globals": {
-    "io": true
+    "io": true,
+    "Snap": true,
+    "Paper": true
   },
   "rules": {
     // Disallow using variables outside the blocks they are defined (especially
