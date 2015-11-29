@@ -57,6 +57,29 @@ body {
   background: -webkit-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
 }
 
+header {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 50px 50px 0 0;
+  border-color: rgba(1, 1, 1, 0.3) transparent transparent transparent;
+  position: fixed;
+  z-index: 3;
+}
+
+header p {
+  position: fixed;
+  left: 10px;
+  top: 10px;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+header p:hover {
+  color: #00d2ff;
+}
+
 .login {
   padding: 20px;
 }
@@ -84,10 +107,3 @@ body {
   z-index: 2;
 }
 
-.triangle-top {
-
-}
-
-.triangle-bottom {
-
-}

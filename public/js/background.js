@@ -1,18 +1,49 @@
 'use strict';
 
 (function () {
-  var tri = document.getElementById('tri');
   var width = window.innerWidth;
   var height = window.innerHeight;
   var snap = Snap('#back');
   var vertices = [];
   var triangles;
   var grouping = snap.select('g[filter="url(#artifacts)"]');
+  var currentTimeOfDay = (new Date()).getHours();
+  var redMin;
+  var redMax;
+  var blueMin;
+  var blueMax;
+  var green;
+
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    redMin = 150;
+    redMax = 120;
+    blueMin = 100;
+    blueMax = 150;
+    green = 120;
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    redMin = 70;
+    redMax = 60;
+    blueMin = 100;
+    blueMax = 210;
+    green = 185;
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    redMin = 100;
+    redMax = 150;
+    blueMin = 70;
+    blueMax = 50;
+    green = 100;
+  } else {
+    redMin = 50;
+    redMax = 20;
+    blueMin = 70;
+    blueMax = 50;
+    green = 10;
+  }
 
   snap.attr({
     width: width,
     height: height
-  })
+  });
 
   function createTriangles() {
     for (var x = 0; x <= width; x += width / 4) {
@@ -64,9 +95,9 @@
   }
 
   function randomColor() {
-    var r = Math.floor(Math.random() * 100) + 50,
-      b = Math.floor(Math.random() * 60) + 180;
-    return 'rgb(' + r.toString() + ',120,' + b.toString() + ')';
+    var r = Math.floor(Math.random() * redMin) + redMax;
+    var b = Math.floor(Math.random() * blueMin) + blueMax;
+    return 'rgb(' + r.toString() + ', ' + green + ',' + b.toString() + ')';
   }
 
   createTriangles();
