@@ -51,6 +51,10 @@ table {
 
 body {
   font-family: Arial, sans-serif;
+  background: rgba(183,222,237,1);
+  background: -moz-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
+  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(183,222,237,1)), color-stop(39%, rgba(33,180,226,1)), color-stop(100%, rgba(48,207,196,1)));
+  background: -webkit-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
 }
 
 .login {
@@ -61,6 +65,23 @@ body {
   color: #f00;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+#back {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#draw {
+  width: 100vw;
+  height: 445px;
+  position: absolute;
+  left: 0;
+  bottom: 10px;
+  z-index: 2;
 }
 
 .triangle-top {

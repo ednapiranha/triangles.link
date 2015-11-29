@@ -1,10 +1,18 @@
 'use strict';
+
 // [96,325, 216,325, 156,235]
 (function() {
-  var snap = Snap(100, 100);
-  snap.paper.polygon(0,0, 25,50, 50,0).attr({ fill: '#eee', stroke: '#ccc' });
-  snap = Snap(100, 100);
-  snap.paper.polygon(25,50, 75,50, 50,0).attr({ fill: '#ccc', stroke: '#ccc' });
-  snap = Snap(100, 100);
-  snap.paper.polygon(0,0, 25,50, 50,0).attr({ fill: '#eee', stroke: '#ccc' });
+  var snap = Snap('#draw');
+
+  var p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
+    fill: 'none',
+    stroke: '#1a4f7b',
+    strokeWidth: 15
+  });
+
+  p = p.pattern(0, 5, 25, 10);
+
+  snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
+            '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
+            '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
 })();
