@@ -7,7 +7,9 @@
   "globals": {
     "io": true,
     "Snap": true,
-    "Paper": true
+    "Paper": true,
+    "Delaunay": true,
+    "TimelineLite": true
   },
   "rules": {
     // Disallow using variables outside the blocks they are defined (especially

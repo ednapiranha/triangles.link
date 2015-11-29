@@ -85,4 +85,18 @@
 
   window.addEventListener('resize', onResize);
 
+  function randomPoly() {
+    return Math.floor(Math.random() * (triangles.length / 3));
+  }
+
+  function nextPoly() {
+    var triSVG = document.querySelectorAll('#back polygon');
+    var triTween = new TimelineLite();
+
+    triTween.to(triSVG[randomPoly()], 0.1, {
+      fill: randomColor(),
+      onComplete: nextPoly
+    });
+  }
+  nextPoly();
 })();
