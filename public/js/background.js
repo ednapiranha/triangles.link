@@ -105,7 +105,7 @@
   }
 
   createTriangles();
-
+/*
   function randomPoly() {
     return Math.floor(Math.random() * (triangles.length - 1));
   }
@@ -124,7 +124,7 @@
     }
   }
   nextPoly();
-
+*/
   /*
    * mountain generation
    */

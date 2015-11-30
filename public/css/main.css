@@ -79,16 +79,12 @@ header p:hover, header p.active {
 
 #menu {
   position: fixed;
-  opacity: 0;
+  display: none;
   top: 50px;
-  transition: opacity 1s;
-  -webkit-transition: opacity: 1;
 }
 
 #menu.active {
-  opacity: 1;
-  transition: opacity 1s;
-  -webkit-transition: opacity: 1;
+  display: block;
 }
 
 #menu a {
@@ -265,9 +261,26 @@ footer form {
   height: 50px;
 }
 
-#vehicle {
-  width: 100px;
+#vehicle, .hole {
   position: absolute;
+  width: 100px;
+  height: 50px;
+  top: 0px;
+  left: 0;
+}
+
+.hole {
+  z-index: 4;
+}
+
+#vehicle {
+  z-index: 5;
+}
+
+#vehicle.active {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 100px;
+  box-shadow: #fff 0 0 25px;
 }
 
 .neon {
