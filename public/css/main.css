@@ -51,15 +51,12 @@ table {
 
 body {
   font-family: Arial, sans-serif;
-  background: rgba(183,222,237,1);
-  background: linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
-  background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(183,222,237,1)), color-stop(39%, rgba(33,180,226,1)), color-stop(100%, rgba(48,207,196,1)));
-  background: -webkit-linear-gradient(-45deg, rgba(183,222,237,1) 0%, rgba(33,180,226,1) 39%, rgba(48,207,196,1) 100%);
+  background: #ccc;
 }
 
 header {
   position: fixed;
-  z-index: 3;
+  z-index: 20;
 }
 
 header p {
@@ -76,7 +73,7 @@ header p:hover, header p.active {
 }
 
 #area {
-  height: 1200px;
+  height: 2592px;
   width: 2400px;
 }
 
@@ -116,6 +113,97 @@ header p:hover, header p.active {
   text-transform: uppercase;
 }
 
+/* form styles */
+
+.form {
+  margin: 50px 10px 0 120px;
+}
+
+.form h1 {
+  margin-bottom: 20px;
+}
+
+.form h2 {
+  margin: 10px 0 5px 0;
+}
+
+/* footer */
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background-color: rgba(1, 1, 1, 0.5);
+  z-index: 9;
+}
+
+footer form {
+  display: inline-block;
+}
+
+#messages {
+  position: absolute;
+  bottom: 41px;
+}
+
+#messages li {
+  padding: 5px 8px;
+  margin-bottom: 1px;
+  background-color: rgba(1, 1, 1, 0.5);
+  color: #ddd;
+  font-weight: 100;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  width: 250px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#messages li:hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  color: #888;
+}
+
+#messages li.hide {
+  opacity: 0;
+  transition: opacity 0.5s;
+  -webkit-transition: opacity 0.5s;
+}
+
+#messages li time {
+  font-size: 0.7rem;
+  margin-right: 5px;
+  font-style: italic;
+  color: #aaa;
+}
+
+#message input {
+  border: 0;
+  font-size: 0.8rem;
+  padding: 4px;
+  background-color: rgba(1, 1, 1, 0.4);
+  color: #eee;
+  width: 246px;
+}
+
+#active {
+  float: right;
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: rgba(1, 1, 1, 0.7);
+  text-align: center;
+  color: #fff;
+}
+
+#message button {
+  display: none;
+}
+
+/* game styles */
+
 #back {
   position: absolute;
   top: 0;
@@ -128,8 +216,63 @@ header p:hover, header p.active {
   width: 1400px;
   height: 445px;
   position: absolute;
-  left: 0;
-  top: 80px;
+  left: 100px;
+  top: 85px;
   z-index: 2;
 }
 
+#land-upper, #land-lower {
+  width: 2400px;
+  height: 500px;
+  position: absolute;
+  left: 0;
+  top: 400px;
+  z-index: 3;
+}
+
+#land-lower {
+  top: 700px;
+}
+
+#mining {
+  position: absolute;
+  top: 1000px;
+  width: 2400px;
+  height: 1600px;
+  z-index: 4;
+}
+
+#playground {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 2400px;
+  height: 1199px;
+  z-index: 7;
+}
+
+#mining-area {
+  position: absolute;
+  left: 0;
+  top: 1200px;
+  width: 2400px;
+  height: 1400px;
+  z-index: 7;
+}
+
+.square {
+  width: 50px;
+  height: 50px;
+}
+
+#vehicle {
+  width: 100px;
+  position: absolute;
+}
+
+.neon {
+  position: absolute;
+  display: inline-block;
+  width: 25px;
+  height: 25px;
+}

@@ -1,8 +1,10 @@
 extend layout
 
 block content
-  section
+  section.form
     h1 profile
+
+    p= uid
 
     if error
       p.errors= error

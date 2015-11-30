@@ -6,6 +6,7 @@ const Hapi = require('hapi');
 const Joi = require('joi');
 const http = require('http');
 const Inert = require('inert');
+const moment = require('moment');
 const SocketIO = require('socket.io');
 
 const conf = require('./lib/conf');
@@ -175,6 +176,19 @@ const routes = [
   },
   {
     method: 'GET',
+    path: '/t/{uid}',
+    config: {
+      handler: services.room,
+      auth: auth,
+      plugins: {
+        'hapi-auth-cookie': {
+          redirectTo: '/'
+        }
+      }
+    }
+  },
+  {
+    method: 'GET',
     path: '/login',
     handler: services.home
   },
@@ -290,14 +304,15 @@ server.start(function (err) {
   io.on('connection', function(socket) {
     socket.on('disconnect', disconnectHandler);
 
-    socket.on('join', function () {
+    socket.on('join', function (data) {
       users++;
-
-      if (users > 999) {
-        users = '😀';
-      }
-
+      socket.join(data.room);
       io.emit('active', users);
+    });
+
+    socket.on('message', function (data) {
+      data.created = moment().format('HH:mm:ss');
+      io.sockets.in(data.room).emit('message', data);
     });
   });
 });

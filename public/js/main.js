@@ -2,7 +2,6 @@
 
 (function() {
   // set menu
-
   var menuButton = document.querySelector('header p');
   var menu = document.querySelector('#menu');
 

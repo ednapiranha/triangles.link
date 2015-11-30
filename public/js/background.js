@@ -4,8 +4,8 @@
   /*
    * sky generation
    */
-  var width = 2400; //window.innerWidth;
-  var height = 530; //window.innerHeight;
+  var width = 2400;
+  var height = 530;
   var snap = Snap('#back');
   var vertices = [];
   var triangles;
@@ -50,19 +50,19 @@
   });
 
   function createTriangles() {
-    for (var x = 0; x <= width; x += width / 8) {
-      for (var y = 0; y <= height; y += height / 8) {
+    for (var x = 0; x <= width; x += width / 6) {
+      for (var y = 0; y <= height; y += height / 6) {
         var xp;
         var yp;
 
         if (x && x != width) {
-          xp = x + (Math.floor(Math.random() * (width / 4 + 1)) - (width / 8));
+          xp = x + (Math.floor(Math.random() * (width / 4)) - (width / 8));
         } else {
           xp = x;
         }
 
         if (y && y != height) {
-          yp = y + (Math.floor(Math.random() * (height / 4 + 1)) - (height / 8));
+          yp = y + (Math.floor(Math.random() * (height / 4)) - (height / 8));
         } else {
           yp = y;
         }
@@ -107,17 +107,21 @@
   createTriangles();
 
   function randomPoly() {
-    return Math.floor(Math.random() * (triangles.length / 3));
+    return Math.floor(Math.random() * (triangles.length - 1));
   }
 
   function nextPoly() {
-    var triSVG = document.querySelectorAll('#back polygon');
-    var triTween = new TimelineLite();
+    var polyback = document.querySelectorAll('#back polygon');
+    var tween = new TimelineLite();
 
-    triTween.to(triSVG[randomPoly()], 0.1, {
-      fill: randomColor(),
-      onComplete: nextPoly
-    });
+    try {
+      tween.to(polyback[randomPoly()], 0.1, {
+        fill: randomColor(),
+        onComplete: nextPoly
+      });
+    } catch (e) {
+
+    }
   }
   nextPoly();
 
@@ -147,6 +151,85 @@
   p = p.pattern(0, 5, 25, 10);
 
   snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
-            '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
-            '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
+    '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
+    '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
+
+  /*
+   * land generation
+   */
+
+  snap = Snap('#land-upper');
+
+  // land color
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    color = 'rgba(241, 203, 255, 0.9)';
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    color = 'rgba(189, 253, 255, 0.9)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(255, 197, 168, 0.9)';
+  } else {
+    color = 'rgba(157, 150, 213, 0.9)';
+  }
+
+  p = snap.path('M0-15-10,15M15,10,0,25M0-5-20,15').attr({
+    fill: 'none',
+    stroke: color,
+    strokeWidth: 55
+  });
+
+  p = p.pattern(0, 15, 25, 10);
+
+  snap.paper.polygon('2400,500 2400,77 2287.9,131.4 2152.3,48.6 1979,90 1854.6,58.9 ' +
+    '1719,90 1532.3,48.6 1421.2,90 1232.3,64.1 1081.2,9.8 919,58.9 779,69.3 ' +
+    '630.1,9.8 496.8,69.3 352.3,69.3 227.9,48.6 125.7,90 65.7,48.6 0,131.4 0,500').attr({ fill: p });
+
+  snap = Snap('#land-lower');
+
+  // land color
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    color = 'rgba(141, 203, 255, 0.95)';
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    color = 'rgba(179, 143, 145, 0.95)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(155, 197, 168, 0.95)';
+  } else {
+    color = 'rgba(157, 150, 213, 0.9)';
+  }
+
+  p = snap.path('M10-35-20,5M15,20,50,25M10-5-20,15').attr({
+    fill: 'none',
+    stroke: color,
+    strokeWidth: 45
+  });
+
+  p = p.pattern(0, 15, 25, 10);
+
+  snap.paper.polygon('2400,500 2400,77 2287.9,131.4 2152.3,48.6 1979,90 1854.6,58.9 ' +
+    '1719,90 1532.3,48.6 1421.2,90 1232.3,64.1 1081.2,9.8 919,58.9 779,69.3 ' +
+    '630.1,9.8 496.8,69.3 352.3,69.3 227.9,48.6 125.7,90 65.7,48.6 0,131.4 0,500').attr({ fill: p });
+
+  snap = Snap('#mining');
+
+  // land color
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    color = 'rgba(41, 203, 255, 0.95)';
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    color = 'rgba(79, 143, 145, 0.95)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(25, 177, 168, 0.95)';
+  } else {
+    color = 'rgba(57, 150, 213, 0.9)';
+  }
+
+  p = snap.path('M10-35-20,5M15,20,50,25M10-5-20,15').attr({
+    fill: 'none',
+    stroke: color,
+    strokeWidth: 45
+  });
+
+  p = p.pattern(0, 15, 15, 10);
+
+  snap.paper.polygon('0,146.2 0,80 143,80 468,122.4 628,80 903,106.5 1083,80 ' +
+    '1288,106.5 1453,80 1678,106.5 1833,80 2033,106.5 2143,80 2400,106.5 ' +
+    '2400,1680 0,1680 0,106.5').attr({ fill: p });
 })();
