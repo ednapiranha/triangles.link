@@ -2,6 +2,7 @@
 
 let currentRoom = document.body.getAttribute('data-room');
 let username = document.body.getAttribute('data-user');
+let mining = document.querySelector('#mining-area');
 
 exports.assignRoom = function (socket) {
   if (currentRoom && currentRoom !== 'undefined') {
@@ -58,6 +59,12 @@ exports.setMining = function (socket) {
   });
 
   socket.on('mining', (data) => {
-    console.log('_________', data)
+    if (data.item) {
+      let item = document.createElement('img');
+      item.classList.add('neon');
+      item.style.left = data.currX;
+      item.style.top = data.currY;
+      mining.appendChild(item);
+    }
   });
 };

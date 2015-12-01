@@ -14,6 +14,7 @@ ws.assignRoom(socket);
 ws.setChat(socket);
 ws.setMining(socket);
 background.generateSky();
+background.generateMountain();
 background.generateLand();
 background.generateMining();
 playground.setVehicle(socket);
