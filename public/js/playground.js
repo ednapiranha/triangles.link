@@ -1,9 +1,11 @@
 'use strict';
 
-(function () {
-  //var playground = document.querySelector('#playground');
-  var snap;
-/*
+let currentRoom = document.body.getAttribute('data-room');
+
+exports.setVehicle = function (socket) {
+  let snap;
+
+  /*
   playground = Snap('#playground');
 
   Snap.load('/assets/square-blue.svg', function (fragment) {
@@ -21,13 +23,14 @@
     playground.append(snap);
     playground.drag();
   });
-*/
-  var mining = document.querySelector('#mining-area');
-  var vehicle = document.querySelector('#vehicle');
-  var hole = document.querySelector('.hole');
-  var activeVehicle = false;
+  */
+  let mining = document.querySelector('#mining-area');
+  let vehicle = document.querySelector('#vehicle');
+  let hole = document.querySelector('.hole');
+  let activeVehicle = false;
   vehicle.style.left = 0;
   vehicle.style.top = 0;
+
   vehicle.onclick = function () {
     if (this.classList.contains('active')) {
       this.classList.remove('active');
@@ -66,51 +69,58 @@
   }
 
   function verifyMove(direction) {
-    var currX = parseInt(vehicle.style.left.split('px')[0], 10);
-    var currY = parseInt(vehicle.style.top.split('px')[0], 10);
-    var holeClone;
+    let currX = parseInt(vehicle.style.left.split('px')[0], 10);
+    let currY = parseInt(vehicle.style.top.split('px')[0], 10);
+    let holeClone;
+
+    function fadeOut(hc) {
+      setTimeout(function () {
+        hc.classList.add('fade');
+        setTimeout(function () {
+          mining.removeChild(hc);
+        }, 2000);
+      }, 4000);
+    }
 
     if (activeVehicle) {
       switch (direction) {
         case 'up':
           if (currY > 0) {
             vehicle.style.top = (currY - 50) + 'px';
-            holeClone = hole.cloneNode();
-            holeClone.style.top = vehicle.style.top;
-            holeClone.style.left = vehicle.style.left;
-            mining.appendChild(holeClone);
           }
           break;
         case 'down':
           if (currY < 1250) {
             vehicle.style.top = (currY + 50) + 'px';
-            holeClone = hole.cloneNode();
-            holeClone.style.top = vehicle.style.top;
-            holeClone.style.left = vehicle.style.left;
-            mining.appendChild(holeClone);
           }
           break;
         case 'left':
           if (currX > 0) {
             vehicle.style.left = (currX - 100) + 'px';
-            holeClone = hole.cloneNode();
-            holeClone.style.top = vehicle.style.top;
-            holeClone.style.left = vehicle.style.left;
-            mining.appendChild(holeClone);
           }
           break;
         case 'right':
           if (currX < 2300) {
             vehicle.style.left = (currX + 100) + 'px';
-            holeClone = hole.cloneNode();
-            holeClone.style.top = vehicle.style.top;
-            holeClone.style.left = vehicle.style.left;
-            mining.appendChild(holeClone);
           }
           break;
         default:
           break;
       }
+
+      holeClone = hole.cloneNode();
+      holeClone.classList.remove('fade');
+      holeClone.style.top = vehicle.style.top;
+      holeClone.style.left = vehicle.style.left;
+
+      socket.emit('mining', {
+        room: currentRoom,
+        currX: vehicle.style.left,
+        currY: vehicle.style.top
+      });
+
+      fadeOut(holeClone);
+      mining.appendChild(holeClone);
     }
   }
-})();
+};

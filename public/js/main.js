@@ -1,17 +1,20 @@
 'use strict';
 
-(function() {
-  // set menu
-  var menuButton = document.querySelector('header p');
-  var menu = document.querySelector('#menu');
+require('../css/main.css');
 
-  menuButton.onclick = function() {
-    if (this.classList.contains('active')) {
-      menu.classList.remove('active');
-      this.classList.remove('active');
-    } else {
-      menu.classList.add('active');
-      this.classList.add('active');
-    }
-  };
-})();
+const ws = require('./ws');
+const background = require('./background');
+const playground = require('./playground');
+const menu = require('./menu');
+
+const socket = io();
+
+menu.generate();
+ws.assignRoom(socket);
+ws.setChat(socket);
+ws.setMining(socket);
+background.generateSky();
+background.generateLand();
+background.generateMining();
+playground.setVehicle(socket);
+

@@ -13,6 +13,7 @@ const conf = require('./lib/conf');
 
 const authenticate = require('./lib/authenticate');
 const services = require('./lib/services');
+const rooms = require('./lib/rooms');
 
 const server = new Hapi.Server();
 
@@ -21,7 +22,7 @@ server.connection({
   port: conf.get('port')
 });
 
-server.ext('onPreResponse', function (request, reply) {
+server.ext('onPreResponse', (request, reply) => {
   var response = request.response;
 
   if (!response.isBoom) {
@@ -78,7 +79,7 @@ server.register([
     register: require('hapi-cache-buster'),
     options: new Date().getTime().toString()
   }
-], function (err) {
+], (err) => {
   if (err) {
     console.log(err);
   }
@@ -100,7 +101,7 @@ const auth = {
   strategy: 'session'
 };
 
-server.register(require('hapi-auth-cookie'), function (err) {
+server.register(require('hapi-auth-cookie'), (err) => {
   if (err) {
     throw err;
   }
@@ -273,7 +274,7 @@ server.route({
   method: 'GET',
   handler: {
     directory: {
-      path: './public',
+      path: './build',
       listing: false,
       index: false
     }
@@ -301,18 +302,23 @@ server.start(function (err) {
 
   io = SocketIO.listen(server.listener);
 
-  io.on('connection', function(socket) {
+  io.on('connection', (socket) => {
     socket.on('disconnect', disconnectHandler);
 
-    socket.on('join', function (data) {
+    socket.on('join', (data) => {
       users++;
       socket.join(data.room);
       io.emit('active', users);
     });
 
-    socket.on('message', function (data) {
+    socket.on('message', (data) => {
       data.created = moment().format('HH:mm:ss');
       io.sockets.in(data.room).emit('message', data);
+    });
+
+    socket.on('mining', (data) => {
+      rooms.getMining(data, io);
+      console.log(data)
     });
   });
 });

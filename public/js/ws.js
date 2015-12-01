@@ -1,10 +1,9 @@
 'use strict';
 
-(function() {
-  var socket = io();
-  var currentRoom = document.body.getAttribute('data-room');
-  var username = document.body.getAttribute('data-user');
+let currentRoom = document.body.getAttribute('data-room');
+let username = document.body.getAttribute('data-user');
 
+exports.assignRoom = function (socket) {
   if (currentRoom && currentRoom !== 'undefined') {
     console.log('joining ', currentRoom);
     socket.emit('join', {
@@ -13,14 +12,16 @@
   } else {
     console.log('no room available');
   }
+};
 
-  var messageForm = document.querySelector('#message');
-  var messages = document.querySelector('#messages');
+exports.setChat = function (socket) {
+  let messageForm = document.querySelector('#message');
+  let messages = document.querySelector('#messages');
 
   messageForm.onsubmit = function (ev) {
     ev.preventDefault();
 
-    var input = this.querySelector('input');
+    let input = this.querySelector('input');
 
     socket.emit('message', {
       room: currentRoom,
@@ -30,10 +31,10 @@
     input.value = '';
   };
 
-  socket.on('message', function (data) {
-    var msg = document.createElement('li');
-    var time = document.createElement('time');
-    var span = document.createElement('span');
+  socket.on('message', (data) => {
+    let msg = document.createElement('li');
+    let time = document.createElement('time');
+    let span = document.createElement('span');
     time.textContent = data.created;
     span.textContent = username + ': ' + data.message;
     msg.appendChild(time);
@@ -42,15 +43,21 @@
     msg.onclick = function () {
       msg.classList.add('hide');
 
-      setTimeout(function () {
+      setTimeout(() => {
         messages.removeChild(msg);
       }, 600);
     };
   });
+};
 
-  var active = document.querySelector('#active');
+exports.setMining = function (socket) {
+  let active = document.querySelector('#active');
 
-  socket.on('active', function (data) {
+  socket.on('active', (data) => {
     active.textContent = data;
   });
-})();
+
+  socket.on('mining', (data) => {
+    console.log('_________', data)
+  });
+};

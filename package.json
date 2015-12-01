@@ -8,7 +8,9 @@
     "npm": "2.x.x"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "nodemon",
+    "build": "webpack -p --progress",
+    "dev": "webpack --progress --color --watch & nodemon"
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
@@ -37,7 +39,14 @@
     "yar": "~3.0.3"
   },
   "devDependencies": {
-    "nodemon": "~1.3.7"
+    "babel-core": "^6.2.1",
+    "babel-loader": "^6.2.0",
+    "css-loader": "^0.23.0",
+    "file-loader": "^0.8.5",
+    "image-webpack-loader": "^1.6.2",
+    "nodemon": "~1.3.7",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.9"
   },
   "repository": {
     "type": "git",

@@ -1,21 +1,20 @@
 'use strict';
 
-(function () {
-  /*
-   * sky generation
-   */
-  var width = 2400;
-  var height = 530;
-  var snap = Snap('#back');
-  var vertices = [];
-  var triangles;
-  var grouping = snap.select('g[filter="url(#artifacts)"]');
-  var currentTimeOfDay = (new Date()).getHours();
-  var redMin;
-  var redMax;
-  var blueMin;
-  var blueMax;
-  var green;
+let currentTimeOfDay = (new Date()).getHours();
+
+exports.generateSky = function () {
+  const width = 2400;
+  const height = 530;
+  const snap = Snap('#back');
+
+  let vertices = [];
+  let triangles;
+  let grouping = snap.select('g[filter="url(#artifacts)"]');
+  let redMin;
+  let redMax;
+  let blueMin;
+  let blueMax;
+  let green;
 
   // sky color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
@@ -105,7 +104,7 @@
   }
 
   createTriangles();
-/*
+  /*
   function randomPoly() {
     return Math.floor(Math.random() * (triangles.length - 1));
   }
@@ -124,12 +123,12 @@
     }
   }
   nextPoly();
-*/
-  /*
-   * mountain generation
-   */
-  snap = Snap('#mountain');
-  var color;
+  */
+};
+
+exports.generateMountain = function () {
+  let snap = Snap('#mountain');
+  let color;
 
   // mountain color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
@@ -142,7 +141,7 @@
     color = 'rgba(157, 150, 213, 0.4)';
   }
 
-  var p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
+  let p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 25
@@ -153,12 +152,11 @@
   snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
     '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
     '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
+};
 
-  /*
-   * land generation
-   */
-
-  snap = Snap('#land-upper');
+exports.generateLand = function () {
+  let snap = Snap('#land-upper');
+  let color;
 
   // land color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
@@ -171,7 +169,7 @@
     color = 'rgba(157, 150, 213, 0.9)';
   }
 
-  p = snap.path('M0-15-10,15M15,10,0,25M0-5-20,15').attr({
+  let p = snap.path('M0-15-10,15M15,10,0,25M0-5-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 55
@@ -207,8 +205,11 @@
   snap.paper.polygon('2400,500 2400,77 2287.9,131.4 2152.3,48.6 1979,90 1854.6,58.9 ' +
     '1719,90 1532.3,48.6 1421.2,90 1232.3,64.1 1081.2,9.8 919,58.9 779,69.3 ' +
     '630.1,9.8 496.8,69.3 352.3,69.3 227.9,48.6 125.7,90 65.7,48.6 0,131.4 0,500').attr({ fill: p });
+};
 
-  snap = Snap('#mining');
+exports.generateMining = function () {
+  let snap = Snap('#mining');
+  let color;
 
   // land color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
@@ -221,7 +222,7 @@
     color = 'rgba(57, 150, 213, 0.9)';
   }
 
-  p = snap.path('M10-35-20,5M15,20,50,25M10-5-20,15').attr({
+  let p = snap.path('M10-35-20,5M15,20,50,25M10-5-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 45
@@ -232,4 +233,4 @@
   snap.paper.polygon('0,146.2 0,80 143,80 468,122.4 628,80 903,106.5 1083,80 ' +
     '1288,106.5 1453,80 1678,106.5 1833,80 2033,106.5 2143,80 2400,106.5 ' +
     '2400,1680 0,1680 0,106.5').attr({ fill: p });
-})();
+};
