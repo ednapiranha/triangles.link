@@ -318,7 +318,11 @@ server.start(function (err) {
 
     socket.on('mining', (data) => {
       rooms.getMining(data, io);
-      console.log(data)
+    });
+
+    socket.on('mined', (data) => {
+      console.log('+!+ ', data)
+      rooms.setMinedItem(data);
     });
   });
 });

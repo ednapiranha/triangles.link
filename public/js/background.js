@@ -49,10 +49,10 @@ exports.generateSky = function () {
   });
 
   function createTriangles() {
-    for (var x = 0; x <= width; x += width / 6) {
-      for (var y = 0; y <= height; y += height / 6) {
-        var xp;
-        var yp;
+    for (let x = 0; x <= width; x += width / 6) {
+      for (let y = 0; y <= height; y += height / 6) {
+        let xp;
+        let yp;
 
         if (x && x != width) {
           xp = x + (Math.floor(Math.random() * (width / 4)) - (width / 8));
@@ -71,13 +71,13 @@ exports.generateSky = function () {
 
     triangles = Delaunay.triangulate(vertices);
 
-    for (var i = 0; i < triangles.length; i += 3) {
+    for (let i = 0; i < triangles.length; i += 3) {
       drawTriangle(i);
     }
   }
 
   function drawTriangle(i) {
-    var poly = snap.polygon([
+    let poly = snap.polygon([
       vertices[triangles[i]][0], vertices[triangles[i]][1],
       vertices[triangles[i + 1]][0], vertices[triangles[i + 1]][1],
       vertices[triangles[i + 2]][0], vertices[triangles[i + 2]][1]
@@ -90,7 +90,7 @@ exports.generateSky = function () {
       y: (vertices[triangles[i]][1] + vertices[triangles[i + 1]][1] + vertices[triangles[i + 2]][1]) / 3
     };
 
-    var cir = snap.polygon(0, 0, poly.centroid.x, poly.centroid.y, poly.centroid.x + 3, poly.centroid.y + 5).attr({
+    let cir = snap.polygon(0, 0, poly.centroid.x, poly.centroid.y, poly.centroid.x + 3, poly.centroid.y + 5).attr({
       fill: 'rgba(255, 255, 255, 0.5)'
     });
 
@@ -98,8 +98,8 @@ exports.generateSky = function () {
   }
 
   function randomColor() {
-    var r = Math.floor(Math.random() * redMin) + redMax;
-    var b = Math.floor(Math.random() * blueMin) + blueMax;
+    let r = Math.floor(Math.random() * redMin) + redMax;
+    let b = Math.floor(Math.random() * blueMin) + blueMax;
     return 'rgb(' + r.toString() + ', ' + green + ',' + b.toString() + ')';
   }
 
@@ -211,7 +211,7 @@ exports.generateMining = function () {
   let snap = Snap('#mining');
   let color;
 
-  // land color
+  // mining color
   if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
     color = 'rgba(41, 203, 255, 0.95)';
   } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
@@ -228,7 +228,7 @@ exports.generateMining = function () {
     strokeWidth: 45
   });
 
-  p = p.pattern(0, 15, 15, 10);
+  p = p.pattern(0, 5, 15, 25);
 
   snap.paper.polygon('0,146.2 0,80 143,80 468,122.4 628,80 903,106.5 1083,80 ' +
     '1288,106.5 1453,80 1678,106.5 1833,80 2033,106.5 2143,80 2400,106.5 ' +

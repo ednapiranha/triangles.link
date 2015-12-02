@@ -61,10 +61,17 @@ exports.setMining = function (socket) {
   socket.on('mining', (data) => {
     if (data.item) {
       let item = document.createElement('img');
-      item.classList.add('neon');
+      item.classList.add(data.name);
       item.style.left = data.currX;
       item.style.top = data.currY;
       mining.appendChild(item);
+      socket.emit('mined', {
+        room: currentRoom,
+        name: data.name
+      });
+      setTimeout(() => {
+        mining.removeChild(item);
+      }, 2000);
     }
   });
 };

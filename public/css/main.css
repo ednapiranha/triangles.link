@@ -293,12 +293,34 @@ footer form {
   box-shadow: #fff 0 0 25px;
 }
 
-.neon {
+.lava {
   position: absolute;
   display: inline-block;
-  width: 25px;
-  height: 25px;
-  z-index: 5;
-  background-image: url(../assets/square-pink.svg);
+  width: 70px;
+  height: 70px;
+  z-index: 7;
+  top: -5px;
+  background-image: url(../assets/lava.svg);
   background-repeat: no-repeat;
+}
+
+.neon-pink, .neon-blue, .neon-green {
+  position: absolute;
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  z-index: 5;
+  background-repeat: no-repeat;
+}
+
+.neon-pink {
+  background-image: url(../assets/square-pink.svg);
+}
+
+.neon-blue {
+  background-image: url(../assets/square-blue.svg);
+}
+
+.neon-green {
+  background-image: url(../assets/square-green.svg);
 }

@@ -251,7 +251,7 @@
     // Allow using variables before they are defined.
     "no-use-before-define": 0,
     // Require let or var instead of var.
-    "no-var": 0,
+    "no-var": 1,
     // Allow using TODO/FIXME comments.
     "no-warning-comments": 0,
     // Disallow use of the with statement.

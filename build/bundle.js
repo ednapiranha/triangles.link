@@ -48,10 +48,10 @@
 
 	__webpack_require__(1);
 
-	const ws = __webpack_require__(7);
-	const background = __webpack_require__(8);
-	const playground = __webpack_require__(9);
-	const menu = __webpack_require__(10);
+	const ws = __webpack_require__(11);
+	const background = __webpack_require__(12);
+	const playground = __webpack_require__(13);
+	const menu = __webpack_require__(14);
 
 	const socket = io();
 
@@ -75,7 +75,7 @@
 	var content = __webpack_require__(2);
 	if(typeof content === 'string') content = [[module.id, content, '']];
 	// add the styles to the DOM
-	var update = __webpack_require__(6)(content, {});
+	var update = __webpack_require__(10)(content, {});
 	if(content.locals) module.exports = content.locals;
 	// Hot Module Replacement
 	if(false) {
@@ -100,7 +100,7 @@
 
 
 	// module
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml, body, div, span, appvar, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol, ul {\n  list-style: none;\n}\nblockquote, q {\n  quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* Main styles */\n\nbody {\n  font-family: Arial, sans-serif;\n  background: #ccc;\n}\n\nheader {\n  position: fixed;\n  z-index: 20;\n}\n\nheader p {\n  position: fixed;\n  left: 10px;\n  top: 10px;\n  color: #fff;\n  font-size: 2rem;\n  cursor: pointer;\n}\n\nheader p:hover, header p.active {\n  color: #111;\n}\n\n#area {\n  height: 2592px;\n  width: 2400px;\n}\n\n#menu {\n  position: fixed;\n  display: none;\n  top: 50px;\n}\n\n#menu.active {\n  display: block;\n}\n\n#menu a {\n  background-color: rgba(1, 1, 1, 0.5);\n  padding: 2px 10px;\n  display: block;\n  color: #fff;\n  text-decoration: none;\n  font-size: 0.8rem;\n  margin-bottom: 1px;\n  text-transform: uppercase;\n  line-height: 1.4rem;\n}\n\n.login {\n  padding: 20px;\n}\n\n.errors {\n  color: #f00;\n  font-weight: bold;\n  text-transform: uppercase;\n}\n\n/* form styles */\n\n.form {\n  margin: 50px 10px 0 120px;\n}\n\n.form h1 {\n  margin-bottom: 20px;\n}\n\n.form h2 {\n  margin: 10px 0 5px 0;\n}\n\n/* footer */\n\nfooter {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 40px;\n  background-color: rgba(1, 1, 1, 0.5);\n  z-index: 9;\n}\n\nfooter form {\n  display: inline-block;\n}\n\n#messages {\n  position: absolute;\n  bottom: 41px;\n}\n\n#messages li {\n  padding: 5px 8px;\n  margin-bottom: 1px;\n  background-color: rgba(1, 1, 1, 0.5);\n  color: #ddd;\n  font-weight: 100;\n  font-size: 0.75rem;\n  line-height: 1rem;\n  width: 250px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: pointer;\n}\n\n#messages li:hover {\n  background-color: rgba(255, 255, 255, 0.5);\n  color: #888;\n}\n\n#messages li.hide {\n  opacity: 0;\n  transition: opacity 0.5s;\n  -webkit-transition: opacity 0.5s;\n}\n\n#messages li time {\n  font-size: 0.7rem;\n  margin-right: 5px;\n  font-style: italic;\n  color: #aaa;\n}\n\n#message input {\n  border: 0;\n  font-size: 0.8rem;\n  padding: 4px;\n  background-color: rgba(1, 1, 1, 0.4);\n  color: #eee;\n  width: 246px;\n}\n\n#active {\n  float: right;\n  display: inline-block;\n  padding: 5px 10px;\n  background-color: rgba(1, 1, 1, 0.7);\n  text-align: center;\n  color: #fff;\n}\n\n#message button {\n  display: none;\n}\n\n/* game styles */\n\n#back {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n\n#mountain {\n  width: 1400px;\n  height: 445px;\n  position: absolute;\n  left: 100px;\n  top: 85px;\n  z-index: 2;\n}\n\n#land-upper, #land-lower {\n  width: 2400px;\n  height: 500px;\n  position: absolute;\n  left: 0;\n  top: 400px;\n  z-index: 3;\n}\n\n#land-lower {\n  top: 700px;\n}\n\n#mining {\n  position: absolute;\n  top: 1000px;\n  width: 2400px;\n  height: 1600px;\n  z-index: 4;\n}\n\n#playground {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 2400px;\n  height: 1199px;\n  z-index: 7;\n}\n\n#mining-area {\n  position: absolute;\n  left: 0;\n  top: 1200px;\n  width: 2400px;\n  height: 1400px;\n  z-index: 7;\n}\n\n.square {\n  width: 50px;\n  height: 50px;\n}\n\n#vehicle, .hole {\n  position: absolute;\n  width: 100px;\n  height: 50px;\n  top: 0px;\n  left: 0;\n}\n\n.hole {\n  z-index: 4;\n  background-image: url(" + __webpack_require__(4) + ");\n  background-repeat: no-repeat;\n}\n\n.hole.fade {\n  opacity: 0;\n  transition: opacity 2s;\n  -webkit-transition: opacity 2s;\n}\n\n#vehicle {\n  z-index: 6;\n  background-image: url(" + __webpack_require__(5) + ");\n  background-repeat: no-repeat;\n}\n\n#vehicle.active {\n  background-color: rgba(255, 255, 255, 0.4);\n  border-radius: 100px;\n  box-shadow: #fff 0 0 25px;\n}\n\n.neon {\n  position: absolute;\n  display: inline-block;\n  width: 25px;\n  height: 25px;\n  z-index: 5;\n  background-image: url(" + __webpack_require__(11) + ");\n  background-repeat: no-repeat;\n}\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\n\nhtml, body, div, span, appvar, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline;\n}\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block;\n}\nbody {\n  line-height: 1;\n}\nol, ul {\n  list-style: none;\n}\nblockquote, q {\n  quotes: none;\n}\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none;\n}\ntable {\n  border-collapse: collapse;\n  border-spacing: 0;\n}\n\n/* Main styles */\n\nbody {\n  font-family: Arial, sans-serif;\n  background: #ccc;\n}\n\nheader {\n  position: fixed;\n  z-index: 20;\n}\n\nheader p {\n  position: fixed;\n  left: 10px;\n  top: 10px;\n  color: #fff;\n  font-size: 2rem;\n  cursor: pointer;\n}\n\nheader p:hover, header p.active {\n  color: #111;\n}\n\n#area {\n  height: 2592px;\n  width: 2400px;\n}\n\n#menu {\n  position: fixed;\n  display: none;\n  top: 50px;\n}\n\n#menu.active {\n  display: block;\n}\n\n#menu a {\n  background-color: rgba(1, 1, 1, 0.5);\n  padding: 2px 10px;\n  display: block;\n  color: #fff;\n  text-decoration: none;\n  font-size: 0.8rem;\n  margin-bottom: 1px;\n  text-transform: uppercase;\n  line-height: 1.4rem;\n}\n\n.login {\n  padding: 20px;\n}\n\n.errors {\n  color: #f00;\n  font-weight: bold;\n  text-transform: uppercase;\n}\n\n/* form styles */\n\n.form {\n  margin: 50px 10px 0 120px;\n}\n\n.form h1 {\n  margin-bottom: 20px;\n}\n\n.form h2 {\n  margin: 10px 0 5px 0;\n}\n\n/* footer */\n\nfooter {\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  height: 40px;\n  background-color: rgba(1, 1, 1, 0.5);\n  z-index: 9;\n}\n\nfooter form {\n  display: inline-block;\n}\n\n#messages {\n  position: absolute;\n  bottom: 41px;\n}\n\n#messages li {\n  padding: 5px 8px;\n  margin-bottom: 1px;\n  background-color: rgba(1, 1, 1, 0.5);\n  color: #ddd;\n  font-weight: 100;\n  font-size: 0.75rem;\n  line-height: 1rem;\n  width: 250px;\n  text-overflow: ellipsis;\n  overflow: hidden;\n  cursor: pointer;\n}\n\n#messages li:hover {\n  background-color: rgba(255, 255, 255, 0.5);\n  color: #888;\n}\n\n#messages li.hide {\n  opacity: 0;\n  transition: opacity 0.5s;\n  -webkit-transition: opacity 0.5s;\n}\n\n#messages li time {\n  font-size: 0.7rem;\n  margin-right: 5px;\n  font-style: italic;\n  color: #aaa;\n}\n\n#message input {\n  border: 0;\n  font-size: 0.8rem;\n  padding: 4px;\n  background-color: rgba(1, 1, 1, 0.4);\n  color: #eee;\n  width: 246px;\n}\n\n#active {\n  float: right;\n  display: inline-block;\n  padding: 5px 10px;\n  background-color: rgba(1, 1, 1, 0.7);\n  text-align: center;\n  color: #fff;\n}\n\n#message button {\n  display: none;\n}\n\n/* game styles */\n\n#back {\n  position: absolute;\n  top: 0;\n  left: 0;\n  right: 0;\n  bottom: 0;\n}\n\n#mountain {\n  width: 1400px;\n  height: 445px;\n  position: absolute;\n  left: 100px;\n  top: 85px;\n  z-index: 2;\n}\n\n#land-upper, #land-lower {\n  width: 2400px;\n  height: 500px;\n  position: absolute;\n  left: 0;\n  top: 400px;\n  z-index: 3;\n}\n\n#land-lower {\n  top: 700px;\n}\n\n#mining {\n  position: absolute;\n  top: 1000px;\n  width: 2400px;\n  height: 1600px;\n  z-index: 4;\n}\n\n#playground {\n  position: absolute;\n  top: 0px;\n  left: 0px;\n  width: 2400px;\n  height: 1199px;\n  z-index: 7;\n}\n\n#mining-area {\n  position: absolute;\n  left: 0;\n  top: 1200px;\n  width: 2400px;\n  height: 1400px;\n  z-index: 7;\n}\n\n.square {\n  width: 50px;\n  height: 50px;\n}\n\n#vehicle, .hole {\n  position: absolute;\n  width: 100px;\n  height: 50px;\n  top: 0px;\n  left: 0;\n}\n\n.hole {\n  z-index: 4;\n  background-image: url(" + __webpack_require__(4) + ");\n  background-repeat: no-repeat;\n}\n\n.hole.fade {\n  opacity: 0;\n  transition: opacity 2s;\n  -webkit-transition: opacity 2s;\n}\n\n#vehicle {\n  z-index: 6;\n  background-image: url(" + __webpack_require__(5) + ");\n  background-repeat: no-repeat;\n}\n\n#vehicle.active {\n  background-color: rgba(255, 255, 255, 0.4);\n  border-radius: 100px;\n  box-shadow: #fff 0 0 25px;\n}\n\n.lava {\n  position: absolute;\n  display: inline-block;\n  width: 70px;\n  height: 70px;\n  z-index: 7;\n  top: -5px;\n  background-image: url(" + __webpack_require__(6) + ");\n  background-repeat: no-repeat;\n}\n\n.neon-pink, .neon-blue, .neon-green {\n  position: absolute;\n  display: inline-block;\n  width: 50px;\n  height: 50px;\n  z-index: 5;\n  background-repeat: no-repeat;\n}\n\n.neon-pink {\n  background-image: url(" + __webpack_require__(7) + ");\n}\n\n.neon-blue {\n  background-image: url(" + __webpack_require__(8) + ");\n}\n\n.neon-green {\n  background-image: url(" + __webpack_require__(9) + ");\n}\n", ""]);
 
 	// exports
 
@@ -172,6 +172,30 @@
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "f9d5c2e7545aaa75725029ef09be7715.svg";
+
+/***/ },
+/* 7 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "f12c6ce28cc2a46005965185f7c5a458.svg";
+
+/***/ },
+/* 8 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "3cfc11e0418090d80700b92c8209d374.svg";
+
+/***/ },
+/* 9 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "10a18b03d2a035a0da62cc4c223d15d3.svg";
+
+/***/ },
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/*
@@ -425,7 +449,7 @@
 
 
 /***/ },
-/* 7 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -491,16 +515,23 @@
 	  socket.on('mining', data => {
 	    if (data.item) {
 	      let item = document.createElement('img');
-	      item.classList.add('neon');
+	      item.classList.add(data.name);
 	      item.style.left = data.currX;
 	      item.style.top = data.currY;
 	      mining.appendChild(item);
+	      socket.emit('mined', {
+	        room: currentRoom,
+	        name: data.name
+	      });
+	      setTimeout(() => {
+	        mining.removeChild(item);
+	      }, 2000);
 	    }
 	  });
 	};
 
 /***/ },
-/* 8 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -554,10 +585,10 @@
 	  });
 
 	  function createTriangles() {
-	    for (var x = 0; x <= width; x += width / 6) {
-	      for (var y = 0; y <= height; y += height / 6) {
-	        var xp;
-	        var yp;
+	    for (let x = 0; x <= width; x += width / 6) {
+	      for (let y = 0; y <= height; y += height / 6) {
+	        let xp;
+	        let yp;
 
 	        if (x && x != width) {
 	          xp = x + (Math.floor(Math.random() * (width / 4)) - width / 8);
@@ -576,13 +607,13 @@
 
 	    triangles = Delaunay.triangulate(vertices);
 
-	    for (var i = 0; i < triangles.length; i += 3) {
+	    for (let i = 0; i < triangles.length; i += 3) {
 	      drawTriangle(i);
 	    }
 	  }
 
 	  function drawTriangle(i) {
-	    var poly = snap.polygon([vertices[triangles[i]][0], vertices[triangles[i]][1], vertices[triangles[i + 1]][0], vertices[triangles[i + 1]][1], vertices[triangles[i + 2]][0], vertices[triangles[i + 2]][1]]).attr({
+	    let poly = snap.polygon([vertices[triangles[i]][0], vertices[triangles[i]][1], vertices[triangles[i + 1]][0], vertices[triangles[i + 1]][1], vertices[triangles[i + 2]][0], vertices[triangles[i + 2]][1]]).attr({
 	      fill: randomColor()
 	    });
 
@@ -591,7 +622,7 @@
 	      y: (vertices[triangles[i]][1] + vertices[triangles[i + 1]][1] + vertices[triangles[i + 2]][1]) / 3
 	    };
 
-	    var cir = snap.polygon(0, 0, poly.centroid.x, poly.centroid.y, poly.centroid.x + 3, poly.centroid.y + 5).attr({
+	    let cir = snap.polygon(0, 0, poly.centroid.x, poly.centroid.y, poly.centroid.x + 3, poly.centroid.y + 5).attr({
 	      fill: 'rgba(255, 255, 255, 0.5)'
 	    });
 
@@ -599,8 +630,8 @@
 	  }
 
 	  function randomColor() {
-	    var r = Math.floor(Math.random() * redMin) + redMax;
-	    var b = Math.floor(Math.random() * blueMin) + blueMax;
+	    let r = Math.floor(Math.random() * redMin) + redMax;
+	    let b = Math.floor(Math.random() * blueMin) + blueMax;
 	    return 'rgb(' + r.toString() + ', ' + green + ',' + b.toString() + ')';
 	  }
 
@@ -703,7 +734,7 @@
 	  let snap = Snap('#mining');
 	  let color;
 
-	  // land color
+	  // mining color
 	  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
 	    color = 'rgba(41, 203, 255, 0.95)';
 	  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
@@ -720,13 +751,13 @@
 	    strokeWidth: 45
 	  });
 
-	  p = p.pattern(0, 15, 15, 10);
+	  p = p.pattern(0, 5, 15, 25);
 
 	  snap.paper.polygon('0,146.2 0,80 143,80 468,122.4 628,80 903,106.5 1083,80 ' + '1288,106.5 1453,80 1678,106.5 1833,80 2033,106.5 2143,80 2400,106.5 ' + '2400,1680 0,1680 0,106.5').attr({ fill: p });
 	};
 
 /***/ },
-/* 9 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -855,7 +886,7 @@
 	};
 
 /***/ },
-/* 10 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -874,12 +905,6 @@
 	    }
 	  };
 	};
-
-/***/ },
-/* 11 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__.p + "f12c6ce28cc2a46005965185f7c5a458.svg";
 
 /***/ }
 /******/ ]);
