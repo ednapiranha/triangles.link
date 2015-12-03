@@ -1,5 +1,7 @@
 'use strict';
 
+const playground = require('./playground');
+
 let currentRoom = document.body.getAttribute('data-room');
 let username = document.body.getAttribute('data-user');
 let mining = document.querySelector('#mining-area');
@@ -74,4 +76,6 @@ exports.setMining = function (socket) {
       }, 2000);
     }
   });
+
+  playground.setHealth(socket);
 };

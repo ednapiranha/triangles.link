@@ -1,29 +1,28 @@
 'use strict';
 
 let currentRoom = document.body.getAttribute('data-room');
+let health = document.querySelector('#health');
+let isDamaged = false;
+
+exports.setHealth = function (socket) {
+  socket.on('damage', (data) => {
+    for (let i = 5; i > 0; i--) {
+      if (data === 0) {
+        isDamaged = true;
+      } else {
+        isDamaged = false;
+      }
+
+      if (i <= data) {
+        health.querySelector('#health-state' + i).classList.remove('damage');
+      } else {
+        health.querySelector('#health-state' + i).classList.add('damage');
+      }
+    }
+  });
+};
 
 exports.setVehicle = function (socket) {
-  let snap;
-
-  /*
-  playground = Snap('#playground');
-
-  Snap.load('/assets/square-blue.svg', function (fragment) {
-    snap = Snap(50, 50);
-    snap.append(fragment);
-    snap.attr({ class: 'square' });
-    playground.append(snap);
-    playground.drag();
-  });
-
-  Snap.load('/assets/vehicle.svg', function (fragment) {
-    snap = Snap(100, 50);
-    snap.append(fragment);
-    snap.attr({ class: 'vehicle' });
-    playground.append(snap);
-    playground.drag();
-  });
-  */
   let mining = document.querySelector('#mining-area');
   let vehicle = document.querySelector('#vehicle');
   let hole = document.querySelector('.hole');
@@ -31,13 +30,23 @@ exports.setVehicle = function (socket) {
   vehicle.style.left = 0;
   vehicle.style.top = 0;
 
+  exports.setHealth(socket);
+
+  socket.on('damage', (data) => {
+    isDamaged = !data;
+  });
+
   vehicle.onclick = function () {
-    if (this.classList.contains('active')) {
-      this.classList.remove('active');
-      activeVehicle = false;
+    if (!isDamaged) {
+      if (this.classList.contains('active')) {
+        this.classList.remove('active');
+        activeVehicle = false;
+      } else {
+        this.classList.add('active');
+        activeVehicle = true;
+      }
     } else {
-      this.classList.add('active');
-      activeVehicle = true;
+      console.log('vehicle damaged');
     }
   };
 
@@ -45,6 +54,11 @@ exports.setVehicle = function (socket) {
 
   function checkArrowKey(ev) {
     ev = ev || window.event;
+
+    if (isDamaged) {
+      vehicle.classList.remove('active');
+      return;
+    }
 
     switch (ev.keyCode) {
       case 38:
@@ -123,4 +137,8 @@ exports.setVehicle = function (socket) {
       mining.appendChild(holeClone);
     }
   }
+};
+
+exports.setDamagedState = function (damage) {
+  isDamaged = damage;
 };

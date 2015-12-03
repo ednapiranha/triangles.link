@@ -130,18 +130,42 @@ footer {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
+  height: 65px;
   background-color: rgba(1, 1, 1, 0.5);
   z-index: 9;
 }
 
 footer form {
   display: inline-block;
+  float: right;
+}
+
+#health {
+  position: absolute;
+  left: 70px;
+  bottom: 10px;
+  height: 30px;
+  width: 120px;
+  z-index: 6;
+}
+
+#health .status {
+  border-radius: 100px;
+  width: 15px;
+  height: 15px;
+  margin-right: 3px;
+  background-color: #01db77;
+  float: left;
+}
+
+#health .status.damage {
+  background-color: #f00;
 }
 
 #messages {
   position: absolute;
   bottom: 41px;
+  right: 10px;
 }
 
 #messages li {
@@ -291,6 +315,17 @@ footer form {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 100px;
   box-shadow: #fff 0 0 25px;
+}
+
+#avatar {
+  position: absolute;
+  background-image: url(../assets/avatar.svg);
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  z-index: 6;
+  bottom: 10px;
+  left: 10px;
 }
 
 .lava {

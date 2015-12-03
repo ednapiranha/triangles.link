@@ -8,6 +8,7 @@ const http = require('http');
 const Inert = require('inert');
 const moment = require('moment');
 const SocketIO = require('socket.io');
+const cron = require('node-schedule');
 
 const conf = require('./lib/conf');
 
@@ -17,23 +18,45 @@ const rooms = require('./lib/rooms');
 
 const server = new Hapi.Server();
 
+let io;
+let users = 0;
+
+rooms.getAllRooms((err, rms) => {
+  rms.forEach((room) => {
+    // generate on server restart
+    rooms.generateMining(room.id);
+
+    // mining items regeneration
+    cron.scheduleJob('0 * * * *', () => {
+      console.log('rengenerating items ... ', room.id);
+      rooms.generateMining(room.id);
+    });
+
+    // vehicle health regeneration
+    cron.scheduleJob('0,15,30,45 * * * *', () => {
+      console.log('rengenerating health ... ', room.id);
+      rooms.addHealth(room.id, io);
+    });
+  });
+});
+
 server.connection({
   host: conf.get('domain'),
   port: conf.get('port')
 });
 
 server.ext('onPreResponse', (request, reply) => {
-  var response = request.response;
+  let response = request.response;
 
   if (!response.isBoom) {
     return reply.continue();
   }
 
-  var error = response;
-  var ctx = {};
+  let error = response;
+  let ctx = {};
 
-  var message = error.output.payload.message;
-  var statusCode = error.output.statusCode || 500;
+  let message = error.output.payload.message;
+  let statusCode = error.output.statusCode || 500;
   ctx.code = statusCode;
   ctx.httpMessage = http.STATUS_CODES[statusCode].toLowerCase();
 
@@ -281,9 +304,6 @@ server.route({
   }
 });
 
-let io;
-let users = 0;
-
 server.start(function (err) {
   if (err) {
     console.error(err.message);
@@ -308,6 +328,10 @@ server.start(function (err) {
     socket.on('join', (data) => {
       users++;
       socket.join(data.room);
+      console.log('joined ', data.room);
+      rooms.getHealth({
+        room: data.room
+      }, io);
       io.emit('active', users);
     });
 
@@ -321,8 +345,7 @@ server.start(function (err) {
     });
 
     socket.on('mined', (data) => {
-      console.log('+!+ ', data)
-      rooms.setMinedItem(data);
+      rooms.setMinedItem(data, io);
     });
   });
 });
