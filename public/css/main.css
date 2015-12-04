@@ -142,7 +142,7 @@ footer form {
 
 #health {
   position: absolute;
-  left: 70px;
+  left: 130px;
   bottom: 10px;
   height: 30px;
   width: 120px;
@@ -317,6 +317,12 @@ footer form {
   box-shadow: #fff 0 0 25px;
 }
 
+#vehicle.damage {
+  background-color: rgba(246, 0, 0, 0.4);
+  border-radius: 100px;
+  box-shadow: #f60000 0 0 25px;
+}
+
 #avatar {
   position: absolute;
   background-image: url(../assets/avatar.svg);
@@ -327,6 +333,26 @@ footer form {
   bottom: 10px;
   left: 10px;
 }
+
+#build {
+  position: absolute;
+  background-image: url(../assets/builder.svg);
+  background-repeat: no-repeat;
+  width: 50px;
+  height: 50px;
+  z-index: 6;
+  bottom: 10px;
+  left: 70px;
+}
+
+#avatar:hover, #build:hover {
+  background-color: rgba(2, 181, 219, 0.6);
+  border-radius: 100px;
+  box-shadow: #06d3ff 0 0 10px;
+  cursor: pointer;
+}
+
+/* items */
 
 .lava {
   position: absolute;

@@ -131,9 +131,9 @@ exports.generateMountain = function () {
   let color;
 
   // mountain color
-  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
     color = 'rgba(241, 203, 255, 0.6)';
-  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
     color = 'rgba(229, 253, 255, 0.6)';
   } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
     color = 'rgba(255, 197, 168, 0.6)';
@@ -159,9 +159,9 @@ exports.generateLand = function () {
   let color;
 
   // land color
-  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
     color = 'rgba(241, 203, 255, 0.9)';
-  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
     color = 'rgba(189, 253, 255, 0.9)';
   } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
     color = 'rgba(255, 197, 168, 0.9)';
@@ -184,9 +184,9 @@ exports.generateLand = function () {
   snap = Snap('#land-lower');
 
   // land color
-  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
     color = 'rgba(141, 203, 255, 0.95)';
-  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
     color = 'rgba(179, 143, 145, 0.95)';
   } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
     color = 'rgba(155, 197, 168, 0.95)';
@@ -212,17 +212,17 @@ exports.generateMining = function () {
   let color;
 
   // mining color
-  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
-    color = 'rgba(41, 203, 255, 0.95)';
-  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
-    color = 'rgba(79, 143, 145, 0.95)';
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
+    color = 'rgba(141, 143, 215, 0.95)';
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
+    color = 'rgba(59, 143, 135, 0.95)';
   } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
     color = 'rgba(25, 177, 168, 0.95)';
   } else {
     color = 'rgba(57, 150, 213, 0.9)';
   }
 
-  let p = snap.path('M10-35-20,5M15,20,50,25M10-5-20,15').attr({
+  let p = snap.path('M10-5-20,15M5,20,50,25M10-5-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 45

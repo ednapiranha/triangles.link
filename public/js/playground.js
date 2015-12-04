@@ -34,6 +34,11 @@ exports.setVehicle = function (socket) {
 
   socket.on('damage', (data) => {
     isDamaged = !data;
+    if (isDamaged) {
+      vehicle.classList.add('damage');
+    } else {
+      vehicle.classList.remove('damage');
+    }
   });
 
   vehicle.onclick = function () {
@@ -90,10 +95,10 @@ exports.setVehicle = function (socket) {
     function fadeOut(hc) {
       setTimeout(function () {
         hc.classList.add('fade');
-        setTimeout(function () {
+        setTimeout(() => {
           mining.removeChild(hc);
-        }, 2000);
-      }, 4000);
+        }, 1400);
+      }, 1000);
     }
 
     if (activeVehicle) {
