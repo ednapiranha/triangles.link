@@ -15,19 +15,26 @@ block content
   #playground
 
   #mining-area
-    img#vehicle
-    img.hole.fade
+    if owner
+      img#vehicle
+      img.hole.fade
+
+  if owner
+    #collection
+      h2 collection
+      ul.items
 
 block footer
   footer
-    #avatar
-    #build
-    #health
-      .status#health-state1
-      .status#health-state2
-      .status#health-state3
-      .status#health-state4
-      .status#health-state5
+    if owner
+      #avatar
+      #build
+      #health
+        .status#health-state1
+        .status#health-state2
+        .status#health-state3
+        .status#health-state4
+        .status#health-state5
     ol#messages
     form#message(method='post')
       input(type='text', placeholder='chat here')

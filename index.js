@@ -347,6 +347,10 @@ server.start(function (err) {
     socket.on('mined', (data) => {
       rooms.setMinedItem(data, io);
     });
+
+    socket.on('collection', (data) => {
+      rooms.getCollection(data, io);
+    });
   });
 });
 

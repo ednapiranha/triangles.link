@@ -164,7 +164,7 @@ footer form {
 
 #messages {
   position: absolute;
-  bottom: 41px;
+  bottom: 65px;
   right: 10px;
 }
 
@@ -345,7 +345,7 @@ footer form {
   left: 70px;
 }
 
-#avatar:hover, #build:hover {
+#avatar:hover, #build:hover, #avatar.active {
   background-color: rgba(2, 181, 219, 0.6);
   border-radius: 100px;
   box-shadow: #06d3ff 0 0 10px;
@@ -374,6 +374,16 @@ footer form {
   background-repeat: no-repeat;
 }
 
+.items .neon-pink, .items .neon-blue, .items .neon-green {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  padding-left: 30px;
+  font-size: 1.2rem;
+  line-height: 22px;
+  margin: 5px 0;
+}
+
 .neon-pink {
   background-image: url(../assets/square-pink.svg);
 }
@@ -384,4 +394,28 @@ footer form {
 
 .neon-green {
   background-image: url(../assets/square-green.svg);
+}
+
+/* collection */
+#collection {
+  display: none;
+  position: fixed;
+  background-color: rgba(1, 1, 1, 0.85);
+  color: #eee;
+  z-index: 9;
+  height: 70vh;
+  width: 70vw;
+  left: 100px;
+  top: 10px;
+  padding: 20px;
+}
+
+#collection.active {
+  display: block;
+}
+
+#collection h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
