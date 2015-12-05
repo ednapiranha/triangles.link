@@ -5,7 +5,7 @@
   "private": true,
   "engines": {
     "node": "~5.x.x",
-    "npm": "2.x.x"
+    "npm": "3.x.x"
   },
   "scripts": {
     "start": "nodemon",
