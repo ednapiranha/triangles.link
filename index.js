@@ -15,6 +15,7 @@ const conf = require('./lib/conf');
 const authenticate = require('./lib/authenticate');
 const services = require('./lib/services');
 const rooms = require('./lib/rooms');
+const builder = require('./lib/builder');
 
 const server = new Hapi.Server();
 
@@ -24,7 +25,7 @@ let users = 0;
 rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
     // mining items regeneration
-    cron.scheduleJob('0 * * * *', () => {
+    cron.scheduleJob('0,30 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
       rooms.generateMining(room.id);
     });
@@ -352,6 +353,14 @@ server.start(function (err) {
 
     socket.on('collection', (data) => {
       rooms.getCollection(data, io);
+    });
+
+    socket.on('build', (data) => {
+      builder.getItems(data, io);
+    });
+
+    socket.on('make', (data) => {
+      rooms.makeItems(data);
     });
   });
 });

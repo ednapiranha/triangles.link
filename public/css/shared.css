@@ -49,6 +49,11 @@ table {
 
 /* Main styles */
 
+@font-face {
+  font-family: 'LeagueSpartan-Bold';
+  src: url('../fonts/LeagueSpartan-Bold.woff');
+}
+
 body {
   font-family: Arial, sans-serif;
   background: #ccc;

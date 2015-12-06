@@ -251,7 +251,7 @@ footer form {
   left: 70px;
 }
 
-#avatar:hover, #build:hover, #avatar.active {
+#avatar:hover, #build:hover, #avatar.active, #build.active {
   background-color: rgba(2, 181, 219, 0.6);
   border-radius: 100px;
   box-shadow: #06d3ff 0 0 10px;
@@ -280,16 +280,89 @@ footer form {
   background-repeat: no-repeat;
 }
 
-.items .neon-pink, .items .neon-blue, .items .neon-green {
+.items .collected {
   position: relative;
-  width: 20px;
-  height: 20px;
-  padding-left: 30px;
+  width: 30px;
+  height: 30px;
+  padding-left: 50px;
   font-size: 1.2rem;
   line-height: 22px;
   margin: 5px 0;
+  background-repeat: no-repeat;
 }
 
+/* collection */
+#collection, #builder {
+  position: fixed;
+  background-color: rgba(1, 1, 1, 0.5);
+  z-index: 9;
+  height: 70vh;
+  width: 70vw;
+  left: 100px;
+  top: -70vw;
+  padding: 20px;
+  border: 1px solid #333;
+  box-shadow: inset #111 0 0 23px;
+  border-radius: 3px;
+  color: #fff;
+  opacity: 0;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+}
+
+#collection.active, #builder.active {
+  top: 0;
+  display: block;
+  opacity: 1;
+  transition: opacity 1s;
+  -webkit-transition: opacity 1s;
+}
+
+#collection h2, #builder h2 {
+  font-size: 1rem;
+  font-family: 'LeagueSpartan-Bold';
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+/* builder */
+#builder li {
+  width: 100px;
+  float: left;
+  padding: 10px;
+}
+
+.items .requirements {
+  width: 20px;
+  height: 20px;
+  padding-left: 30px;
+  display: block;
+}
+
+#builder .items .build {
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  background-repeat: no-repeat;
+  padding-left: 70px;
+  position: relative;
+}
+
+.requirements {
+  display: block;
+  position: relative;
+}
+
+.requirements.disabled {
+  opacity: 0.5;
+}
+
+.buy:hover {
+  box-shadow: inset #eee 0 0 30px;
+  cursor: pointer;
+}
+
+/* item images */
 .neon-pink {
   background-image: url(../assets/square-pink.svg);
 }
@@ -302,26 +375,6 @@ footer form {
   background-image: url(../assets/square-green.svg);
 }
 
-/* collection */
-#collection {
-  display: none;
-  position: fixed;
-  background-color: rgba(1, 1, 1, 0.85);
-  color: #eee;
-  z-index: 9;
-  height: 70vh;
-  width: 70vw;
-  left: 100px;
-  top: 10px;
-  padding: 20px;
-}
-
-#collection.active {
-  display: block;
-}
-
-#collection h2 {
-  font-size: 1rem;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+.palm-tree {
+  background-image: url(../assets/palm-tree.svg);
 }

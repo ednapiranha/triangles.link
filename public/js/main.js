@@ -24,4 +24,5 @@ if (owner === 'true') {
   ws.setMining(socket);
   playground.setVehicle(socket);
   ws.getCollection(socket);
+  ws.getBuildables(socket);
 }

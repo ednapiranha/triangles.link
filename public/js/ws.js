@@ -5,6 +5,11 @@ const playground = require('./playground');
 let currentRoom = document.body.getAttribute('data-room');
 let username = document.body.getAttribute('data-user');
 let mining = document.querySelector('#mining-area');
+let builder = document.querySelector('#builder');
+let collection = document.querySelector('#collection');
+let avatar = document.querySelector('#avatar');
+let build = document.querySelector('#build');
+let currentItems = {};
 
 exports.assignRoom = function (socket) {
   if (currentRoom && currentRoom !== 'undefined') {
@@ -72,6 +77,9 @@ exports.setMining = function (socket) {
         room: currentRoom,
         name: data.name
       });
+      socket.emit('collection', {
+        room: currentRoom
+      });
       setTimeout(() => {
         mining.removeChild(item);
       }, 2000);
@@ -82,31 +90,102 @@ exports.setMining = function (socket) {
 };
 
 exports.getCollection = function (socket) {
-  let avatar = document.querySelector('#avatar');
-  let collection = document.querySelector('#collection');
   let items = collection.querySelector('.items');
 
+  socket.emit('collection', {
+    room: currentRoom
+  });
+
+  socket.on('collection', (data) => {
+    currentItems = data;
+  });
+
   avatar.onclick = function () {
+    builder.classList.remove('active');
+    build.classList.remove('active');
     if (collection.classList.contains('active')) {
       this.classList.remove('active');
       collection.classList.remove('active');
     } else {
+      socket.emit('collection', {
+        room: currentRoom
+      });
       this.classList.add('active');
       collection.classList.add('active');
       items.innerHTML = '';
-      socket.emit('collection', {
+      for (let item in currentItems) {
+        let li = document.createElement('li');
+        let p = document.createElement('p');
+        p.classList.add(item);
+        p.classList.add('collected');
+        p.textContent = 'x' + currentItems[item];
+        li.appendChild(p);
+        items.appendChild(li);
+      }
+    }
+  };
+};
+
+exports.getBuildables = function (socket) {
+  let build = document.querySelector('#build');
+  let items = builder.querySelector('.items');
+
+  build.onclick = function () {
+    collection.classList.remove('active');
+    avatar.classList.remove('active');
+    if (builder.classList.contains('active')) {
+      this.classList.remove('active');
+      builder.classList.remove('active');
+    } else {
+      this.classList.add('active');
+      builder.classList.add('active');
+      items.innerHTML = '';
+      socket.emit('build', {
         room: currentRoom
       });
     }
   };
 
-  socket.on('collection', (data) => {
+  socket.on('build', (data) => {
+    let disabled = false;
     for (let item in data) {
       let li = document.createElement('li');
       let p = document.createElement('p');
+      p.classList.add('build');
       p.classList.add(item);
-      p.textContent = 'x' + data[item];
+      p.setAttribute('title', data[item].name);
       li.appendChild(p);
+
+      for (let key in data[item].requirements) {
+        p = document.createElement('p');
+
+        if (currentItems[key] < data[item].requirements[key]) {
+          p.classList.add('disabled');
+          disabled = true;
+        }
+
+        p.classList.add('requirements');
+        p.classList.add(key);
+        p.textContent = 'x' + data[item].requirements[key];
+        li.appendChild(p);
+      }
+
+      if (!disabled) {
+        li.classList.add('buy');
+        li.onclick = function () {
+          socket.emit('make', {
+            room: currentRoom,
+            item: item,
+            requirements: data[item].requirements
+          });
+
+          items.innerHTML = '';
+          socket.emit('build', {
+            room: currentRoom
+          });
+        };
+      }
+
       items.appendChild(li);
     }
   });
