@@ -23,9 +23,6 @@ let users = 0;
 
 rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
-    // generate on server restart
-    rooms.generateMining(room.id);
-
     // mining items regeneration
     cron.scheduleJob('0 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
@@ -149,6 +146,11 @@ const routes = [
   },
   {
     method: 'GET',
+    path: '/about',
+    handler: services.about
+  },
+  {
+    method: 'GET',
     path: '/signup',
     handler: services.join
   },
@@ -237,7 +239,7 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/profile',
+    path: '/settings',
     config: {
       handler: services.profile,
       auth: auth,
@@ -250,7 +252,7 @@ const routes = [
   },
   {
     method: 'POST',
-    path: '/profile',
+    path: '/settings',
     config: {
       handler: authenticate.update,
       auth: auth,
@@ -353,7 +355,3 @@ server.start(function (err) {
     });
   });
 });
-
-exports.getServer = function () {
-  return server;
-};

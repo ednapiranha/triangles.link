@@ -1,3 +1,4 @@
+
 doctype html
 html
   head
@@ -10,24 +11,15 @@ html
 
   body(data-room='#{room}', data-user='#{name}', data-owner='#{owner}')
     header
-      if session
-        p △
+      p △
         #menu
-          a(href='/dashboard') Back to △
-          a(href='/profile') Profile
-          a(href='/logout') Sign out
-      else
-        block login
-          a(href='/signup') Join
-
-          form(method='post', action='/login', class='login')
-            if error
-              p.errors= error
-            input(type='email', name='email', placeholder='your@email.com', required)
-            input(type='password', name='password', placeholder='password', required)
-            input(type='hidden', name='crumb', value='#{crumb}')
-            a(href='/password/forgot', class='forgot') forgot password?
-            button(type='submit') sign in
+          if session
+            a(href='/dashboard') Back to △
+            a(href='/settings') Settings
+            a(href='/logout') Sign out
+          else
+            a(href='/') Back to /
+            a(href='/about') About
 
     #wrapper
       .inner
@@ -37,6 +29,5 @@ html
     block footer
 
     block script
-      script(src='/socket.io/socket.io.js')
-      script(src='/public/thirdparty.min.js')
-      script(src='/bundle.js')
+      script(src='/thirdparty.min.js')
+      script(src='/landing.bundle.js')

@@ -3,10 +3,13 @@
 const webpack = require('webpack');
 
 module.exports = {
-  entry: './public/js/main.js',
+  entry: {
+    app: './public/js/main.js',
+    landing: './public/js/landing.js'
+  },
   output: {
     path: './build',
-    filename: 'bundle.js',
+    filename: '[name].bundle.js',
     publicPath: '/'
   },
   module: {
@@ -14,6 +17,10 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+      },
+      {
+        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+        loader: 'url-loader?limit=10000&minetype=application/font-woff'
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

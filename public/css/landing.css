@@ -1,0 +1,85 @@
+@font-face {
+  font-family: 'LeagueSpartan-Bold';
+  src: url('../fonts/LeagueSpartan-Bold.woff');
+}
+
+body {
+  background-image: url(../assets/landing.svg);
+  -webkit-animation: background 30s cubic-bezier(1,0,0,1) infinite;
+  animation: background 30s cubic-bezier(1,0,0,1) infinite;
+}
+
+@-webkit-keyframes background {
+  0% { background-color: #32dba9; }
+  20% { background-color: #3abf98; }
+  40% { background-color: #3abdbf; }
+  60% { background-color: #39a8a9; }
+  80% { background-color: #3abdbf; }
+  100% { background-color: #3abf98; }
+}
+
+@keyframes background {
+  0% { background-color: #32dba9; }
+  20% { background-color: #3abf98; }
+  40% { background-color: #3abdbf; }
+  60% { background-color: #39a8a9; }
+  80% { background-color: #3abdbf; }
+  100% { background-color: #3abf98; }
+}
+
+#landing {
+  height: 200px;
+  position: fixed;
+  bottom: -30px;
+}
+
+#title {
+  font-size: 4rem;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.4);
+  position: absolute;
+  top: 42px;
+  left: 100px;
+}
+
+.login {
+  float: right;
+  padding: 10px;
+}
+
+section {
+  margin: 50px 70px 0 100px;
+}
+
+h1 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 100;
+  margin-bottom: 20px;
+}
+
+form h2 {
+  margin: 25px 0 5px 0;
+  color: #fff;
+  font-size: 1.3rem;
+}
+
+form a {
+  color: #fff;
+}
+
+form a.forgot {
+  display: block;
+  margin: 10px 0;
+}
+
+input {
+  border: 1px solid #39a8a9;
+  padding: 2px;
+  font-size: 1.2rem;
+}
+
+button {
+  font-size: 1.3rem;
+  padding: 5px 10px;
+}

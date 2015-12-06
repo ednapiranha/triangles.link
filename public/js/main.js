@@ -1,5 +1,6 @@
 'use strict';
 
+require('../css/shared.css');
 require('../css/main.css');
 
 const ws = require('./ws');

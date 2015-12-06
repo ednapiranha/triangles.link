@@ -1,7 +1,22 @@
-include mixins
 extend layout
 
 block content
-  section.home
+  svg#landing
+  #title TRIANGLES
+
+  form(method='post', action='/login', class='login')
+    h1 Sign in or&#xa0;
+      a(href='/signup') Join
+    if error
+      p.errors= error
+    h2 Email
+    input(type='email', name='email', placeholder='your@email.com', required)
+    h2 Password
+    input(type='password', name='password', placeholder='password', required)
+    input(type='hidden', name='crumb', value='#{crumb}')
+    button(type='submit') sign in
+    a(href='/password/forgot', class='forgot') forgot password?
 
 block script
+  script(src='/thirdparty.min.js')
+  script(src='/landing.bundle.js')
