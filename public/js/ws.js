@@ -98,18 +98,21 @@ exports.getCollection = function (socket) {
 
   socket.on('collection', (data) => {
     currentItems = data;
+    socket.emit('build', {
+      room: currentRoom
+    });
   });
 
   avatar.onclick = function () {
+    socket.emit('collection', {
+      room: currentRoom
+    });
     builder.classList.remove('active');
     build.classList.remove('active');
     if (collection.classList.contains('active')) {
       this.classList.remove('active');
       collection.classList.remove('active');
     } else {
-      socket.emit('collection', {
-        room: currentRoom
-      });
       this.classList.add('active');
       collection.classList.add('active');
       items.innerHTML = '';
@@ -131,6 +134,9 @@ exports.getBuildables = function (socket) {
   let items = builder.querySelector('.items');
 
   build.onclick = function () {
+    socket.emit('build', {
+      room: currentRoom
+    });
     collection.classList.remove('active');
     avatar.classList.remove('active');
     if (builder.classList.contains('active')) {
@@ -139,15 +145,13 @@ exports.getBuildables = function (socket) {
     } else {
       this.classList.add('active');
       builder.classList.add('active');
-      items.innerHTML = '';
-      socket.emit('build', {
-        room: currentRoom
-      });
     }
   };
 
   socket.on('build', (data) => {
     let disabled = false;
+    items.innerHTML = '';
+
     for (let item in data) {
       let li = document.createElement('li');
       let p = document.createElement('p');
@@ -159,7 +163,7 @@ exports.getBuildables = function (socket) {
       for (let key in data[item].requirements) {
         p = document.createElement('p');
 
-        if (currentItems[key] < data[item].requirements[key]) {
+        if (!currentItems[key] || currentItems[key] < data[item].requirements[key]) {
           p.classList.add('disabled');
           disabled = true;
         }
@@ -180,13 +184,14 @@ exports.getBuildables = function (socket) {
           });
 
           items.innerHTML = '';
-          socket.emit('build', {
+          socket.emit('collection', {
             room: currentRoom
           });
         };
       }
 
       items.appendChild(li);
+      disabled = false;
     }
   });
 };

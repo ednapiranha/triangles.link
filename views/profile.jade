@@ -14,7 +14,8 @@ block content
     form(method='post', action='/settings')
       h2 Email
       span= email
-      h2 Name
+      h2
+        label(for='name') Name
       input(type='text', name='name', placeholder='name', value='#{name}')
       h2 Password
       input(type='password', name='password', placeholder='password')

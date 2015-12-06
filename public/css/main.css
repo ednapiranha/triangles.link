@@ -282,10 +282,10 @@ footer form {
 
 .items .collected {
   position: relative;
-  width: 30px;
-  height: 30px;
+  width: 65px;
+  height: 40px;
   padding-left: 50px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 22px;
   margin: 5px 0;
   background-repeat: no-repeat;
@@ -294,7 +294,13 @@ footer form {
 /* collection */
 #collection, #builder {
   position: fixed;
-  background-color: rgba(1, 1, 1, 0.5);
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(2, 2, 2, 0.7),
+    rgba(2, 2, 2, 0.7) 3px,
+    rgba(3, 3, 3, 0.6) 5px,
+    rgba(4, 4, 4, 0.6) 3px
+  );
   z-index: 9;
   height: 70vh;
   width: 70vw;
@@ -302,10 +308,10 @@ footer form {
   top: -70vw;
   padding: 20px;
   border: 1px solid #333;
-  box-shadow: inset #111 0 0 23px;
   border-radius: 3px;
   color: #fff;
   opacity: 0;
+  overflow: auto;
   transition: opacity 1s;
   -webkit-transition: opacity 1s;
 }
@@ -323,20 +329,40 @@ footer form {
   font-family: 'LeagueSpartan-Bold';
   text-transform: uppercase;
   margin-bottom: 10px;
+  clear: both;
+  display: block;
+  width: 100%;
+  float: left;
+}
+
+.tip {
+  float: left;
+  clear: both;
+  line-height: 1.2rem;
+  font-size: 0.85rem;
+}
+
+.items {
+  margin-bottom: 20px;
+  float: left;
+  clear: both;
+  width: 100%;
+}
+
+.items li {
+  width: 70px;
+  float: left;
+  padding: 10px;
+  margin-right: 10px;
 }
 
 /* builder */
-#builder li {
-  width: 100px;
-  float: left;
-  padding: 10px;
-}
-
 .items .requirements {
   width: 20px;
   height: 20px;
   padding-left: 30px;
   display: block;
+  background-repeat: no-repeat;
 }
 
 #builder .items .build {
@@ -354,11 +380,11 @@ footer form {
 }
 
 .requirements.disabled {
-  opacity: 0.5;
+  opacity: 0.3;
 }
 
 .buy:hover {
-  box-shadow: inset #eee 0 0 30px;
+  border-top: 5px solid #d0ff12;
   cursor: pointer;
 }
 
@@ -375,6 +401,18 @@ footer form {
   background-image: url(../assets/square-green.svg);
 }
 
-.palm-tree {
+.neon-red {
+  background-image: url(../assets/square-red.svg);
+}
+
+.neon-purple {
+  background-image: url(../assets/square-purple.svg);
+}
+
+.neon-palm-tree {
   background-image: url(../assets/palm-tree.svg);
+}
+
+.neon-lips {
+  background-image: url(../assets/lips.svg);
 }

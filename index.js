@@ -25,7 +25,7 @@ let users = 0;
 rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
     // mining items regeneration
-    cron.scheduleJob('0,30 * * * *', () => {
+    cron.scheduleJob('0,21,30 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
       rooms.generateMining(room.id);
     });
@@ -72,8 +72,8 @@ server.ext('onPreResponse', (request, reply) => {
       break;
   }
 
-  if (process.env.npm_lifecycle_event === 'dev') {
-    console.log(error.stack || error);
+  if (process.NODE_ENV !== 'production') {
+    //console.log(error.stack || error);
   }
 
   if (ctx.reason) {
@@ -86,6 +86,21 @@ server.ext('onPreResponse', (request, reply) => {
   reply.redirect(request.path + '?err=' + ctx.reason);
 });
 
+let skip = function () {
+  return false;
+};
+
+let auth = {
+  mode: 'try',
+  strategy: 'session'
+};
+
+if (process.env.NODE_ENV === 'test') {
+  skip = function () {
+    return true;
+  };
+}
+
 server.register([
   {
     register: Inert
@@ -94,7 +109,10 @@ server.register([
     register: require('vision')
   },
   {
-    register: require('crumb')
+    register: require('crumb'),
+    options: {
+      skip: skip
+    }
   },
   {
     register: require('hapi-cache-buster'),
@@ -116,11 +134,6 @@ server.register([
     }
   });
 });
-
-const auth = {
-  mode: 'try',
-  strategy: 'session'
-};
 
 server.register(require('hapi-auth-cookie'), (err) => {
   if (err) {
@@ -364,3 +377,8 @@ server.start(function (err) {
     });
   });
 });
+
+// called during tests
+exports.getServer = function() {
+  return server;
+};
