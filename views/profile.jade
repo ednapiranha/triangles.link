@@ -2,7 +2,7 @@ extend layout
 
 block content
   section.form
-    h1 profile
+    h1 settings
 
     p= uid
 
@@ -12,12 +12,12 @@ block content
       p.messages= message
 
     form(method='post', action='/settings')
-      h2 Email
+      h2 email
       span= email
       h2
-        label(for='name') Name
+        label(for='name') display name
       input(type='text', name='name', placeholder='name', value='#{name}')
-      h2 Password
+      h2 change password (leave empty if you don't want to change it)
       input(type='password', name='password', placeholder='password')
       input(type='hidden', name='crumb', value='#{crumb}')
       button(type='submit') update

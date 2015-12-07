@@ -22,9 +22,10 @@ block content
     #collection
       h2 inventory
       ul.items
-      h2 displayed
+      h2 displayed samples
       p.tip Select from the inventory above to display it in your scene.
       p.tip Click on the item below to place it back into your inventory to build other items.
+      p.tip You can only display one of each item at a time.
       ul.displayed
     #builder
       h2 build
@@ -32,6 +33,7 @@ block content
   else
     #collection
     #builder
+  #notification
 
 block footer
   footer

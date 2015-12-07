@@ -12,8 +12,19 @@ let avatar = document.querySelector('#avatar');
 let build = document.querySelector('#build');
 let items = collection.querySelector('.items') || false;
 let displayItems = collection.querySelector('.displayed');
+let notification = document.querySelector('#notification');
 const owner = document.body.getAttribute('data-owner');
 let currentItems = {};
+let displayableItems = {};
+
+function setNotification(msg) {
+  notification.textContent = msg;
+  notification.classList.add('active');
+  setTimeout(() => {
+    notification.classList.remove('active');
+    notification.classList.remove('danger');
+  }, 5000);
+}
 
 exports.assignRoom = function (socket) {
   if (currentRoom && currentRoom !== 'undefined') {
@@ -84,6 +95,15 @@ exports.setMining = function (socket) {
       socket.emit('collection', {
         room: currentRoom
       });
+
+      if (data.name === 'lava') {
+        notification.classList.add('danger');
+        setNotification('Oh no! You found ' + data.name + '!');
+      } else {
+        notification.classList.remove('danger');
+        setNotification('You found ' + data.name + '!');
+      }
+
       setTimeout(() => {
         mining.removeChild(item);
       }, 2000);
@@ -125,7 +145,13 @@ exports.getCollection = function (socket) {
         p.textContent = 'x' + currentItems[item];
 
         if (currentItems[item] > 0) {
+          li.classList.add('displayable');
+        }
+
+        if (currentItems[item] > 0 && !displayableItems[item]) {
           li.onclick = function () {
+            setNotification('You added a displayable ' + item);
+            this.classList.remove('displayable');
             drawDisplayable(item, 100, 100);
             socket.emit('display', {
               room: currentRoom,
@@ -152,7 +178,7 @@ exports.getCollection = function (socket) {
 
       if (owner === 'true') {
         let draggable = new Draggabilly(displayable);
-        draggable.on('dragEnd', (ev, pointer) => {
+        draggable.on('dragEnd', () => {
           socket.emit('saveDisplay', {
             room: currentRoom,
             item: item,
@@ -166,6 +192,7 @@ exports.getCollection = function (socket) {
   }
 
   socket.on('displayables', (data) => {
+    displayableItems = data;
     playgroundEl.innerHTML = '';
     for (let d in data) {
       drawDisplayable(d, data[d].x, data[d].y);
@@ -174,19 +201,22 @@ exports.getCollection = function (socket) {
 
   socket.on('display', (data) => {
     displayItems.innerHTML = '';
-
+    displayableItems = data;
     for (let display in data) {
       let li = document.createElement('li');
       let p = document.createElement('p');
       p.classList.add(display);
       p.classList.add('collected');
       li.onclick = function () {
+        setNotification('You removed a displayable ' + display);
         socket.emit('undisplay', {
           room: currentRoom,
           item: display
         });
+        delete displayableItems[display];
       };
 
+      li.classList.add('displayable');
       li.appendChild(p);
       displayItems.appendChild(li);
     }
@@ -257,6 +287,7 @@ exports.getBuildables = function (socket) {
       if (!disabled) {
         li.classList.add('buy');
         li.onclick = function () {
+          setNotification('Successfully built ' + item);
           socket.emit('make', {
             room: currentRoom,
             item: item,

@@ -37,6 +37,48 @@ body {
   left: 100px;
 }
 
+.instructions {
+  min-width: 300px;
+  width: 50vw;
+  padding: 120px 20px 20px 20px;
+  font-size: 1.3rem;
+  line-height: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.instructions h2 {
+  font-size: 2rem;
+  margin: 20px 0 10px 0;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  font-family: 'LeagueSpartan-Bold';
+}
+
+.instructions li {
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.instructions span::before {
+  content: ' ';
+}
+
+.instructions span.boxes::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  background: transparent url(../assets/square-pink.svg) no-repeat;
+  display: inline-block;
+}
+
+.instructions span.lava::after {
+  content: '';
+  width: 30px;
+  height: 30px;
+  background: transparent url(../assets/lava.svg) no-repeat;
+  display: inline-block;
+}
+
 .login {
   float: right;
   padding: 10px;
@@ -47,15 +89,44 @@ section {
 }
 
 h1 {
-  color: #fff;
   font-size: 2rem;
   font-weight: 100;
   margin-bottom: 20px;
+  font-family: 'LeagueSpartan-Bold';
+  color: rgba(255, 255, 255, 0.5);
+  text-transform: uppercase;
+}
+
+.instructions, .form {
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(2, 2, 2, 0.7),
+    rgba(2, 2, 2, 0.7) 3px,
+    rgba(3, 3, 3, 0.6) 5px,
+    rgba(4, 4, 4, 0.6) 3px
+  );
+  display: inline-block;
+  color: #fff;
+}
+
+/* form styles */
+
+.form {
+  margin: 50px 10px 0 120px;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form h1 {
+  margin-bottom: 20px;
+}
+
+.form h2 {
+  margin: 20px 0 5px 0;
 }
 
 form h2 {
   margin: 25px 0 5px 0;
-  color: #fff;
   font-size: 1.3rem;
 }
 
