@@ -19,10 +19,10 @@ background.generateSky();
 background.generateMountain();
 background.generateLand();
 background.generateMining();
+ws.getCollection(socket);
 
 if (owner === 'true') {
   ws.setMining(socket);
   playground.setVehicle(socket);
-  ws.getCollection(socket);
   ws.getBuildables(socket);
 }

@@ -25,7 +25,7 @@ let users = 0;
 rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
     // mining items regeneration
-    cron.scheduleJob('0,21,30 * * * *', () => {
+    cron.scheduleJob('0,30 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
       rooms.generateMining(room.id);
     });
@@ -374,6 +374,22 @@ server.start(function (err) {
 
     socket.on('make', (data) => {
       rooms.makeItems(data);
+    });
+
+    socket.on('displayables', (data) => {
+      rooms.getDisplayables(data, io);
+    });
+
+    socket.on('display', (data) => {
+      rooms.setToDisplay(data, io);
+    });
+
+    socket.on('saveDisplay', (data) => {
+      rooms.saveDisplayPos(data);
+    });
+
+    socket.on('undisplay', (data) => {
+      rooms.undisplay(data, io);
     });
   });
 });

@@ -4,7 +4,7 @@
 	 viewBox="0 0 300 300" enable-background="new 0 0 300 300" xml:space="preserve">
 <g>
 	
-		<rect x="41" y="45.7" opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" width="216" height="216"/>
+		<rect x="41" y="45.7" opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="35" stroke-linecap="round" stroke-linejoin="round" width="216" height="216"/>
 	
 		<rect x="41" y="45.7" opacity="0.25" fill="none" stroke="#EB3B95" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" width="216" height="216"/>
 	
@@ -21,7 +21,7 @@
 </g>
 <g>
 	
-		<line opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" x1="39.6" y1="44.4" x2="257.4" y2="262.1"/>
+		<line opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="35" stroke-linecap="round" stroke-linejoin="round" x1="39.6" y1="44.4" x2="257.4" y2="262.1"/>
 	
 		<line opacity="0.25" fill="none" stroke="#EB3B95" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" x1="39.6" y1="44.4" x2="257.4" y2="262.1"/>
 	
@@ -38,7 +38,7 @@
 </g>
 <g>
 	
-		<line opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="20" stroke-linecap="round" stroke-linejoin="round" x1="257.1" y1="45.6" x2="40.9" y2="261.9"/>
+		<line opacity="0.2" fill="none" stroke="#EB3B95" stroke-width="35" stroke-linecap="round" stroke-linejoin="round" x1="257.1" y1="45.6" x2="40.9" y2="261.9"/>
 	
 		<line opacity="0.25" fill="none" stroke="#EB3B95" stroke-width="8.5" stroke-linecap="round" stroke-linejoin="round" x1="257.1" y1="45.6" x2="40.9" y2="261.9"/>
 	

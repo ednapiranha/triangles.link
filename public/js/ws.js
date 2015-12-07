@@ -7,8 +7,12 @@ let username = document.body.getAttribute('data-user');
 let mining = document.querySelector('#mining-area');
 let builder = document.querySelector('#builder');
 let collection = document.querySelector('#collection');
+let playgroundEl = document.querySelector('#playground');
 let avatar = document.querySelector('#avatar');
 let build = document.querySelector('#build');
+let items = collection.querySelector('.items') || false;
+let displayItems = collection.querySelector('.displayed');
+const owner = document.body.getAttribute('data-owner');
 let currentItems = {};
 
 exports.assignRoom = function (socket) {
@@ -90,17 +94,102 @@ exports.setMining = function (socket) {
 };
 
 exports.getCollection = function (socket) {
-  let items = collection.querySelector('.items');
-
   socket.emit('collection', {
+    room: currentRoom
+  });
+
+  socket.emit('display', {
+    room: currentRoom
+  });
+
+  socket.emit('displayables', {
     room: currentRoom
   });
 
   socket.on('collection', (data) => {
     currentItems = data;
+    drawInventory();
     socket.emit('build', {
       room: currentRoom
     });
+  });
+
+  function drawInventory() {
+    if (items) {
+      items.innerHTML = '';
+      for (let item in currentItems) {
+        let li = document.createElement('li');
+        let p = document.createElement('p');
+        p.classList.add(item);
+        p.classList.add('collected');
+        p.textContent = 'x' + currentItems[item];
+
+        if (currentItems[item] > 0) {
+          li.onclick = function () {
+            drawDisplayable(item, 100, 100);
+            socket.emit('display', {
+              room: currentRoom,
+              item: item,
+              x: 100,
+              y: 100
+            });
+          };
+        }
+
+        li.appendChild(p);
+        items.appendChild(li);
+      }
+    }
+  }
+
+  function drawDisplayable(item, x, y) {
+    if (!playgroundEl.querySelector('.' + item)) {
+      let displayable = document.createElement('div');
+      displayable.classList.add(item);
+      displayable.classList.add('display');
+      displayable.style.left = x + 'px';
+      displayable.style.top = y + 'px';
+
+      if (owner === 'true') {
+        let draggable = new Draggabilly(displayable);
+        draggable.on('dragEnd', (ev, pointer) => {
+          socket.emit('saveDisplay', {
+            room: currentRoom,
+            item: item,
+            x: draggable.position.x,
+            y: draggable.position.y
+          });
+        });
+      }
+      playgroundEl.appendChild(displayable);
+    }
+  }
+
+  socket.on('displayables', (data) => {
+    playgroundEl.innerHTML = '';
+    for (let d in data) {
+      drawDisplayable(d, data[d].x, data[d].y);
+    }
+  });
+
+  socket.on('display', (data) => {
+    displayItems.innerHTML = '';
+
+    for (let display in data) {
+      let li = document.createElement('li');
+      let p = document.createElement('p');
+      p.classList.add(display);
+      p.classList.add('collected');
+      li.onclick = function () {
+        socket.emit('undisplay', {
+          room: currentRoom,
+          item: display
+        });
+      };
+
+      li.appendChild(p);
+      displayItems.appendChild(li);
+    }
   });
 
   avatar.onclick = function () {
@@ -115,16 +204,7 @@ exports.getCollection = function (socket) {
     } else {
       this.classList.add('active');
       collection.classList.add('active');
-      items.innerHTML = '';
-      for (let item in currentItems) {
-        let li = document.createElement('li');
-        let p = document.createElement('p');
-        p.classList.add(item);
-        p.classList.add('collected');
-        p.textContent = 'x' + currentItems[item];
-        li.appendChild(p);
-        items.appendChild(li);
-      }
+      drawInventory();
     }
   };
 };

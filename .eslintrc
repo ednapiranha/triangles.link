@@ -12,7 +12,8 @@
     "TimelineLite": true,
     "it": true,
     "describe": true,
-    "after": true
+    "after": true,
+    "Draggabilly": true
   },
   "rules": {
     // Disallow using variables outside the blocks they are defined (especially
