@@ -104,26 +104,24 @@ exports.generateSky = function () {
   }
 
   createTriangles();
-  /*
+
   function randomPoly() {
-    return Math.floor(Math.random() * (triangles.length - 1));
+    return Math.floor(Math.random() * (triangles.length - 2));
   }
 
   function nextPoly() {
-    var polyback = document.querySelectorAll('#back polygon');
-    var tween = new TimelineLite();
+    let polyback = document.querySelectorAll('#back polygon');
+    let tween = new TimelineLite();
 
     try {
-      tween.to(polyback[randomPoly()], 0.1, {
+      tween.to(polyback[randomPoly()], 0.3, {
         fill: randomColor(),
         onComplete: nextPoly
       });
-    } catch (e) {
-
-    }
+    } catch (e) { }
   }
   nextPoly();
-  */
+
 };
 
 exports.generateMountain = function () {
