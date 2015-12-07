@@ -224,21 +224,23 @@ exports.getCollection = function (socket) {
     }
   });
 
-  avatar.onclick = function () {
-    socket.emit('collection', {
-      room: currentRoom
-    });
-    builder.classList.remove('active');
-    build.classList.remove('active');
-    if (collection.classList.contains('active')) {
-      this.classList.remove('active');
-      collection.classList.remove('active');
-    } else {
-      this.classList.add('active');
-      collection.classList.add('active');
-      drawInventory();
-    }
-  };
+  if (avatar) {
+    avatar.onclick = function () {
+      socket.emit('collection', {
+        room: currentRoom
+      });
+      builder.classList.remove('active');
+      build.classList.remove('active');
+      if (collection.classList.contains('active')) {
+        this.classList.remove('active');
+        collection.classList.remove('active');
+      } else {
+        this.classList.add('active');
+        collection.classList.add('active');
+        drawInventory();
+      }
+    };
+  }
 };
 
 exports.getBuildables = function (socket) {
