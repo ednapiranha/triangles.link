@@ -49,7 +49,9 @@ block footer
     ol#messages
     form#message(method='post')
       input(type='text', placeholder='chat here')
-    span#active 0
+    #active
+      p currently online&#xa0;
+        span 0
 
 block script
   script(src='/socket.io/socket.io.js')

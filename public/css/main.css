@@ -87,7 +87,7 @@ footer form {
 #messages li {
   padding: 5px 8px;
   margin-bottom: 1px;
-  background-color: rgba(1, 1, 1, 0.5);
+  background-color: rgba(1, 1, 1, 0.7);
   color: #ddd;
   font-weight: 100;
   font-size: 0.75rem;
@@ -126,10 +126,13 @@ footer form {
 }
 
 #active {
-  float: right;
-  display: inline-block;
+  right: 0;
+  /* display: inline-block; */
+  display: none;
+  position: absolute;
+  bottom: 0;
   padding: 5px 10px;
-  background-color: rgba(1, 1, 1, 0.7);
+  background-color: rgba(1, 1, 1, 0.5);
   text-align: center;
   color: #fff;
 }
@@ -471,4 +474,16 @@ footer form {
 
 .neon-cat-1 {
   background-image: url(../assets/cat1.svg);
+}
+
+.neon-hammer {
+  background-image: url(../assets/hammer.svg);
+}
+
+.neon-nails {
+  background-image: url(../assets/nails.svg);
+}
+
+.neon-dog-1 {
+  background-image: url(../assets/dog1.svg);
 }

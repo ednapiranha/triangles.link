@@ -78,7 +78,7 @@ exports.setMining = function (socket) {
   let active = document.querySelector('#active');
 
   socket.on('active', (data) => {
-    active.textContent = data;
+    active.querySelector('span').textContent = data;
   });
 
   socket.on('mining', (data) => {
