@@ -200,25 +200,27 @@ exports.getCollection = function (socket) {
   });
 
   socket.on('display', (data) => {
-    displayItems.innerHTML = '';
-    displayableItems = data;
-    for (let display in data) {
-      let li = document.createElement('li');
-      let p = document.createElement('p');
-      p.classList.add(display);
-      p.classList.add('collected');
-      li.onclick = function () {
-        setNotification('You removed a displayable ' + display);
-        socket.emit('undisplay', {
-          room: currentRoom,
-          item: display
-        });
-        delete displayableItems[display];
-      };
+    if (displayItems) {
+      displayItems.innerHTML = '';
+      displayableItems = data;
+      for (let display in data) {
+        let li = document.createElement('li');
+        let p = document.createElement('p');
+        p.classList.add(display);
+        p.classList.add('collected');
+        li.onclick = function () {
+          setNotification('You removed a displayable ' + display);
+          socket.emit('undisplay', {
+            room: currentRoom,
+            item: display
+          });
+          delete displayableItems[display];
+        };
 
-      li.classList.add('displayable');
-      li.appendChild(p);
-      displayItems.appendChild(li);
+        li.classList.add('displayable');
+        li.appendChild(p);
+        displayItems.appendChild(li);
+      }
     }
   });
 
