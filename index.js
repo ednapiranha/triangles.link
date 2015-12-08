@@ -345,9 +345,6 @@ server.start(function (err) {
       users++;
       socket.join(data.room);
       console.log('joined ', data.room);
-      rooms.getHealth({
-        room: data.room
-      }, io);
       io.emit('active', users);
     });
 
