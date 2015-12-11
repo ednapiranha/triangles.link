@@ -425,6 +425,11 @@ footer form {
   height: 100px;
   width: 100px;
   position: absolute;
+  border: 2px solid transparent;
+}
+
+.display:hover {
+  border: 2px dashed #eee;
 }
 
 /* item images */

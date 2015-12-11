@@ -13,7 +13,7 @@
     "it": true,
     "describe": true,
     "after": true,
-    "Draggabilly": true
+    "interact": true
   },
   "rules": {
     // Disallow using variables outside the blocks they are defined (especially

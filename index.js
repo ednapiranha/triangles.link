@@ -378,6 +378,7 @@ server.start(function (err) {
     });
 
     socket.on('display', (data) => {
+      console.log(data)
       rooms.setToDisplay(data, io);
     });
 

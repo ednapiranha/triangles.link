@@ -149,15 +149,17 @@ exports.getCollection = function (socket) {
         }
 
         if (currentItems[item] > 0 && !displayableItems[item]) {
-          li.onclick = function () {
+          li.onclick = () => {
             setNotification('You added a displayable ' + item);
-            this.classList.remove('displayable');
+            //this.classList.remove('displayable');
             drawDisplayable(item, 100, 100);
             socket.emit('display', {
               room: currentRoom,
               item: item,
               x: 100,
-              y: 100
+              y: 100,
+              w: 100,
+              h: 100
             });
           };
         }
@@ -168,22 +170,79 @@ exports.getCollection = function (socket) {
     }
   }
 
-  function drawDisplayable(item, x, y) {
+  function dragMoveListener(event) {
+    let target = event.target;
+    let x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx;
+    let y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+    target.style.webkitTransform = target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+    target.setAttribute('data-x', x);
+    target.setAttribute('data-y', y);
+  }
+
+  window.dragMoveListener = dragMoveListener;
+
+  function drawDisplayable(item, x, y, w, h) {
     if (!playgroundEl.querySelector('.' + item)) {
       let displayable = document.createElement('div');
       displayable.classList.add(item);
       displayable.classList.add('display');
-      displayable.style.left = x + 'px';
-      displayable.style.top = y + 'px';
+      displayable.style.webkitTransform = displayable.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+      displayable.setAttribute('data-x', x);
+      displayable.setAttribute('data-y', y);
+      displayable.style.width = w || 100;
+      displayable.style.height = h || 100;
 
       if (owner === 'true') {
-        let draggable = new Draggabilly(displayable);
-        draggable.on('dragEnd', () => {
+        interact(displayable).draggable({
+          inertia: false,
+          restrict: {
+            restriction: 'parent',
+            endOnly: true,
+            elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+          },
+          onmove: dragMoveListener,
+          onend: (event) => {
+            let target = event.target;
+
+            socket.emit('saveDisplay', {
+              room: currentRoom,
+              item: item,
+              x: target.getAttribute('data-x'),
+              y: target.getAttribute('data-y'),
+              w: target.style.width,
+              h: target.style.height
+            });
+          }
+        }).resizable({
+          preserveAspectRatio: true,
+          edges: { left: true, right: true, bottom: true, top: true }
+        }).on('resizemove', (event) => {
+          let target = event.target;
+          let x = (parseFloat(target.getAttribute('data-x')) || 0);
+          let y = (parseFloat(target.getAttribute('data-y')) || 0);
+
+          // update the element's style
+          target.style.width = event.rect.width + 'px';
+          target.style.height = event.rect.height + 'px';
+
+          // translate when resizing from top or left edges
+          x += event.deltaRect.left;
+          y += event.deltaRect.top;
+
+          target.style.webkitTransform = target.style.transform =
+              'translate(' + x + 'px,' + y + 'px)';
+
+          target.setAttribute('data-x', x);
+          target.setAttribute('data-y', y);
           socket.emit('saveDisplay', {
             room: currentRoom,
             item: item,
-            x: draggable.position.x,
-            y: draggable.position.y
+            x: target.getAttribute('data-x'),
+            y: target.getAttribute('data-y'),
+            w: target.style.width,
+            h: target.style.height
           });
         });
       }
@@ -195,7 +254,7 @@ exports.getCollection = function (socket) {
     displayableItems = data;
     playgroundEl.innerHTML = '';
     for (let d in data) {
-      drawDisplayable(d, data[d].x, data[d].y);
+      drawDisplayable(d, data[d].x, data[d].y, data[d].w || 100, data[d].h || 100);
     }
   });
 
