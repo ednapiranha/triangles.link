@@ -138,7 +138,10 @@ describe('rooms', () => {
       room: 'test',
       item: selectedItem2.name,
       x: selectedItem2.currX,
-      y: selectedItem2.currY
+      y: selectedItem2.currY,
+      z: 50,
+      w: 100,
+      h: 100
     };
 
     socket.emit('display', data);
@@ -146,8 +149,78 @@ describe('rooms', () => {
       should.exist(d);
       d[selectedItem2.name].x.should.equal(data.x);
       d[selectedItem2.name].y.should.equal(data.y);
+      d[selectedItem2.name].z.should.equal(data.z);
+      d[selectedItem2.name].w.should.equal(data.w);
+      d[selectedItem2.name].h.should.equal(data.h);
       done();
     });
   });
 
+  it('should save the displayable position', (done) => {
+    let data = {
+      room: 'test',
+      item: selectedItem2.name,
+      x: '200px',
+      y: '300px',
+      z: 50,
+      w: 300,
+      h: 300
+    };
+
+    socket.emit('saveDisplay', data);
+    socket.on('test.saveDisplay', (d) => {
+      should.exist(d);
+      d[selectedItem2.name].x.should.equal(data.x);
+      d[selectedItem2.name].y.should.equal(data.y);
+      d[selectedItem2.name].z.should.equal(data.z);
+      d[selectedItem2.name].w.should.equal(data.w);
+      d[selectedItem2.name].h.should.equal(data.h);
+      done();
+    });
+  });
+
+  it('should undisplay', (done) => {
+    let data = {
+      room: 'test',
+      item: selectedItem2.name,
+      x: '200px',
+      y: '300px',
+      z: 50,
+      w: 300,
+      h: 300
+    };
+
+    socket.emit('undisplay', data);
+    socket.on('test.undisplay', (d) => {
+      should.not.exist(d[selectedItem2]);
+      done();
+    });
+  });
+
+  it('should check if it is purchasable', (done) => {
+    let data = {
+      room: 'test',
+      requirements: {
+        'neon-pink': 5
+      }
+    };
+
+    function socketConnections() {
+      data.requirements = {
+        'neon-pink': 1
+      };
+
+      socket.emit('make', data);
+      socket.on('test.purchasable', (d) => {
+        d.should.equal(true);
+        done();
+      });
+    }
+
+    socket.emit('make', data);
+    socket.on('test.notPurchasable', (d) => {
+      d.should.equal(false);
+      socketConnections();
+    });
+  });
 });

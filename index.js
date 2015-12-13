@@ -370,7 +370,7 @@ server.start(function (err) {
     });
 
     socket.on('make', (data) => {
-      rooms.makeItems(data);
+      rooms.makeItems(data, io);
     });
 
     socket.on('displayables', (data) => {
@@ -378,12 +378,11 @@ server.start(function (err) {
     });
 
     socket.on('display', (data) => {
-      console.log(data)
       rooms.setToDisplay(data, io);
     });
 
     socket.on('saveDisplay', (data) => {
-      rooms.saveDisplayPos(data);
+      rooms.saveDisplayPos(data, io);
     });
 
     socket.on('undisplay', (data) => {

@@ -23,18 +23,22 @@ describe('builder', () => {
       room: 'test'
     };
 
+    function socketConnects() {
+      socket.emit('join', data);
+      socket.emit('build', data);
+      socket.on('build', (d) => {
+        should.exist(d);
+        done();
+      });
+    }
+
     rooms.get(data.room, (err) => {
       if (err) {
         throw err;
       }
 
       socket.on('connect', () => {
-        socket.emit('join', data);
-        socket.emit('build', data);
-        socket.on('build', function (d) {
-          should.exist(d);
-          done();
-        });
+        socketConnects();
       });
     });
   });
