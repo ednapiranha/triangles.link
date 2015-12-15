@@ -1,13 +1,9 @@
-# what we like
+# triangles
 
 ## Setup
 
     cp local.json-dist local.json
     npm install
-    npm start
+    npm run dev
 
 Go to [http://localhost:3000](http://localhost:3000)
-
-## License
-
-GPLv3
