@@ -1,11 +1,11 @@
 /* main styles */
 
 body {
-  background:   linear-gradient(to bottom,
-                #3ec7b8 0%,
-                #883ec7 50%,
-                #c73eb2 81%,
-                #111 100%);
+  background: linear-gradient(to bottom,
+              #3ec7b8 0%,
+              #883ec7 50%,
+              #c73eb2 81%,
+              #111 100%);
 }
 
 #area {
@@ -404,9 +404,9 @@ footer form {
     rgba(4, 4, 4, 0.7) 3px
   );
   z-index: 9;
-  height: 70vh;
-  width: 70vw;
-  left: 100px;
+  left: 30px;
+  right: 30px;
+  bottom: 80px;
   top: -70vw;
   padding: 20px;
   border: 1px solid #333;
@@ -434,7 +434,7 @@ footer form {
   clear: both;
   display: block;
   width: 100%;
-  float: left;
+  text-align: center;
 }
 
 .tip {
