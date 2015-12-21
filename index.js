@@ -24,6 +24,7 @@ let users = 0;
 
 rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
+    rooms.generateMining(room.id);
     // mining items regeneration
     cron.scheduleJob('0,30 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
