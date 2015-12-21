@@ -140,9 +140,11 @@ exports.getCollection = function (socket) {
       for (let item in currentItems) {
         let li = document.createElement('li');
         let p = document.createElement('p');
+        let span = document.createElement('span');
         p.classList.add(item);
         p.classList.add('collected');
-        p.textContent = 'x' + currentItems[item];
+        span.textContent = 'x' + currentItems[item];
+        p.appendChild(span);
 
         if (currentItems[item] > 0) {
           li.classList.add('displayable');

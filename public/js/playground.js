@@ -5,6 +5,10 @@ let health = document.querySelector('#health');
 let isDamaged = false;
 
 exports.setHealth = function (socket) {
+  socket.emit('damage', {
+    room: currentRoom
+  });
+
   socket.on('damage', (data) => {
     for (let i = 5; i > 0; i--) {
       if (data === 0) {

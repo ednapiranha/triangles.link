@@ -385,6 +385,10 @@ server.start(function (err) {
       rooms.saveDisplayPos(data, io);
     });
 
+    socket.on('damage', (data) => {
+      rooms.getHealth(data, io);
+    });
+
     socket.on('undisplay', (data) => {
       rooms.undisplay(data, io);
     });

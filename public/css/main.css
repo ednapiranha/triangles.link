@@ -228,12 +228,19 @@ footer form {
   z-index: 6;
   background-image: url(../assets/vehicle.svg);
   background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
 #vehicle.active {
-  background-color: rgba(255, 255, 255, 0.4);
-  border-radius: 100px;
-  box-shadow: #fff 0 0 25px;
+  opacity: 1.0;
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00b0ff)
+        drop-shadow(0 0 8px rgba(0, 176, 255, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00b0ff)
+        drop-shadow(0 0 8px rgba(0, 176, 255, 0.5));
 }
 
 #vehicle.damage {
@@ -310,9 +317,9 @@ footer form {
   background: repeating-linear-gradient(
     45deg,
     rgba(2, 2, 2, 0.7),
-    rgba(2, 2, 2, 0.7) 3px,
-    rgba(3, 3, 3, 0.6) 5px,
-    rgba(4, 4, 4, 0.6) 3px
+    rgba(2, 2, 2, 0.9) 3px,
+    rgba(3, 3, 3, 0.8) 5px,
+    rgba(4, 4, 4, 0.7) 3px
   );
   z-index: 9;
   height: 70vh;
@@ -412,6 +419,12 @@ footer form {
   border-right: 1px solid #04cbe3;
   border-bottom: 1px solid #04cbe3;
   cursor: pointer;
+  box-shadow: 0 0 3px #fff,
+              0 0 5px #F00,
+              0 0 7px #F00,
+              inset 0 0 3px #fff,
+              inset 0 0 5px #F00,
+              inset 0 0 7px #F00;
 }
 
 .displayed {
@@ -434,47 +447,135 @@ footer form {
 
 /* item images */
 .neon-pink {
-  background-image: url(../assets/square-pink.svg);
+  background-image: url(../assets/square.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #f31de6)
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #f31de6)
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
 }
 
 .neon-blue {
-  background-image: url(../assets/square-blue.svg);
+  background-image: url(../assets/square.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #1686dc)
+        drop-shadow(0 0 8px rgba(22, 134, 220, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #1686dc)
+        drop-shadow(0 0 8px rgba(22, 134, 220, 0.5));
 }
 
 .neon-green {
-  background-image: url(../assets/square-green.svg);
+  background-image: url(../assets/square.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #70b32e)
+        drop-shadow(0 0 8px rgba(112, 179, 46, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #70b32e)
+        drop-shadow(0 0 8px rgba(112, 179, 46, 0.5));
 }
 
 .neon-red {
-  background-image: url(../assets/square-red.svg);
+  background-image: url(../assets/square.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #f31d1d)
+        drop-shadow(0 0 8px rgba(243, 29, 29, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #f31d1d)
+        drop-shadow(0 0 8px rgba(243, 29, 29, 0.5));
 }
 
 .neon-purple {
-  background-image: url(../assets/square-purple.svg);
+  background-image: url(../assets/square.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #b608ef)
+        drop-shadow(0 0 8px rgba(182, 8, 239, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #b608ef)
+        drop-shadow(0 0 8px rgba(182, 8, 239, 0.5));
 }
 
 .neon-palm-tree {
   background-image: url(../assets/palm-tree.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00fda1)
+        drop-shadow(0 0 8px rgba(0, 253, 161, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00fda1)
+        drop-shadow(0 0 8px rgba(0, 253, 161, 0.5));
 }
 
 .neon-lips {
   background-image: url(../assets/lips.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #e10055)
+        drop-shadow(0 0 8px rgba(225, 0, 85, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #e10055)
+        drop-shadow(0 0 8px rgba(225, 0, 85, 0.5));
 }
 
-.neon-sun {
+.neon-sun, .neon-fire {
   background-image: url(../assets/sun.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #fffa00)
+        drop-shadow(0 0 8px rgba(255, 250, 0, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #fffa00)
+        drop-shadow(0 0 8px rgba(255, 250, 0, 0.5));
 }
 
 .neon-clouds {
   background-image: url(../assets/clouds.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00d4ff)
+        drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00d4ff)
+        drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
 }
 
-.neon-hand {
+.neon-hand, .neon-hammer, .neon-nails {
   background-image: url(../assets/hand.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #ff9a2a)
+        drop-shadow(0 0 8px rgba(255, 154, 42, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #ff9a2a)
+        drop-shadow(0 0 8px rgba(255, 154, 42, 0.5));
 }
 
-.neon-fish {
+.neon-fish, .neon-cat-1, .neon-dog-1 {
   background-image: url(../assets/fish.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #875bff)
+        drop-shadow(0 0 8px rgba(135, 91, 255, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #875bff)
+        drop-shadow(0 0 8px rgba(135, 91, 255, 0.5));
 }
 
 .neon-cat-1 {
