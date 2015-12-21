@@ -404,10 +404,10 @@ footer form {
     rgba(4, 4, 4, 0.7) 3px
   );
   z-index: 9;
-  left: 30px;
-  right: 30px;
-  bottom: 80px;
-  top: 0;
+  height: 70vh;
+  width: 70vw;
+  left: 100px;
+  top: -70vw;
   padding: 20px;
   border: 1px solid #333;
   border-radius: 3px;
@@ -434,7 +434,7 @@ footer form {
   clear: both;
   display: block;
   width: 100%;
-  text-align: center;
+  float: left;
 }
 
 .tip {
