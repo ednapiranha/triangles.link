@@ -201,7 +201,7 @@ describe('rooms', () => {
     let data = {
       room: 'test',
       requirements: {
-        'neon-pink': 5
+        'neon-pink': 100
       }
     };
 
