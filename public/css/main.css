@@ -407,7 +407,7 @@ footer form {
   left: 30px;
   right: 30px;
   bottom: 80px;
-  top: -70vw;
+  top: 0;
   padding: 20px;
   border: 1px solid #333;
   border-radius: 3px;
