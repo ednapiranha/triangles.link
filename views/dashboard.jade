@@ -1,38 +1,39 @@
 extend layout
 
 block content
-  section#area
-    svg#back
-      filter#artifacts
-        feComponentTransfer
-      g(filter='url(#artifacts)')
+  #game
+    section#area
+      svg#back
+        filter#artifacts
+          feComponentTransfer
+        g(filter='url(#artifacts)')
 
-    svg#mountain
-    svg#land-upper
-    svg#land-lower
-    svg#mining
-  #playground
+      svg#mountain
+      svg#land-upper
+      svg#land-lower
+      svg#mining
+    #playground
 
-  #mining-area
+    #mining-area
+      if owner
+        img#vehicle
+        img.hole.fade
+
     if owner
-      img#vehicle
-      img.hole.fade
-
-  if owner
-    #collection
-      h2 inventory
-      ul.items
-      h2 displayed samples
-      p.tip Select from the inventory above to display it in your scene.
-      p.tip Click on the item below to place it back into your inventory to build other items.
-      p.tip You can only display one of each item at a time.
-      ul.displayed
-    #builder
-      h2 build
-      ul.items
-  else
-    #collection
-    #builder
+      #collection
+        h2 inventory
+        ul.items
+        h2 displayed samples
+        p.tip Select from the inventory above to display it in your scene.
+        p.tip Click on the item below to place it back into your inventory to build other items.
+        p.tip You can only display one of each item at a time.
+        ul.displayed
+      #builder
+        h2 build
+        ul.items
+    else
+      #collection
+      #builder
   #notification
 
 block footer

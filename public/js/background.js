@@ -1,9 +1,9 @@
 'use strict';
 
-let currentTimeOfDay = (new Date()).getHours();
+let currentTimeOfDay = 6; //(new Date()).getHours();
 
 exports.generateSky = function () {
-  const width = 2400;
+  const width = 1200;
   const height = 530;
   const snap = Snap('#back');
 
@@ -139,7 +139,7 @@ exports.generateMountain = function () {
     color = 'rgba(157, 150, 213, 0.4)';
   }
 
-  let p = snap.path('M10-5-10,15M15,0,0,15M0-5-20,15').attr({
+  let p = snap.path('M10-15-10,5M5,0,0,15M0-5-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 25
@@ -147,9 +147,9 @@ exports.generateMountain = function () {
 
   p = p.pattern(0, 5, 25, 10);
 
-  snap.paper.polygon('1400.8,422.7 1371.4,293.2 1256.7,148.4 1131.7,174.1 ' +
-    '1018.5,87.4 830.2,97.7 689.1,0.6 499.3,119.7 417,87.4 ' +
-    '278.8,209.4 209.6,174.1 89.1,271.2 0.8,444.7 1400.8,444.7').attr({ fill: p });
+  snap.paper.polygon('1118.6,428.7 1095.1,297.4 1003.5,150.5 903.7,176.6 ' +
+    '813.3,88.6 663,99.1 550.3,0.6 398.8,121.4 333.1,88.6 222.8,212.4 ' +
+    '167.5,176.6 71.3,275 0.8,451 1118.6,451').attr({ fill: p });
 };
 
 exports.generateLand = function () {
@@ -167,7 +167,7 @@ exports.generateLand = function () {
     color = 'rgba(157, 150, 213, 0.9)';
   }
 
-  let p = snap.path('M0-15-10,15M15,10,0,25M0-5-20,15').attr({
+  let p = snap.path('M10-15-20,10M15,20,10,5M0-15-30,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 55
@@ -220,7 +220,7 @@ exports.generateMining = function () {
     color = 'rgba(57, 150, 213, 0.9)';
   }
 
-  let p = snap.path('M10-5-20,15M5,20,50,25M10-5-20,15').attr({
+  let p = snap.path('M10-5-20,15M5,20,10,5M0-15-20,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 45

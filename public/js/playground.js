@@ -123,7 +123,7 @@ exports.setVehicle = function (socket) {
           }
           break;
         case 'right':
-          if (currX < 2300) {
+          if (currX < 1100) {
             vehicle.style.left = (currX + 100) + 'px';
           }
           break;
