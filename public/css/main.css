@@ -1,9 +1,11 @@
 /* main styles */
 
 body {
-  background-color: #111;
-  background-image: url(../assets/stars.png);
-  background-attachment: fixed;
+  background:   linear-gradient(to bottom,
+                #3ec7b8 0%,
+                #883ec7 50%,
+                #c73eb2 81%,
+                #111 100%);
 }
 
 #area {
@@ -172,6 +174,7 @@ footer form {
   left: 90px;
   top: 85px;
   z-index: 2;
+  /*
   filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
         drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
         drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
@@ -180,9 +183,11 @@ footer form {
         drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
         drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
         drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+  */
 }
 
 #land-upper {
+  /*
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
         drop-shadow(0 0 5px rgba(0, 184, 137, 0.5))
@@ -191,6 +196,7 @@ footer form {
         drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
         drop-shadow(0 0 5px rgba(0, 184, 137, 0.5))
         drop-shadow(0 0 8px rgba(0, 184, 137, 0.5));
+  */
 }
 
 #land-upper, #land-lower {
@@ -204,6 +210,7 @@ footer form {
 
 #land-lower {
   top: 700px;
+  /*
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px rgba(1, 1, 1, 0.5))
         drop-shadow(0 0 5px rgba(0, 184, 137, 0.5))
@@ -212,6 +219,7 @@ footer form {
         drop-shadow(0 0 3px rgba(1, 1, 1, 0.5))
         drop-shadow(0 0 5px rgba(0, 184, 137, 0.5))
         drop-shadow(0 0 8px rgba(0, 184, 137, 0.5));
+  */
 }
 
 #mining {
@@ -220,6 +228,7 @@ footer form {
   width: 1200px;
   height: 1600px;
   z-index: 4;
+  /*
   filter: drop-shadow(0 0 1px #006ebd)
         drop-shadow(0 0 3px rgba(1, 1, 1, 0.5))
         drop-shadow(0 0 15px rgba(0, 107, 255, 0.5))
@@ -228,6 +237,7 @@ footer form {
           drop-shadow(0 0 3px rgba(1, 1, 1, 0.5))
           drop-shadow(0 0 15px rgba(0, 107, 255, 0.5))
           drop-shadow(0 0 22px rgba(0, 107, 255, 0.5));
+  */
 }
 /*
 @keyframes mining {
