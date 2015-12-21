@@ -2,6 +2,8 @@
 
 body {
   background-color: #111;
+  background-image: url(../assets/stars.png);
+  background-attachment: fixed;
 }
 
 #area {
