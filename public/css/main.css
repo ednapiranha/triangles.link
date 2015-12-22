@@ -267,6 +267,7 @@ footer form {
   }
 }
 */
+
 #playground {
   position: absolute;
   top: 0px;
@@ -292,6 +293,7 @@ footer form {
 
 #vehicle, .hole {
   position: absolute;
+  background-repeat: no-repeat;
   width: 100px;
   height: 50px;
   top: 0px;
@@ -301,7 +303,6 @@ footer form {
 .hole {
   z-index: 4;
   background-image: url(../assets/hole.svg);
-  background-repeat: no-repeat;
 }
 
 .hole.fade {
@@ -313,7 +314,6 @@ footer form {
 #vehicle {
   z-index: 6;
   background-image: url(../assets/vehicle.svg);
-  background-repeat: no-repeat;
   opacity: 0.7;
 }
 

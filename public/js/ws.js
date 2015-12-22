@@ -85,7 +85,7 @@ exports.setMining = function (socket) {
 
   socket.on('mining', (data) => {
     if (data.item) {
-      let item = document.createElement('img');
+      let item = document.createElement('div');
       item.classList.add(data.name);
       item.style.left = data.currX;
       item.style.top = data.currY;
