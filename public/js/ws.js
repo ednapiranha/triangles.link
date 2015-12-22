@@ -41,37 +41,39 @@ exports.setChat = function (socket) {
   let messageForm = document.querySelector('#message');
   let messages = document.querySelector('#messages');
 
-  messageForm.onsubmit = function (ev) {
-    ev.preventDefault();
+  if (messageForm) {
+    messageForm.onsubmit = function (ev) {
+      ev.preventDefault();
 
-    let input = this.querySelector('input');
+      let input = this.querySelector('input');
 
-    socket.emit('message', {
-      room: currentRoom,
-      message: input.value,
-      name: username
-    });
+      socket.emit('message', {
+        room: currentRoom,
+        message: input.value,
+        name: username
+      });
 
-    input.value = '';
-  };
-
-  socket.on('message', (data) => {
-    let msg = document.createElement('li');
-    let time = document.createElement('time');
-    let span = document.createElement('span');
-    time.textContent = data.created;
-    span.textContent = data.name + ': ' + data.message;
-    msg.appendChild(time);
-    msg.appendChild(span);
-    messages.appendChild(msg);
-    msg.onclick = function () {
-      msg.classList.add('hide');
-
-      setTimeout(() => {
-        messages.removeChild(msg);
-      }, 600);
+      input.value = '';
     };
-  });
+
+    socket.on('message', (data) => {
+      let msg = document.createElement('li');
+      let time = document.createElement('time');
+      let span = document.createElement('span');
+      time.textContent = data.created;
+      span.textContent = data.name + ': ' + data.message;
+      msg.appendChild(time);
+      msg.appendChild(span);
+      messages.appendChild(msg);
+      msg.onclick = function () {
+        msg.classList.add('hide');
+
+        setTimeout(() => {
+          messages.removeChild(msg);
+        }, 600);
+      };
+    });
+  }
 };
 
 exports.setMining = function (socket) {
