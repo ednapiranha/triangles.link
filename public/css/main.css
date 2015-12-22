@@ -698,3 +698,13 @@ footer form {
 .neon-fire {
   background-image: url(../assets/fire.svg);
 }
+
+h1.world {
+  background-color: none;
+  font-size: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  z-index: 10;
+  left: 80px;
+  top: 10px;
+}

@@ -7,8 +7,12 @@ block content
     ul.worlds
       for world in worlds
         li
-          a(href='/t/#{world.id}', title='#{world.id}')
+          a(href='/t/#{world.id}', title='#{world.world || "???"}')
             .world
+              if world.world
+                span= world.world
+              else
+                span ???
 
 block script
   script(src='/thirdparty.min.js')

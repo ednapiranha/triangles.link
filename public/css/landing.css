@@ -212,10 +212,14 @@ button {
 }
 
 .world {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   background-image: url(../assets/world.svg);
   background-repeat: no-repeat;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 2px #fff)
         drop-shadow(0 0 5px #875bff)
@@ -235,4 +239,15 @@ button {
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 10px #fff)
         drop-shadow(0 0 12px rgba(0, 91, 255, 0.5));
+}
+
+.worlds a {
+  text-decoration: none;
+}
+
+.worlds span {
+  display: block;
+  width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

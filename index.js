@@ -269,6 +269,7 @@ const routes = [
       validate: {
         payload: {
           name: Joi.string().required(),
+          world: Joi.any().optional(),
           password: Joi.any().optional()
         }
       },

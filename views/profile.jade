@@ -15,9 +15,16 @@ block content
       h2 email
       span= email
       h2
-        label(for='name') display name
+        label(for='name') world name
+      input(type='text', name='world', placeholder='planet x', value='#{world || ""}')
+      h2
+        label(for='name') your display name
       input(type='text', name='name', placeholder='name', value='#{name}')
       h2 change password (leave empty if you don't want to change it)
       input(type='password', name='password', placeholder='password')
       input(type='hidden', name='crumb', value='#{crumb}')
       button(type='submit') update
+
+block script
+  script(src='/thirdparty.min.js')
+  script(src='/nosession.bundle.js')
