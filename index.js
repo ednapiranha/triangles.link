@@ -145,6 +145,7 @@ server.register([Scooter,
     options: {
       defaultSrc: 'self',
       connectSrc: ['ws:', 'wss:', 'self'],
+      scriptSrc: 'self',
       styleSrc: ['self', 'unsafe-inline']
     }
   }
@@ -370,8 +371,6 @@ server.start(function (err) {
 
   let testMode = !!(process.env.NODE_ENV === 'test');
 
-  console.log('!!!!!!!! ', testMode);
-
   io.set('authorization', (handshake, next) => {
     if (handshake.headers.cookie) {
       stateDefn.parse(handshake.headers.cookie, (err, state) => {
@@ -420,9 +419,6 @@ server.start(function (err) {
     });
 
     socket.on('collection', (data) => {
-      if (!testMode && socket.handshake.headers.uid !== data.room) {
-        return;
-      }
       rooms.getCollection(data, io);
     });
 
