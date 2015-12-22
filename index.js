@@ -9,6 +9,8 @@ const Inert = require('inert');
 const moment = require('moment');
 const SocketIO = require('socket.io');
 const cron = require('node-schedule');
+const Blankie = require('blankie');
+const Scooter = require('scooter');
 
 const conf = require('./lib/conf');
 
@@ -134,6 +136,21 @@ server.register([
       pretty: true
     }
   });
+});
+
+server.register([Scooter,
+  {
+    register: Blankie,
+    options: {
+      defaultSrc: 'self',
+      connectSrc: ['ws:', 'wss:', 'self'],
+      styleSrc: ['self', 'unsafe-inline']
+    }
+  }
+], (err) => {
+  if (err) {
+    throw err;
+  }
 });
 
 server.register(require('hapi-auth-cookie'), (err) => {

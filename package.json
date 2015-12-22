@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "bcrypt": "^0.8.5",
+    "blankie": "^1.1.1",
     "boom": "^2.6.1",
     "concat-stream": "~1.4.7",
     "cookie": "^0.2.3",
