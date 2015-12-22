@@ -138,7 +138,7 @@ server.register([
     }
   });
 });
-
+/*
 server.register([Scooter,
   {
     register: Blankie,
@@ -154,7 +154,7 @@ server.register([Scooter,
     throw err;
   }
 });
-
+*/
 server.register(require('hapi-auth-cookie'), (err) => {
   if (err) {
     throw err;
