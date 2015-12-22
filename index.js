@@ -220,12 +220,7 @@ const routes = [
     path: '/t/{uid}',
     config: {
       handler: services.room,
-      auth: auth,
-      plugins: {
-        'hapi-auth-cookie': {
-          redirectTo: '/'
-        }
-      }
+      auth: auth
     }
   },
   {

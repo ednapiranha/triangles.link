@@ -47,9 +47,10 @@ block footer
         .status#health-state3
         .status#health-state4
         .status#health-state5
-    ol#messages
-    form#message(method='post')
-      input(type='text', placeholder='chat here')
+    if session
+      ol#messages
+      form#message(method='post')
+        input(type='text', placeholder='chat here')
     #active
       p currently online&#xa0;
         span 0

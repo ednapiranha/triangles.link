@@ -8,6 +8,10 @@ body {
               #111 100%);
 }
 
+footer.hide {
+  display: none;
+}
+
 #area {
   height: 2592px;
   width: 1200px;
