@@ -1,10 +1,9 @@
 'use strict';
 
 const conf = require('nconf');
-const should = require('should');
 const io = require('socket.io-client');
 
-conf.argv().env().file({ file: 'test/local.json' });
+conf.argv().env().file({ file: 'test/local.test.json' });
 
 const HOST = 'http://127.0.0.1:' + conf.get('port');
 
