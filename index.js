@@ -368,7 +368,9 @@ server.start(function (err) {
 
   io = SocketIO.listen(server.listener);
 
-  let notTest = !(process.env.NODE_ENV === 'test');
+  let testMode = !!(process.env.NODE_ENV === 'test');
+
+  console.log('!!!!!!!! ', testMode);
 
   io.set('authorization', (handshake, next) => {
     if (handshake.headers.cookie) {
@@ -404,35 +406,35 @@ server.start(function (err) {
     });
 
     socket.on('mining', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.getMining(data, io);
     });
 
     socket.on('mined', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.setMinedItem(data, io);
     });
 
     socket.on('collection', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.getCollection(data, io);
     });
 
     socket.on('build', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       builder.getItems(data, io);
     });
 
     socket.on('make', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.makeItems(data, io);
@@ -443,28 +445,28 @@ server.start(function (err) {
     });
 
     socket.on('display', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.setToDisplay(data, io);
     });
 
     socket.on('saveDisplay', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.saveDisplayPos(data, io);
     });
 
     socket.on('damage', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.getHealth(data, io);
     });
 
     socket.on('undisplay', (data) => {
-      if (notTest && socket.handshake.headers.uid !== data.room) {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
       rooms.undisplay(data, io);
