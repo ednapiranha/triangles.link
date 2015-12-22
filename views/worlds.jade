@@ -1,0 +1,15 @@
+extend layout
+
+block content
+  section
+    h1 everyone's worlds
+
+    ul.worlds
+      for world in worlds
+        li
+          a(href='/t/#{world.id}', title='#{world.id}')
+            .world
+
+block script
+  script(src='/thirdparty.min.js')
+  script(src='/nosession.bundle.js')

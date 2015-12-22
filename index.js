@@ -299,6 +299,14 @@ const routes = [
         }
       }
     }
+  },
+  {
+    method: 'GET',
+    path: '/worlds',
+    config: {
+      handler: services.worlds,
+      auth: auth
+    }
   }
 ];
 

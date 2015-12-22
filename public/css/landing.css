@@ -200,3 +200,39 @@ button {
     max-width: 150px;
   }
 }
+
+/* world view */
+.worlds {
+  height: 100%;
+}
+
+.worlds li {
+  float: left;
+  margin: 10px;
+}
+
+.world {
+  background-image: url(../assets/world.svg);
+  background-repeat: no-repeat;
+  width: 100px;
+  height: 100px;
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 2px #fff)
+        drop-shadow(0 0 5px #875bff)
+        drop-shadow(0 0 8px rgba(0, 91, 255, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 2px #fff)
+        drop-shadow(0 0 5px #875bff)
+        drop-shadow(0 0 8px rgba(0, 91, 255, 0.5));
+}
+
+.worlds li:hover .world {
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 10px #fff)
+        drop-shadow(0 0 12px rgba(0, 91, 255, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 10px #fff)
+        drop-shadow(0 0 12px rgba(0, 91, 255, 0.5));
+}
