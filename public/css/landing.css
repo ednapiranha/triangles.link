@@ -1,54 +1,58 @@
+html, body {
+  height: 100%;
+}
+
 body {
-  background-image: url(../assets/landing.svg);
-  -webkit-animation: background 30s cubic-bezier(1,0,0,1) infinite;
-  animation: background 30s cubic-bezier(1,0,0,1) infinite;
+  background: linear-gradient(to bottom,
+                #3ec7b8 0%,
+                #883ec7 50%,
+                #c73eb2 81%,
+                #111 100%);
+  position: relative;
 }
 
-@-webkit-keyframes background {
-  0% { background-color: #32dba9; }
-  20% { background-color: #3abf98; }
-  40% { background-color: #3abdbf; }
-  60% { background-color: #39a8a9; }
-  80% { background-color: #3abdbf; }
-  100% { background-color: #3abf98; }
-}
-
-@keyframes background {
-  0% { background-color: #32dba9; }
-  20% { background-color: #3abf98; }
-  40% { background-color: #3abdbf; }
-  60% { background-color: #39a8a9; }
-  80% { background-color: #3abdbf; }
-  100% { background-color: #3abf98; }
-}
-
-#landing {
-  height: 200px;
+#mountain {
+  width: 1200px;
+  height: 445px;
   position: fixed;
-  bottom: -30px;
+  left: 90px;
+  bottom: 0;
+  z-index: 1;
+  filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
 }
 
 #title {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(255, 255, 255, 0.9);
   position: absolute;
-  top: 42px;
-  left: 100px;
+  top: -5px;
+  left: 0;
 }
 
 .instructions {
-  min-width: 300px;
-  width: 50vw;
-  padding: 120px 20px 20px 20px;
-  font-size: 1.3rem;
-  line-height: 1.4rem;
-  color: rgba(255, 255, 255, 0.5);
+  width: 300px;
+  padding: 20px 10px;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  color: rgba(255, 255, 255, 0.7);
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 5;
+
 }
 
 .instructions h2 {
   font-size: 2rem;
-  margin: 20px 0 10px 0;
+  margin: 10px 0 10px 0;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.5);
   font-family: 'LeagueSpartan-Bold';
@@ -94,6 +98,7 @@ body {
 
 section {
   margin: 50px 70px 0 100px;
+  height: 100%;
 }
 
 h1 {
@@ -113,20 +118,39 @@ h1 {
     rgba(3, 3, 3, 0.6) 5px,
     rgba(4, 4, 4, 0.6) 3px
   );
-  display: inline-block;
+  display: block;
   color: #fff;
+  position: absolute;
 }
 
 /* form styles */
 
 .form {
   margin: 50px 10px 0 120px;
-  padding: 20px;
+  padding: 20px 10px;
   color: rgba(255, 255, 255, 0.7);
 }
 
+.home.form {
+  margin: 50px 0 0 0;
+  position: absolute;
+  z-index: 5;
+  height: 190px;
+  width: 300px;
+}
+
+.home.form input {
+  width: 110px;
+}
+
+.group {
+  float: left;
+  margin: 10px 10px;
+}
+
 .form h1 {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  font-size: 1.5rem;
 }
 
 .form h2 {
@@ -135,7 +159,7 @@ h1 {
 
 form h2 {
   margin: 25px 0 5px 0;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 
 form a {
@@ -150,10 +174,29 @@ form a.forgot {
 input {
   border: 1px solid #39a8a9;
   padding: 2px;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
 }
 
 button {
   font-size: 1.3rem;
   padding: 5px 10px;
+  background-color: #02d8db;
+  color: #135051;
+  border: 0;
+}
+
+@media (max-width: 705px) {
+  .instructions {
+    left: 0;
+    top: 300px;
+  }
+
+  .form {
+    margin: 80px 0 0 0;
+    float: left;
+  }
+
+  .form input {
+    max-width: 150px;
+  }
 }

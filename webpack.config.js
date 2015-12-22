@@ -5,7 +5,8 @@ const webpack = require('webpack');
 module.exports = {
   entry: {
     app: './public/js/main.js',
-    landing: './public/js/landing.js'
+    landing: './public/js/landing.js',
+    nosession: './public/js/nosession.js'
   },
   output: {
     path: './build',

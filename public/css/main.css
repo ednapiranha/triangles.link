@@ -325,6 +325,21 @@ footer form {
         drop-shadow(0 0 8px rgba(0, 176, 255, 0.5));
 }
 
+#vehicle.left {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+#vehicle.up {
+  -webkit-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+
+#vehicle.down {
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
 #vehicle.damage {
   background-color: rgba(246, 0, 0, 0.4);
   border-radius: 100px;

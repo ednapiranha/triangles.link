@@ -72,18 +72,30 @@ exports.setVehicle = function (socket) {
     switch (ev.keyCode) {
       case 38:
         ev.preventDefault();
+        vehicle.classList.remove('left');
+        vehicle.classList.remove('down');
+        vehicle.classList.add('up');
         verifyMove('up');
         break;
       case 40:
         ev.preventDefault();
+        vehicle.classList.remove('left');
+        vehicle.classList.remove('up');
+        vehicle.classList.add('down');
         verifyMove('down');
         break;
       case 37:
         ev.preventDefault();
+        vehicle.classList.remove('up');
+        vehicle.classList.remove('down');
+        vehicle.classList.add('left');
         verifyMove('left');
         break;
       case 39:
         ev.preventDefault();
+        vehicle.classList.remove('up');
+        vehicle.classList.remove('down');
+        vehicle.classList.remove('left');
         verifyMove('right');
         break;
       default:

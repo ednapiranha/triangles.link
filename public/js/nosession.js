@@ -3,6 +3,6 @@
 require('../css/shared.css');
 require('../css/landing.css');
 
-const background = require('./background');
+const menu = require('./menu');
 
-background.generateMountain();
+menu.generate();
