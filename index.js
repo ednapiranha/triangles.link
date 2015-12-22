@@ -11,6 +11,7 @@ const SocketIO = require('socket.io');
 const cron = require('node-schedule');
 const Blankie = require('blankie');
 const Scooter = require('scooter');
+const Statehood = require('statehood');
 
 const conf = require('./lib/conf');
 
@@ -165,6 +166,13 @@ server.register(require('hapi-auth-cookie'), (err) => {
     keepAlive: true,
     isSecure: false
   });
+});
+
+let stateDefn = new Statehood.Definitions({
+  encoding: 'iron',
+  password: conf.get('password'),
+  ttl: conf.get('session-ttl'),
+  isSecure: false
 });
 
 const routes = [
@@ -360,6 +368,26 @@ server.start(function (err) {
 
   io = SocketIO.listen(server.listener);
 
+  let notTest = !(process.env.NODE_ENV === 'test');
+
+  io.set('authorization', (handshake, next) => {
+    if (handshake.headers.cookie) {
+      stateDefn.parse(handshake.headers.cookie, (err, state) => {
+        if (state && state.secret) {
+          let session = state.secret.uid;
+
+          if (session) {
+            handshake.headers.uid = session;
+          }
+        }
+
+        return next(null, true);
+      });
+    }
+
+    next(null, true);
+  });
+
   io.on('connection', (socket) => {
     socket.on('disconnect', disconnectHandler);
 
@@ -376,22 +404,37 @@ server.start(function (err) {
     });
 
     socket.on('mining', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getMining(data, io);
     });
 
     socket.on('mined', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.setMinedItem(data, io);
     });
 
     socket.on('collection', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getCollection(data, io);
     });
 
     socket.on('build', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       builder.getItems(data, io);
     });
 
     socket.on('make', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.makeItems(data, io);
     });
 
@@ -400,18 +443,30 @@ server.start(function (err) {
     });
 
     socket.on('display', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.setToDisplay(data, io);
     });
 
     socket.on('saveDisplay', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.saveDisplayPos(data, io);
     });
 
     socket.on('damage', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getHealth(data, io);
     });
 
     socket.on('undisplay', (data) => {
+      if (notTest && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.undisplay(data, io);
     });
   });
