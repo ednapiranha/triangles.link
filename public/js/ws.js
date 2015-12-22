@@ -155,7 +155,7 @@ exports.getCollection = function (socket) {
         if (currentItems[item] > 0 && !displayableItems[item]) {
           li.onclick = () => {
             setNotification('You added a displayable ' + item);
-            //this.classList.remove('displayable');
+            // this.classList.remove('displayable');
             drawDisplayable(item, 100, 100);
             socket.emit('display', {
               room: currentRoom,
