@@ -315,6 +315,7 @@ footer form {
   z-index: 6;
   background-image: url(../assets/vehicle.svg);
   opacity: 0.7;
+  cursor: pointer;
 }
 
 #vehicle.active {
@@ -373,10 +374,13 @@ footer form {
 }
 
 #avatar:hover, #build:hover, #avatar.active, #build.active {
-  background-color: rgba(2, 181, 219, 0.6);
-  border-radius: 100px;
-  box-shadow: #06d3ff 0 0 10px;
   cursor: pointer;
+  filter: drop-shadow(0 0 1px #fff)
+      drop-shadow(0 0 2px #06d3ff)
+      drop-shadow(0 0 5px #06d3ff);
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 2px #06d3ff)
+        drop-shadow(0 0 5px #06d3ff);
 }
 
 /* items */
@@ -422,7 +426,7 @@ footer form {
     rgba(3, 3, 3, 0.8) 5px,
     rgba(4, 4, 4, 0.7) 3px
   );
-  z-index: 9;
+  z-index: 999;
   height: 70vh;
   width: 70vw;
   left: 100px;
@@ -707,4 +711,71 @@ h1.world {
   z-index: 10;
   left: 80px;
   top: 10px;
+}
+
+.arrow-content {
+  opacity: 1.0;
+}
+
+#arrow {
+  background-image: url(../assets/arrow.svg);
+  background-repeat: no-repeat;
+  width: 310px;
+  height: 150px;
+  position: fixed;
+  z-index: 997;
+  top: 200px;
+  left: 20px;
+  -webkit-transform: rotate(25deg);
+  transform: rotate(25deg);
+  animation: arrow 1.5s ease-in-out infinite alternate;
+}
+
+#arrow-tip {
+  font-family: 'LeagueSpartan-Bold';
+  font-size: 0.9rem;
+  line-height: 1.2rem;
+  color: #fff;
+  text-shadow: 0 0 1px #fff,
+              0 0 5px #111,
+              0 0 10px #111;
+  position: fixed;
+  z-index: 997;
+  top: 290px;
+  left: 130px;
+  width: 160px;
+  text-transform: uppercase;
+}
+
+#arrow-tip p {
+  margin-bottom: 8px;
+}
+
+.arrow-content.remove {
+  opacity: 0;
+  -webkit-transition: opacity 2s;
+  transition: opacity 2s;
+}
+
+@keyframes arrow {
+  from {
+    filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #ffab73)
+        drop-shadow(0 0 5px #d802db)
+        drop-shadow(0 0 8px rgba(216, 2, 219, 0.9));
+    -webkit-filter: drop-shadow(0 0 1px #fff)
+          drop-shadow(0 0 3px #ffab73)
+          drop-shadow(0 0 5px #d802db)
+          drop-shadow(0 0 8px rgba(216, 2, 219, 0.9));
+  }
+  to {
+    filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 13px #ffab73)
+        drop-shadow(0 0 15px #d802db)
+        drop-shadow(0 0 18px rgba(216, 2, 219, 0.9));
+    -webkit-filter: drop-shadow(0 0 1px #fff)
+          drop-shadow(0 0 13px #ffab73)
+          drop-shadow(0 0 15px #d802db)
+          drop-shadow(0 0 18px rgba(216, 2, 219, 0.9));
+  }
 }

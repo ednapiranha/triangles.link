@@ -1,6 +1,7 @@
 'use strict';
 
 let currentRoom = document.body.getAttribute('data-room');
+let firstTime = document.querySelector('.arrow-content');
 let health = document.querySelector('#health');
 let isDamaged = false;
 
@@ -46,6 +47,9 @@ exports.setVehicle = function (socket) {
   });
 
   vehicle.onclick = function () {
+    if (firstTime) {
+      firstTime.classList.add('remove');
+    }
     if (!isDamaged) {
       if (this.classList.contains('active')) {
         this.classList.remove('active');
