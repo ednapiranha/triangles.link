@@ -408,42 +408,37 @@ server.start(function (err) {
     });
 
     socket.on('mining', (data) => {
-      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
-      */
       rooms.getMining(data, io);
     });
 
     socket.on('mined', (data) => {
-      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
-      */
       rooms.setMinedItem(data, io);
     });
 
     socket.on('collection', (data) => {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getCollection(data, io);
     });
 
     socket.on('build', (data) => {
-      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
-      */
       builder.getItems(data, io);
     });
 
     socket.on('make', (data) => {
-      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
-      */
       rooms.makeItems(data, io);
     });
 
@@ -452,11 +447,13 @@ server.start(function (err) {
     });
 
     socket.on('display', (data) => {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.setToDisplay(data, io);
     });
 
     socket.on('saveDisplay', (data) => {
-      console.log(socket.handshake.headers.uid, data.room)
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
@@ -464,10 +461,16 @@ server.start(function (err) {
     });
 
     socket.on('damage', (data) => {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getHealth(data, io);
     });
 
     socket.on('undisplay', (data) => {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.undisplay(data, io);
     });
   });
