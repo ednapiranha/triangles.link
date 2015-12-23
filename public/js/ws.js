@@ -292,6 +292,7 @@ exports.getCollection = function (socket) {
     closeWin.onclick = function () {
       builder.classList.remove('active');
       build.classList.remove('active');
+      avatar.classList.remove('active');
       collection.classList.remove('active');
       this.classList.remove('active');
     };
