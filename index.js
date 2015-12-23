@@ -393,11 +393,9 @@ server.start(function (err) {
 
   io.on('connection', (socket) => {
     function checkSession(next) {
-      console.log('++++++++++ ', stateDefn);
       stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
-        console.log('++++++++++session ', state)
-        if (state && state.secret) {
-          let session = state.secret.uid;
+        if (state) {
+          let session = state.uid;
 
           if (session) {
             socket.handshake.headers.uid = session;
@@ -405,8 +403,6 @@ server.start(function (err) {
             return next(null, true);
           }
         }
-
-        next(null, true);
       });
     }
 
