@@ -379,15 +379,14 @@ server.start(function (err) {
 
           if (session) {
             handshake.headers.uid = session;
-            return next(null, true);
           }
         }
 
-        return next(null, false);
+        return next(null, true);
       });
     }
 
-    next(null, false);
+    next(null, true);
   });
 
   io.on('connection', (socket) => {
