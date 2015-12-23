@@ -373,21 +373,19 @@ server.start(function (err) {
 
   io.set('authorization', (handshake, next) => {
     if (handshake.headers.cookie) {
-      console.log('got here!! ', handshake.headers.cookie)
       stateDefn.parse(handshake.headers.cookie, (err, state) => {
         if (state && state.secret) {
           let session = state.secret.uid;
 
           if (session) {
             handshake.headers.uid = session;
-            console.log('++++++++++ ', handshake.headers);
             return next(null, true);
           }
         }
       });
     }
 
-    next(null, true);
+    next(null, false);
   });
 
   io.on('connection', (socket) => {
@@ -406,16 +404,20 @@ server.start(function (err) {
     });
 
     socket.on('mining', (data) => {
+      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
+      */
       rooms.getMining(data, io);
     });
 
     socket.on('mined', (data) => {
+      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
+      */
       rooms.setMinedItem(data, io);
     });
 
@@ -424,16 +426,20 @@ server.start(function (err) {
     });
 
     socket.on('build', (data) => {
+      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
+      */
       builder.getItems(data, io);
     });
 
     socket.on('make', (data) => {
+      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
+      */
       rooms.makeItems(data, io);
     });
 
@@ -447,9 +453,11 @@ server.start(function (err) {
 
     socket.on('saveDisplay', (data) => {
       console.log(socket.handshake.headers, data.room)
+      /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
+      */
       rooms.saveDisplayPos(data, io);
     });
 
