@@ -372,27 +372,22 @@ server.start(function (err) {
   let testMode = !!(process.env.NODE_ENV === 'test');
 
   io.set('authorization', (handshake, next) => {
-    if (handshake.headers.cookie) {
-      stateDefn.parse(handshake.headers.cookie, (err, state) => {
-        if (state && state.secret) {
-          let session = state.secret.uid;
+    setTimeout(() => {
+      if (handshake.headers.cookie) {
+        stateDefn.parse(handshake.headers.cookie, (err, state) => {
+          if (state && state.secret) {
+            let session = state.secret.uid;
 
-          if (session) {
-            handshake.uid = session;
-            next(null, true);
-          } else {
-            handshake.headers.uid = false;
-            next(null, true);
+            if (session) {
+              handshake.headers.uid = session;
+              return next(null, true);
+            }
           }
-        } else {
-          handshake.headers.uid = false;
-          next(null, true);
-        }
-      });
-    } else {
-      handshake.headers.uid = false;
+        });
+      }
+
       next(null, true);
-    }
+    }, 100);
   });
 
   io.on('connection', (socket) => {
@@ -459,7 +454,7 @@ server.start(function (err) {
     });
 
     socket.on('saveDisplay', (data) => {
-      console.log(socket.handshake, data.room)
+      console.log(socket.handshake.headers, data.room)
       /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
