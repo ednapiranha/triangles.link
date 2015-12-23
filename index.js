@@ -373,6 +373,7 @@ server.start(function (err) {
 
   io.set('authorization', (handshake, next) => {
     if (handshake.headers.cookie) {
+      console.log('got here!! ', handshake.headers.cookies)
       stateDefn.parse(handshake.headers.cookie, (err, state) => {
         if (state && state.secret) {
           let session = state.secret.uid;
