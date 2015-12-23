@@ -374,12 +374,13 @@ server.start(function (err) {
   io.set('authorization', (handshake, next) => {
     if (handshake.headers.cookie) {
       stateDefn.parse(handshake.headers.cookie, (err, state) => {
-        if (state && state.secret) {
-          let session = state.secret.uid;
+        let key = conf.get('cookie');
+
+        if (state && state[key]) {
+          let session = state[key].uid;
 
           if (session) {
             handshake.headers.uid = session;
-            console.log('reconnecting to socket...');
             return next(null, true);
           }
         }
@@ -392,22 +393,6 @@ server.start(function (err) {
   });
 
   io.on('connection', (socket) => {
-    function checkSession(next) {
-      stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
-        let key = conf.get('cookie');
-        console.log('++++++++++session ', state)
-        if (state && key) {
-          let session = state[key].uid;
-
-          if (session) {
-            socket.handshake.headers.uid = session;
-            console.log('reconnecting to socket... ', socket.handshake.headers);
-            return next(null, true);
-          }
-        }
-      });
-    }
-
     socket.on('disconnect', disconnectHandler);
 
     socket.on('join', (data) => {
@@ -472,12 +457,10 @@ server.start(function (err) {
 
     socket.on('saveDisplay', (data) => {
       console.log(socket.handshake.headers.uid, data.room)
-      checkSession(() => {
-        if (!testMode && socket.handshake.headers.uid !== data.room) {
-          return;
-        }
-        rooms.saveDisplayPos(data, io);
-      });
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
+      rooms.saveDisplayPos(data, io);
     });
 
     socket.on('damage', (data) => {
