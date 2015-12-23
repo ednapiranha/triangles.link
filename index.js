@@ -384,6 +384,9 @@ server.start(function (err) {
             handshake.headers.uid = false;
             next(null, true);
           }
+        } else {
+          handshake.headers.uid = false;
+          next(null, true);
         }
       });
     } else {
