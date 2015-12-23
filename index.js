@@ -393,13 +393,15 @@ server.start(function (err) {
 
   io.on('connection', (socket) => {
     function checkSession(next) {
+      console.log('++++++++++ ', stateDefn);
       stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
+        console.log('++++++++++session ', state, state.uid)
         if (state) {
           let session = state.uid;
 
           if (session) {
             socket.handshake.headers.uid = session;
-            console.log('reconnecting to socket...');
+            console.log('reconnecting to socket... ', socket.handshake.headers);
             return next(null, true);
           }
         }
@@ -469,7 +471,7 @@ server.start(function (err) {
     });
 
     socket.on('saveDisplay', (data) => {
-      console.log(socket.handshake.headers, data.room)
+      console.log(socket.handshake.headers.uid, data.room)
       checkSession(() => {
         if (!testMode && socket.handshake.headers.uid !== data.room) {
           return;
