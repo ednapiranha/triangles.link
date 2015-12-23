@@ -379,11 +379,11 @@ server.start(function (err) {
 
           if (session) {
             handshake.headers.uid = session;
-
+            return next(null, true);
           }
         }
 
-        return next(null, true);
+        return next(null, false);
       });
     }
 
