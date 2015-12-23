@@ -451,7 +451,7 @@ server.start(function (err) {
     });
 
     socket.on('saveDisplay', (data) => {
-      console.log(socket.handshake.headers.uid, data.room)
+      console.log(socket.handshake.headers, data.room)
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
       }
