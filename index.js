@@ -372,25 +372,42 @@ server.start(function (err) {
   let testMode = !!(process.env.NODE_ENV === 'test');
 
   io.set('authorization', (handshake, next) => {
-    setTimeout(() => {
-      if (handshake.headers.cookie) {
-        stateDefn.parse(handshake.headers.cookie, (err, state) => {
-          if (state && state.secret) {
-            let session = state.secret.uid;
+    if (handshake.headers.cookie) {
+      stateDefn.parse(handshake.headers.cookie, (err, state) => {
+        if (state && state.secret) {
+          let session = state.secret.uid;
 
-            if (session) {
-              handshake.headers.uid = session;
-              return next(null, true);
-            }
+          if (session) {
+            handshake.headers.uid = session;
+            console.log('reconnecting to socket...');
+            return next(null, true);
           }
-        });
-      }
+        }
+      });
+    } else {
+      return next('No cookie transmitted.', false);
+    }
 
-      next(null, true);
-    }, 100);
+    next(null, true);
   });
 
   io.on('connection', (socket) => {
+    function checkSession(next) {
+      stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
+        if (state && state.secret) {
+          let session = state.secret.uid;
+
+          if (session) {
+            socket.handshake.headers.uid = session;
+            console.log('reconnecting to socket...');
+            return next(null, true);
+          }
+        }
+
+        next(null, true);
+      });
+    }
+
     socket.on('disconnect', disconnectHandler);
 
     socket.on('join', (data) => {
@@ -455,12 +472,12 @@ server.start(function (err) {
 
     socket.on('saveDisplay', (data) => {
       console.log(socket.handshake.headers, data.room)
-      /*
-      if (!testMode && socket.handshake.headers.uid !== data.room) {
-        return;
-      }
-      */
-      rooms.saveDisplayPos(data, io);
+      checkSession(() => {
+        if (!testMode && socket.handshake.headers.uid !== data.room) {
+          return;
+        }
+        rooms.saveDisplayPos(data, io);
+      });
     });
 
     socket.on('damage', (data) => {
