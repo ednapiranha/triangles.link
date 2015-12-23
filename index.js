@@ -385,7 +385,7 @@ server.start(function (err) {
       });
     }
 
-    next(null, false);
+    next(null, true);
   });
 
   io.on('connection', (socket) => {
