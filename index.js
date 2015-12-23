@@ -379,6 +379,7 @@ server.start(function (err) {
 
           if (session) {
             handshake.headers.uid = session;
+
           }
         }
 
@@ -386,7 +387,7 @@ server.start(function (err) {
       });
     }
 
-    next(null, true);
+    next(null, false);
   });
 
   io.on('connection', (socket) => {
@@ -419,6 +420,9 @@ server.start(function (err) {
     });
 
     socket.on('collection', (data) => {
+      if (!testMode && socket.handshake.headers.uid !== data.room) {
+        return;
+      }
       rooms.getCollection(data, io);
     });
 
