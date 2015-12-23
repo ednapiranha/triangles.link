@@ -414,10 +414,12 @@ footer form {
   line-height: 22px;
   margin: 5px 0;
   background-repeat: no-repeat;
+
 }
 
 /* collection */
 #collection, #builder {
+  display: none;
   position: fixed;
   background: repeating-linear-gradient(
     45deg,
@@ -427,8 +429,8 @@ footer form {
     rgba(4, 4, 4, 0.7) 3px
   );
   z-index: 999;
-  height: 70vh;
-  width: 70vw;
+  bottom: 120px;
+  right: 50px;
   left: 100px;
   top: -70vw;
   padding: 20px;
@@ -439,6 +441,32 @@ footer form {
   overflow: auto;
   transition: opacity 1s;
   -webkit-transition: opacity 1s;
+}
+
+#close-window {
+  position: fixed;
+  bottom: 70px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  background-color: #111;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  z-index: 997;
+  color: #fff;
+  line-height: 2.8rem;
+  cursor: pointer;
+  display: none;
+}
+
+#close-window.active {
+  display: block;
+}
+
+#close-window:hover {
+  background-color: #eee;
+  color: #111;
 }
 
 #collection.active, #builder.active {
@@ -469,10 +497,19 @@ footer form {
 
 .items {
   margin-bottom: 20px;
+  margin-top: 20px;
   float: left;
   clear: both;
   width: 100%;
   flex-direction: column;
+}
+
+#collection .items li > p {
+  opacity: 0.3;
+}
+
+#collection .items li.displayable > p {
+  opacity: 1.0;
 }
 
 .items li, .displayed li {
@@ -486,15 +523,16 @@ footer form {
 
 /* builder */
 .items .requirements {
-  width: 18px;
-  height: 18px;
+  width: 21px;
+  height: 21px;
   padding-left: 30px;
   display: block;
   background-repeat: no-repeat;
 }
 
 #builder .items li {
-  height: 105px;
+  height: 115px;
+  width: 100px;
 }
 
 #builder .items .build, .displayed li p {
@@ -575,7 +613,7 @@ footer form {
         drop-shadow(0 0 8px rgba(22, 134, 220, 0.5));
 }
 
-.neon-green {
+.neon-yellow {
   background-image: url(../assets/square.svg);
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px #fff)
@@ -585,6 +623,10 @@ footer form {
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 5px #70b32e)
         drop-shadow(0 0 8px rgba(112, 179, 46, 0.5));
+}
+
+.neon-green {
+  background-image: url(../assets/square.svg);
 }
 
 .neon-red {
@@ -601,6 +643,13 @@ footer form {
 
 .neon-purple {
   background-image: url(../assets/square.svg);
+}
+
+.neon-eyeglasses {
+  background-image: url(../assets/eyeglasses.svg);
+}
+
+.neon-purple, .neon-eyeglasses {
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 5px #b608ef)
@@ -613,6 +662,9 @@ footer form {
 
 .neon-palm-tree {
   background-image: url(../assets/palm-tree.svg);
+}
+
+.neon-palm-tree, .neon-martini, .neon-green {
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 5px #00fda1)
@@ -683,8 +735,23 @@ footer form {
         drop-shadow(0 0 8px rgba(135, 91, 255, 0.5));
 }
 
+.neon-cat-2, .neon-dog-2 {
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #db023a)
+        drop-shadow(0 0 8px rgba(219, 2, 58, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #db023a)
+        drop-shadow(0 0 8px rgba(219, 2, 58, 0.5));
+}
+
 .neon-cat-1 {
   background-image: url(../assets/cat1.svg);
+}
+
+.neon-cat-2 {
+  background-image: url(../assets/cat2.svg);
 }
 
 .neon-hammer {
@@ -699,8 +766,16 @@ footer form {
   background-image: url(../assets/dog1.svg);
 }
 
+.neon-dog-2 {
+  background-image: url(../assets/dog2.svg);
+}
+
 .neon-fire {
   background-image: url(../assets/fire.svg);
+}
+
+.neon-martini {
+  background-image: url(../assets/martini.svg);
 }
 
 h1.world {

@@ -32,10 +32,14 @@ block content
         ul.displayed
       #builder
         h2 build
+        p.tip Each item requires a certain number of other items to be built.
+        p.tip If you see all the requirements highlighted, then you can build that item.
         ul.items
     else
       #collection
       #builder
+    #close-window x
+
   #notification
   if firstVisit
     .arrow-content

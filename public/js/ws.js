@@ -14,6 +14,7 @@ let items = collection.querySelector('.items') || false;
 let displayItems = collection.querySelector('.displayed');
 let notification = document.querySelector('#notification');
 const owner = document.body.getAttribute('data-owner');
+let closeWin = document.querySelector('#close-window');
 let currentItems = {};
 let displayableItems = {};
 
@@ -288,6 +289,13 @@ exports.getCollection = function (socket) {
   });
 
   if (avatar) {
+    closeWin.onclick = function () {
+      builder.classList.remove('active');
+      build.classList.remove('active');
+      collection.classList.remove('active');
+      this.classList.remove('active');
+    };
+
     avatar.onclick = function () {
       socket.emit('collection', {
         room: currentRoom
@@ -295,11 +303,11 @@ exports.getCollection = function (socket) {
       builder.classList.remove('active');
       build.classList.remove('active');
       if (collection.classList.contains('active')) {
-        this.classList.remove('active');
-        collection.classList.remove('active');
+        closeWin.click();
       } else {
         this.classList.add('active');
         collection.classList.add('active');
+        closeWin.classList.add('active');
         drawInventory();
       }
     };
@@ -308,7 +316,11 @@ exports.getCollection = function (socket) {
 
 exports.getBuildables = function (socket) {
   let build = document.querySelector('#build');
-  let items = builder.querySelector('.items');
+  let items = builder.querySelector('.items') || false;
+
+  if (!items) {
+    return;
+  }
 
   build.onclick = function () {
     socket.emit('build', {
@@ -317,11 +329,11 @@ exports.getBuildables = function (socket) {
     collection.classList.remove('active');
     avatar.classList.remove('active');
     if (builder.classList.contains('active')) {
-      this.classList.remove('active');
-      builder.classList.remove('active');
+      closeWin.click();
     } else {
       this.classList.add('active');
       builder.classList.add('active');
+      closeWin.classList.add('active');
     }
   };
 
