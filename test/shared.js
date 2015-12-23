@@ -14,9 +14,9 @@ const wsOpts = {
   'reopen delay': 0
 };
 
-let socket = io.connect(HOST, wsOpts);
-
 exports.socket = function () {
+  let socket = io.connect(HOST, wsOpts);
+
   return socket;
 };
 

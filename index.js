@@ -372,6 +372,10 @@ server.start(function (err) {
   let testMode = !!(process.env.NODE_ENV === 'test');
 
   io.set('authorization', (handshake, next) => {
+    if (testMode) {
+      return next(null, true);
+    }
+
     if (handshake.headers.cookie) {
       stateDefn.parse(handshake.headers.cookie, (err, state) => {
         let key = conf.get('cookie');
@@ -381,7 +385,6 @@ server.start(function (err) {
 
           if (session) {
             handshake.headers.uid = session;
-            return next(null, true);
           }
         }
       });
@@ -404,7 +407,9 @@ server.start(function (err) {
 
     socket.on('message', (data) => {
       data.created = moment().format('HH:mm:ss');
-      io.sockets.in(data.room).emit('message', data);
+      if (socket.handshake.headers.uid) {
+        io.sockets.in(data.room).emit('message', data);
+      }
     });
 
     socket.on('mining', (data) => {
