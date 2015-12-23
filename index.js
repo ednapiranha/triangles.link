@@ -379,13 +379,17 @@ server.start(function (err) {
 
           if (session) {
             handshake.uid = session;
-            return next(null, true);
+            next(null, true);
+          } else {
+            handshake.headers.uid = false;
+            next(null, true);
           }
         }
       });
+    } else {
+      handshake.headers.uid = false;
+      next(null, true);
     }
-    handshake.headers.uid = false;
-    next(null, true);
   });
 
   io.on('connection', (socket) => {
