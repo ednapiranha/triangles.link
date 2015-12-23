@@ -378,7 +378,7 @@ server.start(function (err) {
           let session = state.secret.uid;
 
           if (session) {
-            handshake.headers.uid = session;
+            handshake.uid = session;
             return next(null, true);
           }
         }
@@ -452,7 +452,7 @@ server.start(function (err) {
     });
 
     socket.on('saveDisplay', (data) => {
-      console.log(socket.handshake.headers, data.room)
+      console.log(socket.handshake, data.room)
       /*
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;
