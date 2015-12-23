@@ -395,9 +395,10 @@ server.start(function (err) {
     function checkSession(next) {
       console.log('++++++++++ ', stateDefn);
       stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
-        console.log('++++++++++session ', state, state.uid)
-        if (state) {
-          let session = state.uid;
+        let key = state[Object.keys(state)[0]];
+        console.log('++++++++++session ', state, state[key].uid)
+        if (state && key) {
+          let session = state[key].uid;
 
           if (session) {
             socket.handshake.headers.uid = session;
