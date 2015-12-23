@@ -372,6 +372,20 @@ server.start(function (err) {
   let testMode = !!(process.env.NODE_ENV === 'test');
 
   io.set('authorization', (handshake, next) => {
+    if (handshake.headers.cookie) {
+      stateDefn.parse(handshake.headers.cookie, (err, state) => {
+        if (state && state.secret) {
+          let session = state.secret.uid;
+
+          if (session) {
+            handshake.headers.uid = session;
+            console.log('++++++++++ ', handshake.headers);
+            return next(null, true);
+          }
+        }
+      });
+    }
+
     next(null, true);
   });
 
@@ -382,16 +396,6 @@ server.start(function (err) {
       users++;
       socket.join(data.room);
       console.log('joined ', data.room);
-      stateDefn.parse(socket.handshake.headers.cookie, (err, state) => {
-        if (state && state.secret) {
-          let session = state.secret.uid;
-
-          if (session) {
-            socket.handshake.headers.uid = session;
-            console.log('++++++++++ ', socket.handshake.headers);
-          }
-        }
-      });
       io.emit('active', users);
     });
 
