@@ -215,7 +215,6 @@ const routes = [
     path: '/password/reset',
     handler: authenticate.resetPassword
   },
-  /*
   {
     method: 'GET',
     path: '/g/{uid}',
@@ -229,7 +228,6 @@ const routes = [
       }
     }
   },
-  */
   {
     method: 'POST',
     path: '/signup',
