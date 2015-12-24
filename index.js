@@ -6,7 +6,7 @@ const Hapi = require('hapi');
 const Joi = require('joi');
 const http = require('http');
 const Inert = require('inert');
-const moment = require('moment');
+// const moment = require('moment');
 const SocketIO = require('socket.io');
 const cron = require('node-schedule');
 const Blankie = require('blankie');
@@ -138,7 +138,7 @@ server.register([
     }
   });
 });
-/*
+
 server.register([Scooter,
   {
     register: Blankie,
@@ -154,7 +154,7 @@ server.register([Scooter,
     throw err;
   }
 });
-*/
+
 server.register(require('hapi-auth-cookie'), (err) => {
   if (err) {
     throw err;
@@ -215,6 +215,7 @@ const routes = [
     path: '/password/reset',
     handler: authenticate.resetPassword
   },
+  /*
   {
     method: 'GET',
     path: '/g/{uid}',
@@ -228,6 +229,7 @@ const routes = [
       }
     }
   },
+  */
   {
     method: 'POST',
     path: '/signup',
@@ -417,14 +419,14 @@ server.start(function (err) {
       console.log('joined ', data.room);
       io.emit('active', users);
     });
-
+    /*
     socket.on('message', (data) => {
       data.created = moment().format('HH:mm:ss');
       if (socket.handshake.headers.uid) {
         io.sockets.in(data.room).emit('message', data);
       }
     });
-
+    */
     socket.on('mining', (data) => {
       if (!testMode && socket.handshake.headers.uid !== data.room) {
         return;

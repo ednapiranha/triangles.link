@@ -99,7 +99,7 @@ footer form {
 #health .status.damage {
   background-color: #f00;
 }
-
+/*
 #messages {
   position: absolute;
   bottom: 65px;
@@ -146,7 +146,7 @@ footer form {
   color: #eee;
   width: 246px;
 }
-
+*/
 #active {
   right: 0;
   /* display: inline-block; */
@@ -689,8 +689,11 @@ footer form {
         drop-shadow(0 0 8px rgba(225, 0, 85, 0.5));
 }
 
-.neon-sun, .neon-fire {
+.neon-sun {
   background-image: url(../assets/sun.svg);
+}
+
+.neon-sun, .neon-fire, .neon-star {
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 5px #fffa00)
@@ -778,6 +781,53 @@ footer form {
 
 .neon-martini {
   background-image: url(../assets/martini.svg);
+}
+
+.neon-triangle-1 {
+  background-image: url(../assets/triangle1.svg);
+}
+
+.neon-triangle-2 {
+  background-image: url(../assets/triangle2.svg);
+}
+
+.neon-triangle-1, .neon-triangle-2 {
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00ffce)
+        drop-shadow(0 0 8px rgba(0, 255, 206, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #00ffce)
+        drop-shadow(0 0 8px rgba(0, 255, 206, 0.5));
+}
+
+.neon-triangle-3 {
+  background-image: url(../assets/triangle3.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #ff59c5)
+        drop-shadow(0 0 8px rgba(255, 89, 157, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #ff59c5)
+        drop-shadow(0 0 8px rgba(255, 89, 157, 0.5));
+}
+
+.neon-star {
+  background-image: url(../assets/star.svg);
+}
+
+.neon-portal-1 {
+  background-image: url(../assets/portal1.svg);
+  filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #111)
+        drop-shadow(0 0 8px rgba(1, 1, 1, 0.5));
+  -webkit-filter: drop-shadow(0 0 1px #fff)
+        drop-shadow(0 0 3px #fff)
+        drop-shadow(0 0 5px #111)
+        drop-shadow(0 0 8px rgba(1, 1, 1, 0.5));
 }
 
 h1.world {

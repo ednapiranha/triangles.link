@@ -3,7 +3,7 @@
 const playground = require('./playground');
 
 let currentRoom = document.body.getAttribute('data-room');
-let username = document.body.getAttribute('data-user');
+//let username = document.body.getAttribute('data-user');
 let mining = document.querySelector('#mining-area');
 let builder = document.querySelector('#builder');
 let collection = document.querySelector('#collection');
@@ -37,7 +37,7 @@ exports.assignRoom = function (socket) {
     console.log('no room available');
   }
 };
-
+/*
 exports.setChat = function (socket) {
   let messageForm = document.querySelector('#message');
   let messages = document.querySelector('#messages');
@@ -76,7 +76,7 @@ exports.setChat = function (socket) {
     });
   }
 };
-
+*/
 exports.setMining = function (socket) {
   let active = document.querySelector('#active');
 
