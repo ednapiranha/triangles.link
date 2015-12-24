@@ -216,6 +216,17 @@ const routes = [
     handler: authenticate.resetPassword
   },
   {
+    method: 'GET',
+    path: '/g/{uid}',
+    handler: authenticate.get,
+    auth: auth,
+    plugins: {
+      'hapi-auth-cookie': {
+        redirectTo: '/'
+      }
+    }
+  },
+  {
     method: 'POST',
     path: '/signup',
     config: {
