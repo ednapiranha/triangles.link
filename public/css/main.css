@@ -6,6 +6,8 @@ body {
               #883ec7 50%,
               #c73eb2 81%,
               #111 100%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 footer.hide {

@@ -57,6 +57,7 @@ table {
 body {
   font-family: Arial, sans-serif;
   background: #ccc;
+  margin: 0;
 }
 
 header {

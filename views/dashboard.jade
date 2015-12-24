@@ -49,17 +49,18 @@ block content
         p Use your arrow keys to navigate.
 
 block footer
-  footer
-    if owner
-      #avatar
-      #build
-      #health
-        .status#health-state1
-        .status#health-state2
-        .status#health-state3
-        .status#health-state4
-        .status#health-state5
-    if session
+  if session
+    footer
+      if owner
+        #avatar
+        #build
+        #health
+          .status#health-state1
+          .status#health-state2
+          .status#health-state3
+          .status#health-state4
+          .status#health-state5
+
       ol#messages
       form#message(method='post')
         input(type='text', placeholder='chat here')

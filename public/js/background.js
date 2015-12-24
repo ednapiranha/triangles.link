@@ -36,10 +36,10 @@ exports.generateSky = function () {
     blueMax = 50;
     green = 100;
   } else {
-    redMin = 50;
+    redMin = 100;
     redMax = 20;
     blueMin = 70;
-    blueMax = 50;
+    blueMax = 80;
     green = 10;
   }
 
@@ -104,7 +104,7 @@ exports.generateSky = function () {
   }
 
   createTriangles();
-
+  /*
   function randomPoly() {
     return Math.floor(Math.random() * (triangles.length - 2));
   }
@@ -120,7 +120,9 @@ exports.generateSky = function () {
       });
     } catch (e) { }
   }
+
   nextPoly();
+  */
 };
 
 exports.generateMountain = function () {
