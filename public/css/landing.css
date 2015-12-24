@@ -9,6 +9,8 @@ body {
                 #c73eb2 81%,
                 #111 100%);
   position: relative;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 #mountain {
