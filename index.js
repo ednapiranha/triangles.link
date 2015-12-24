@@ -77,7 +77,7 @@ server.ext('onPreResponse', (request, reply) => {
   }
 
   if (process.NODE_ENV !== 'production') {
-    //console.log(error.stack || error);
+    console.log('ERROR: ', (error.stack || error));
   }
 
   if (ctx.reason) {

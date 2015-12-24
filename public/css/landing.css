@@ -18,28 +18,45 @@ body {
   left: 90px;
   bottom: 0;
   z-index: 1;
-  filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
-        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
-        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
-        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
-  -webkit-filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
-        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
-        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
-        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+  animation: mountain 5.5s ease-in-out alternate;
 }
+
+@keyframes mountain {
+  from {
+    filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+    -webkit-filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 3px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 5px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+  }
+  to {
+    filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 13px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 15px rgba(1, 29, 230, 0.5))
+        drop-shadow(0 0 18px rgba(243, 29, 230, 0.5));
+    -webkit-filter: drop-shadow(0 0 1px rgba(243, 29, 230, 0.5))
+        drop-shadow(0 0 13px rgba(1, 1, 255, 0.5))
+        drop-shadow(0 0 15px rgba(1, 29, 230, 0.5))
+        drop-shadow(0 0 18px rgba(243, 29, 230, 0.5));
+  }
+}
+
 
 #title {
   font-size: 3rem;
   font-weight: bold;
   color: rgba(255, 255, 255, 0.9);
   position: absolute;
-  top: -5px;
-  left: 0;
+  top: 0;
+  left: 5px;
 }
 
 .instructions {
-  width: 300px;
-  padding: 20px 10px;
+  width: 280px;
+  padding: 20px;
   font-size: 1rem;
   line-height: 1.3rem;
   color: rgba(255, 255, 255, 0.7);
@@ -74,13 +91,13 @@ body {
   background: transparent url(../assets/square.svg) no-repeat;
   display: inline-block;
   filter: drop-shadow(0 0 1px #fff)
-        drop-shadow(0 0 3px #fff)
-        drop-shadow(0 0 5px #f31de6)
-        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+      drop-shadow(0 0 3px #fff)
+      drop-shadow(0 0 5px #f31de6)
+      drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
   -webkit-filter: drop-shadow(0 0 1px #fff)
-        drop-shadow(0 0 3px #fff)
-        drop-shadow(0 0 5px #f31de6)
-        drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
+      drop-shadow(0 0 3px #fff)
+      drop-shadow(0 0 5px #f31de6)
+      drop-shadow(0 0 8px rgba(243, 29, 230, 0.5));
 }
 
 .instructions span.lava::after {
