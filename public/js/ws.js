@@ -107,9 +107,9 @@ exports.setMining = function (socket) {
         setNotification('You found ' + data.name + '!');
       }
 
-      //setTimeout(() => {
-      //  mining.removeChild(item);
-      //}, 2000);
+      setTimeout(() => {
+        mining.removeChild(item);
+      }, 2000);
     }
   });
 
