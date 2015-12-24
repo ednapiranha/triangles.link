@@ -29,13 +29,13 @@ rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
     rooms.generateMining(room.id);
     // mining items regeneration
-    cron.scheduleJob('0,30 * * * *', () => {
+    cron.scheduleJob('0,15,30,45 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
       rooms.generateMining(room.id);
     });
 
     // vehicle health regeneration
-    cron.scheduleJob('0,15,30,45 * * * *', () => {
+    cron.scheduleJob('0,5,10,15,20,25,30,35,40,45,50,55 * * * *', () => {
       console.log('rengenerating health ... ', room.id);
       rooms.addHealth(room.id, io);
     });

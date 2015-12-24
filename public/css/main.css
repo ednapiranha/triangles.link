@@ -398,7 +398,7 @@ footer form {
   background-repeat: no-repeat;
 }
 
-.neon-pink, .neon-blue, .neon-green {
+.neon-pink, .neon-blue, .neon-green, .neon-yellow, .neon-star {
   position: absolute;
   display: inline-block;
   width: 50px;
@@ -819,7 +819,7 @@ footer form {
 }
 
 .neon-portal-1 {
-  background-image: url(../assets/portal1.svg);
+  background-image: url(../assets/portal.svg);
   filter: drop-shadow(0 0 1px #fff)
         drop-shadow(0 0 3px #fff)
         drop-shadow(0 0 5px #111)

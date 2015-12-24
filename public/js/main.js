@@ -4,9 +4,11 @@ require('../css/shared.css');
 require('../css/main.css');
 
 const ws = require('./ws');
+const level = parseInt(document.body.getAttribute('data-level'), 10);
 let background;
-if (document.location.href.indexOf('?moon') > -1) {
-  background = require('./background-moon');
+
+if (!isNaN(level) && level > 0) {
+  background = require('./background-' + level);
 } else {
   background = require('./background');
 }
@@ -14,7 +16,6 @@ const playground = require('./playground');
 const menu = require('./menu');
 
 const owner = document.body.getAttribute('data-owner');
-// const user = document.body.getAttribute('data-user');
 
 const socket = io();
 

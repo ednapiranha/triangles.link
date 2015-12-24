@@ -1,6 +1,6 @@
 'use strict';
 
-let currentTimeOfDay = (new Date()).getHours();
+let currentTimeOfDay = 22 // (new Date()).getHours();
 
 exports.generateSky = function () {
   const width = 1200;
@@ -17,11 +17,31 @@ exports.generateSky = function () {
   let green;
 
   // sky color
-  redMin = 10;
-  redMax = 100;
-  blueMin = 10;
-  blueMax = 100;
-  green = 80;
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 8) {
+    redMin = 180;
+    redMax = 255;
+    blueMin = 100;
+    blueMax = 150;
+    green = 120;
+  } else if (currentTimeOfDay >= 8 && currentTimeOfDay < 17) {
+    redMin = 80;
+    redMax = 100;
+    blueMin = 100;
+    blueMax = 210;
+    green = 185;
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    redMin = 100;
+    redMax = 150;
+    blueMin = 170;
+    blueMax = 250;
+    green = 100;
+  } else {
+    redMin = 10;
+    redMax = 100;
+    blueMin = 10;
+    blueMax = 100;
+    green = 80;
+  }
 
   snap.attr({
     width: width,
@@ -111,9 +131,17 @@ exports.generateLand = function () {
   let color;
 
   // land color
-  color = 'rgba(117, 130, 93, 0.9)';
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
+    color = 'rgba(41, 203, 255, 0.6)';
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
+    color = 'rgba(29, 113, 115, 0.6)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(185, 0, 180, 0.9)';
+  } else {
+    color = 'rgba(117, 130, 93, 0.9)';
+  }
 
-  let p = snap.path('M10-15-20,10M15,20,10,5M0-15-30,15').attr({
+  let p = snap.path('M10-15-20,10M15,0,12,5M0-15-30,15').attr({
     fill: 'none',
     stroke: color,
     strokeWidth: 55
@@ -148,7 +176,15 @@ exports.generateMining = function () {
   let color;
 
   // mining color
-  color = 'rgba(57, 50, 53, 0.9)';
+  if (currentTimeOfDay >= 5 && currentTimeOfDay < 9) {
+    color = 'rgba(141, 203, 255, 0.6)';
+  } else if (currentTimeOfDay >= 9 && currentTimeOfDay < 17) {
+    color = 'rgba(129, 113, 115, 0.6)';
+  } else if (currentTimeOfDay >= 17 && currentTimeOfDay < 21) {
+    color = 'rgba(57, 50, 53, 0.9)';
+  } else {
+    color = 'rgba(1, 5, 3, 0.8)';
+  }
 
   let p = snap.path('M10-5-20,5M5,2,10,1M10-5-20,15').attr({
     fill: 'none',
@@ -156,7 +192,7 @@ exports.generateMining = function () {
     strokeWidth: 45
   });
 
-  p = p.pattern(0, 5, 15, 25);
+  p = p.pattern(1, 15, 15, 5);
 
   snap.paper.path('M1202.7,2400H-1.7V112.3C7.1,98.9,22.1,91,36.4,83.7c23.4-11.9,' +
     '46.7-23.8,70.1-35.8c7.9-4.1,16.1-8.2,24.9-9.3c6.3-0.8,12.7-0.1,19.1,0.3c9.9,' +
