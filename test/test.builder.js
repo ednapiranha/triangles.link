@@ -24,6 +24,7 @@ describe('builder', () => {
     };
 
     function socketConnects() {
+      let socket = shared.socket();
       socket.emit('join', data);
       socket.emit('build', data);
       socket.on('build', (d) => {
