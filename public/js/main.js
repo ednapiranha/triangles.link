@@ -4,10 +4,13 @@ require('../css/shared.css');
 require('../css/main.css');
 
 const ws = require('./ws');
-const level = parseInt(document.body.getAttribute('data-level'), 10);
+let level = parseInt(document.body.getAttribute('data-level'), 10);
 let background;
 
 if (!isNaN(level) && level > 0) {
+  if (level > 1) {
+    level = 1;
+  }
   background = require('./background-' + level);
 } else {
   background = require('./background');

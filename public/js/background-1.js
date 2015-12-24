@@ -1,6 +1,6 @@
 'use strict';
 
-let currentTimeOfDay = 22 // (new Date()).getHours();
+let currentTimeOfDay = (new Date()).getHours();
 
 exports.generateSky = function () {
   const width = 1200;
