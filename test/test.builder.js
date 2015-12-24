@@ -8,8 +8,6 @@ const server = require('../').getServer();
 const rooms = require('../lib/rooms');
 const shared = require('./shared');
 
-let socket = shared.socket();
-
 after(() => {
   child.exec('rm -rf ./test/db/rooms ./test/db/users');
   server.stop(() => {
@@ -23,8 +21,9 @@ describe('builder', () => {
       room: 'test'
     };
 
+    let socket = shared.socket();
+
     function socketConnects() {
-      let socket = shared.socket();
       socket.emit('join', data);
       socket.emit('build', data);
       socket.on('build', (d) => {
