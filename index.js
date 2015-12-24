@@ -218,11 +218,13 @@ const routes = [
   {
     method: 'GET',
     path: '/g/{uid}',
-    handler: authenticate.get,
-    auth: auth,
-    plugins: {
-      'hapi-auth-cookie': {
-        redirectTo: '/'
+    config: {
+      handler: authenticate.get,
+      auth: auth,
+      plugins: {
+        'hapi-auth-cookie': {
+          redirectTo: '/'
+        }
       }
     }
   },
