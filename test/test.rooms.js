@@ -210,24 +210,23 @@ describe('rooms', () => {
       x: '200px',
       y: '300px',
       z: 50,
-      w: 300,
-      h: 300
+      w: '300px',
+      h: '300px'
     };
 
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('saveDisplay', data);
-    setImmediate(() => {
-      socket.on('test.saveDisplay', (d) => {
-        should.exist(d);
-        d[selectedItem1].x.should.equal(data.x);
-        d[selectedItem1].y.should.equal(data.y);
-        d[selectedItem1].z.should.equal(data.z);
-        d[selectedItem1].w.should.equal(data.w);
-        d[selectedItem1].h.should.equal(data.h);
-        socket.disconnect();
-        done();
-      });
+
+    socket.on('test.saveDisplay', (d) => {
+      should.exist(d);
+      d[selectedItem1.name].x.should.equal(data.x);
+      d[selectedItem1.name].y.should.equal(data.y);
+      d[selectedItem1.name].z.should.equal(data.z);
+      d[selectedItem1.name].w.should.equal(data.w);
+      d[selectedItem1.name].h.should.equal(data.h);
+      socket.disconnect();
+      done();
     });
   });
 
@@ -265,6 +264,7 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('make', data);
+
     setImmediate(() => {
       socket.on('purchasable', (d) => {
         d.should.equal(true);
@@ -285,10 +285,13 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('make', data);
-    socket.on('purchasable', (d) => {
-      d.should.equal(false);
-      socket.disconnect();
-      done();
+
+    setImmediate(() => {
+      socket.on('purchasable', (d) => {
+        d.should.equal(false);
+        socket.disconnect();
+        done();
+      });
     });
   });
 });
