@@ -93,7 +93,9 @@ exports.setMining = function (socket) {
       mining.appendChild(item);
       socket.emit('mined', {
         room: currentRoom,
-        name: data.name
+        name: data.name,
+        x: data.currX,
+        y: data.currY
       });
       socket.emit('collection', {
         room: currentRoom

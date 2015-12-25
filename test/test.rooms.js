@@ -8,19 +8,16 @@ const server = require('../').getServer();
 const rooms = require('../lib/rooms');
 const shared = require('./shared');
 
-let gridObj;
 let selectedItem1 = {
-  name: 'neon-blue'
+  name: 'neon-blue',
+  currX: 100,
+  currY: 100
 };
 let selectedItem2 = {
   name: 'neon-pink',
   currX: 100,
   currY: 100
 };
-
-function emitData(dt, socket) {
-  socket.emit('mining', dt);
-}
 
 after(() => {
   child.exec('rm -rf ./test/db/rooms ./test/db/users');
@@ -48,8 +45,7 @@ describe('rooms', () => {
 
   it('should generate a mining grid', (done) => {
     rooms.generateMining('test', (err, grid) => {
-      gridObj = grid;
-      Object.keys(gridObj).length.should.equal(17);
+      Object.keys(grid).length.should.equal(17);
       done();
     });
   });
@@ -66,58 +62,49 @@ describe('rooms', () => {
     });
   });
 
-  it('should get mining for grid area', (done) => {
+  it('should mine an item', (done) => {
+    let gridTotal = rooms.gridDimensions();
     let data = {
       room: 'test'
     };
 
-    let gridTotal = rooms.gridDimensions();
-    let gridTotalObj = {};
-    let count = 0;
+    function checkMined(grid) {
+      // valid position
+      let g = Object.keys(grid)[0];
+      data.name = 'neon-blue';
+      data.x = gridTotal[g].x;
+      data.y = gridTotal[g].y;
+
+      socket.emit('mined', data);
+      socket.on('mined', (d) => {
+        should.exist(d);
+        socket.disconnect();
+        done();
+      });
+    }
 
     let socket = shared.socket();
     socket.emit('join', data);
 
-    for (let g in gridObj) {
-      gridTotalObj[gridTotal[g].x + gridTotal[g].y] = true;
-      data.currX = gridTotal[g].x;
-      data.currY = gridTotal[g].y;
-      emitData(data, socket);
-    }
-
-    socket.on('mining', function (d) {
-      should.exist(d);
-      should.exist(gridTotalObj[d.currX + d.currY]);
-      count++;
-
-      if (count === Object.keys(gridObj).length) {
-        socket.disconnect();
-        done();
-      }
+    setImmediate(() => {
+      rooms.generateMining(data.room, (err, grid) => {
+        checkMined(grid);
+      });
     });
   });
 
-  it('should mine an item', (done) => {
-    let count = 0;
+  it('should not mine an item', (done) => {
     let data = {
       room: 'test',
-      name: 'neon-blue'
+      name: 'neon-star'
     };
 
     function checkMined() {
       socket.emit('mined', data);
-      socket.on('mined', function (d) {
-        should.exist(d);
-        count++;
-        data.name = 'neon-pink';
-        socket.emit('mined', data);
-        socket.on('mined', function (d) {
-          should.exist(d);
-          if (count === 2) {
-            socket.disconnect();
-            done();
-          }
-        });
+      socket.on('mined', (d) => {
+        d.should.equal(false);
+        socket.disconnect();
+        done();
       });
     }
 
@@ -140,7 +127,7 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('collection', data);
-    socket.on('collection', function (d) {
+    socket.on('collection', (d) => {
       count++;
       should.exist(d);
       if (count === 1) {
@@ -150,36 +137,76 @@ describe('rooms', () => {
     });
   });
 
-  it('should set to display an item and get displayables', (done) => {
+  it('should set to display an item', (done) => {
+    let count = 0;
+
     let data = {
       room: 'test',
-      item: selectedItem2.name,
-      x: selectedItem2.currX,
-      y: selectedItem2.currY,
-      z: 50,
-      w: 100,
-      h: 100
+      item: selectedItem1.name,
+      x: selectedItem1.currX + 'px',
+      y: selectedItem1.currY + 'px'
     };
+
+    function display() {
+      socket.emit('display', data);
+      socket.on('display', (d) => {
+        count++;
+        should.exist(d);
+        d[selectedItem1.name].x.should.equal(data.x);
+        d[selectedItem1.name].y.should.equal(data.y);
+
+        if (count > 0) {
+          socket.disconnect();
+          done();
+        }
+      });
+    }
 
     let socket = shared.socket();
     socket.emit('join', data);
-    socket.emit('display', data);
-    socket.on('display', function (d) {
-      should.exist(d);
-      d['neon-pink'].x.should.equal(data.x);
-      d['neon-pink'].y.should.equal(data.y);
-      d['neon-pink'].z.should.equal(data.z);
-      d['neon-pink'].w.should.equal(data.w);
-      d['neon-pink'].h.should.equal(data.h);
-      socket.disconnect();
-      done();
+    socket.emit('collection', data);
+
+    socket.on('collection', () => {
+      display();
+    });
+  });
+
+  it('should not display an item', (done) => {
+    let count = 0;
+
+    let data = {
+      room: 'test',
+      item: 'lava',
+      x: '100px',
+      y: '100px'
+    };
+
+    function display() {
+      socket.emit('display', data);
+      socket.on('display', (d) => {
+        count++;
+        d.should.equal(false);
+
+        if (count > 0) {
+          socket.disconnect();
+          done();
+        }
+      });
+    }
+
+    let socket = shared.socket();
+    socket.emit('join', data);
+    socket.emit('collection', data);
+
+    socket.on('collection', () => {
+      display();
     });
   });
 
   it('should save the displayable position', (done) => {
     let data = {
       room: 'test',
-      item: selectedItem2.name,
+      item: selectedItem1.name,
       x: '200px',
       y: '300px',
       z: 50,
@@ -190,22 +217,24 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('saveDisplay', data);
-    socket.on('test.saveDisplay', (d) => {
-      should.exist(d);
-      d['neon-pink'].x.should.equal(data.x);
-      d['neon-pink'].y.should.equal(data.y);
-      d['neon-pink'].z.should.equal(data.z);
-      d['neon-pink'].w.should.equal(data.w);
-      d['neon-pink'].h.should.equal(data.h);
-      socket.disconnect();
-      done();
+    setImmediate(() => {
+      socket.on('test.saveDisplay', (d) => {
+        should.exist(d);
+        d[selectedItem1].x.should.equal(data.x);
+        d[selectedItem1].y.should.equal(data.y);
+        d[selectedItem1].z.should.equal(data.z);
+        d[selectedItem1].w.should.equal(data.w);
+        d[selectedItem1].h.should.equal(data.h);
+        socket.disconnect();
+        done();
+      });
     });
   });
 
   it('should undisplay', (done) => {
     let data = {
       room: 'test',
-      item: 'neon-pink',
+      item: selectedItem1.name,
       x: '200px',
       y: '300px',
       z: 50,
@@ -216,10 +245,12 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('undisplay', data);
-    socket.on('display', (d) => {
-      should.not.exist(d['neon-pink']);
-      socket.disconnect();
-      done();
+    setImmediate(() => {
+      socket.on('display', (d) => {
+        should.not.exist(d['neon-pink']);
+        socket.disconnect();
+        done();
+      });
     });
   });
 
@@ -234,10 +265,12 @@ describe('rooms', () => {
     let socket = shared.socket();
     socket.emit('join', data);
     socket.emit('make', data);
-    socket.on('purchasable', (d) => {
-      d.should.equal(true);
-      socket.disconnect();
-      done();
+    setImmediate(() => {
+      socket.on('purchasable', (d) => {
+        d.should.equal(true);
+        socket.disconnect();
+        done();
+      });
     });
   });
 
