@@ -13,11 +13,6 @@ let selectedItem1 = {
   currX: 100,
   currY: 100
 };
-let selectedItem2 = {
-  name: 'neon-pink',
-  currX: 100,
-  currY: 100
-};
 
 after(() => {
   child.exec('rm -rf ./test/db/rooms ./test/db/users');
@@ -119,7 +114,6 @@ describe('rooms', () => {
   });
 
   it('should get the collection', (done) => {
-    let count = 0;
     let data = {
       room: 'test'
     };
@@ -128,52 +122,38 @@ describe('rooms', () => {
     socket.emit('join', data);
     socket.emit('collection', data);
     socket.on('collection', (d) => {
-      count++;
       should.exist(d);
-      if (count === 1) {
-        socket.disconnect();
-        done();
-      }
+      socket.disconnect();
+      done();
     });
   });
 
   it('should set to display an item', (done) => {
-    let count = 0;
-
     let data = {
       room: 'test',
       item: selectedItem1.name,
-      x: selectedItem1.currX + 'px',
-      y: selectedItem1.currY + 'px'
+      x: selectedItem1.currX,
+      y: selectedItem1.currY
     };
 
     function display() {
       socket.emit('display', data);
-      socket.on('display', (d) => {
-        count++;
+      socket.on('display.pass', (d) => {
         should.exist(d);
         d[selectedItem1.name].x.should.equal(data.x);
         d[selectedItem1.name].y.should.equal(data.y);
-
-        if (count > 0) {
-          socket.disconnect();
-          done();
-        }
+        socket.emit('undisplay', data);
+        socket.disconnect();
+        done();
       });
     }
 
     let socket = shared.socket();
     socket.emit('join', data);
-    socket.emit('collection', data);
-
-    socket.on('collection', () => {
-      display();
-    });
+    display();
   });
 
   it('should not display an item', (done) => {
-    let count = 0;
-
     let data = {
       room: 'test',
       item: 'lava',
@@ -183,32 +163,24 @@ describe('rooms', () => {
 
     function display() {
       socket.emit('display', data);
-      socket.on('display', (d) => {
-        count++;
+      socket.on('display.fail', (d) => {
         d.should.equal(false);
-
-        if (count > 0) {
-          socket.disconnect();
-          done();
-        }
+        socket.disconnect();
+        done();
       });
     }
 
     let socket = shared.socket();
     socket.emit('join', data);
-    socket.emit('collection', data);
-
-    socket.on('collection', () => {
-      display();
-    });
+    display();
   });
 
   it('should save the displayable position', (done) => {
     let data = {
       room: 'test',
       item: selectedItem1.name,
-      x: '200px',
-      y: '300px',
+      x: 200,
+      y: 300,
       z: 50,
       w: '300px',
       h: '300px'
@@ -230,15 +202,42 @@ describe('rooms', () => {
     });
   });
 
+  it('should save the displayable position with a valid x/y', (done) => {
+    let data = {
+      room: 'test',
+      item: selectedItem1.name,
+      x: 'scale(3.5, 3.5) skew(20deg,  -15deg)',
+      y: 'scale(3.5, 3.5) skew(20deg,  -15deg)',
+      z: 50,
+      w: '300px',
+      h: '300px'
+    };
+
+    let socket = shared.socket();
+    socket.emit('join', data);
+    socket.emit('saveDisplay', data);
+
+    socket.on('test.saveDisplay', (d) => {
+      should.exist(d);
+      d[selectedItem1.name].x.should.equal(100);
+      d[selectedItem1.name].y.should.equal(100);
+      d[selectedItem1.name].z.should.equal(data.z);
+      d[selectedItem1.name].w.should.equal(data.w);
+      d[selectedItem1.name].h.should.equal(data.h);
+      socket.disconnect();
+      done();
+    });
+  });
+
   it('should undisplay', (done) => {
     let data = {
       room: 'test',
       item: selectedItem1.name,
-      x: '200px',
-      y: '300px',
+      x: 200,
+      y: 300,
       z: 50,
-      w: 300,
-      h: 300
+      w: '300px',
+      h: '300px'
     };
 
     let socket = shared.socket();
