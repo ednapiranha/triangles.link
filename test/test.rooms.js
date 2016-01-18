@@ -40,7 +40,7 @@ describe('rooms', () => {
 
   it('should generate a mining grid', (done) => {
     rooms.generateMining('test', (err, grid) => {
-      Object.keys(grid).length.should.equal(17);
+      Object.keys(grid).length.should.equal(22);
       done();
     });
   });
