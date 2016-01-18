@@ -29,7 +29,7 @@ rooms.getAllRooms((err, rms) => {
   rms.forEach((room) => {
     rooms.generateMining(room.id);
     // mining items regeneration
-    cron.scheduleJob('0,15,30,45 * * * *', () => {
+    cron.scheduleJob('0,10,20,30,40,50 * * * *', () => {
       console.log('rengenerating items ... ', room.id);
       rooms.generateMining(room.id);
     });
