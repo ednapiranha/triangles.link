@@ -146,7 +146,8 @@ server.register([Scooter,
       defaultSrc: 'self',
       connectSrc: ['ws:', 'wss:', 'self'],
       scriptSrc: 'self',
-      styleSrc: ['self', 'unsafe-inline']
+      styleSrc: ['self', 'unsafe-inline'],
+      generateNonces: false
     }
   }
 ], (err) => {
